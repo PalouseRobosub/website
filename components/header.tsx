@@ -15,6 +15,7 @@ const Header = () => {
       <div className={styles.linkWrapper}>
         <Link href="/about" className={styles.link}>About</Link>
         <Link href="/officers" className={styles.link}>Officers</Link>
+        <Link href="/sponsors" className={styles.link}>Sponsors</Link>
         <Link href="/blog" className={styles.link}>Blog</Link>
         <Link href="/contact" className={styles.link}>Contact</Link>
         <Link href="/join" className={styles.joinButton}>JOIN US</Link>
