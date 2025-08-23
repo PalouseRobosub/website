@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from 'next/font/local'
 import "./globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const aptos = localFont({
   src: '../public/fonts/Aptos.ttf'
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={`${aptos.className}`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
