@@ -1,11 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     max-width: 100vw;
     overflow-x: hidden;
     padding: 0;
     margin: 0;
+    font-size: 24px;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
+
+main {
+    width: 100%;
+    padding: 0 15%;
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    position: relative;
+}
+
+h2::before {
+    content: "";
+    height: 6px;
+    width: 100px;
+    background-color: #A60F2D;
+    position: absolute;
+    bottom: -6px;
+}
+
+h3 {
+    position: relative;
+}
+
+h3::before {
+    content: "";
+    height: 4px;
+    width: 70px;
+    background-color: #A60F2D;
+    position: absolute;
+    bottom: -6px;
+}
+
 a {
-    color: inherit;
-    text-decoration: inherit;
+    color: #A60F2D;
+    position: relative;
+    text-decoration: none;
+}
+
+a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: #A60F2D;
+    transition: width 0.3s ease;
+}
+
+a:hover::before {
+  width: 100%;
 }
