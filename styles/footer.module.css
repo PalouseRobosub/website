@@ -1,6 +1,23 @@
 .footer {
     width: 100%;
-    background-color:  #9C3A14;
-    margin-top: 24px;
+    background-color:  #4D4D4D;
     padding: 24px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import localFont from 'next/font/local'
+import {Montserrat} from 'next/font/google'
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-const aptos = localFont({
-  src: '../public/fonts/Aptos.ttf'
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: "variable"
 })
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${aptos.className}`}>
+      <body className={`${montserrat.className}`}>
         <Header />
         {children}
         <Footer />

@@ -1,5 +1,5 @@
 .header {
-    background-color: #9C3A14;
+    background-color: #A60F2D;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -10,6 +10,15 @@
 
 .title {
     color: white;
+    font-weight: 600;
+}
+
+.titleLink {
+    display: contents;
+}
+
+.titleLink::before, .titleLink:hover::before {
+    display: none;
 }
 
 .titleWrapper {
@@ -23,7 +32,7 @@
 
 .logoWrapper {
     height: 1em;
-    aspect-ratio: 16/9;
+    aspect-ratio: 11/4;
     position: relative;
 }
 
@@ -40,6 +49,7 @@
 .link {
     color: white;
     position: relative;
+    font-weight: 500;
 }
 
 .link::before {
@@ -63,11 +73,12 @@
     padding: 8px;
     border-radius: 12px;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .joinButton:hover {
     background-color: white;
-    color:#9C3A14;
+    color: #A60F2D;
 }
 
 .donateButton {
@@ -77,9 +88,16 @@
     padding: 8px;
     border-radius: 12px;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .donateButton:hover {
     background-color: #14769C;
     color: white;
+}
+
+.joinButton::before, .donateButton::before, joinButton:hover::before, .donateButton:hover::before {
+    display: none;
+    height: 0;
+    width: 0;
 }
