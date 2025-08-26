@@ -96,7 +96,7 @@
     color: white;
 }
 
-.joinButton::before, .donateButton::before, joinButton:hover::before, .donateButton:hover::before {
+.joinButton::before, .donateButton::before, .joinButton:hover::before, .donateButton:hover::before {
     display: none;
     height: 0;
     width: 0;
