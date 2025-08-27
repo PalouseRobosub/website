@@ -1,6 +1,7 @@
 import styles from "@/styles/footer.module.css"
 import { Building, Mail } from "lucide-react";
 import Image from "next/image";
+import basePath from "@/next.config"
 
 const Footer = () => {
   
@@ -8,7 +9,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div>
         <a href="https://vcea.wsu.edu" target="_blank">
-          <Image src="/vcea.png" alt="Voiland College of Engineering and Architecture" width={300} height={75} />
+          <Image src={`${basePath}/vcea.png`} alt="Voiland College of Engineering and Architecture" width={300} height={75} />
         </a>
       </div>
       <div className={styles.flexCol}>
