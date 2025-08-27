@@ -14,11 +14,11 @@ const Footer = () => {
       <div className={styles.flexCol}>
         <div className={styles.flexRow}>
           <Building />
-          <a href="https://share.google/6RyJkGjaZzTvsN4k4" target="_blank" style={{color: "white"}}>Dana 3</a>
+          <a href="https://maps.app.goo.gl/7Q5XkS5YgbN3bmqq8" target="_blank" style={{color: "white"}}>Dana 3</a>
         </div>
         <div className={styles.flexRow}>
           <Mail />
-          <a href="mailto:officer.name@wsu.edu" style={{color: "white"}}>officer.name@wsu.edu</a>
+          <a href="mailto:robosub.vcea@wsu.edu" style={{color: "white"}}>robosub.vcea@wsu.edu</a>
         </div>
         <div></div>
       </div>
