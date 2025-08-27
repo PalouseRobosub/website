@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <main>
       <h1>Palouse RoboSub Blog</h1>
-      <p style={{ fontSize: "24px", textAlign: "center" }}>
+      <p>
         Our blog is currently under development.
         Please check back soon to read our posts.
         Thank you for your patience.

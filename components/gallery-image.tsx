@@ -11,7 +11,7 @@ const GalleryImage = ({ name, caption }: { name: string, caption: string }) => {
     bottom: "-20px",
     width: "min-content",
     padding: "8px 16px",
-    fontSize: "32px",
+    fontSize: "30px",
     textWrap: "nowrap"
   }
   
