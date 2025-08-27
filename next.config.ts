@@ -5,10 +5,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       new URL('https://picsum.photos/*')
-    ]
+    ],
+    unoptimized: true
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  output: "export"
+  output: "export",
+  basePath: "/website"
 };
 
 const withMDX = createMDX({
