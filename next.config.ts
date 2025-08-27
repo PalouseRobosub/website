@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   output: "export",
-  basePath: "/website"
 };
 
 const withMDX = createMDX({
