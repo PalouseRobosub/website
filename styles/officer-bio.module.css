@@ -1,10 +1,9 @@
 .bioWrapper {
     background-color: #CCCCCC;
-    padding: 36px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 36px;
     align-items: center;
     width: min-content;
-    clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 40px 100%, 0 calc(100% - 40px))
+    clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px))
 }
