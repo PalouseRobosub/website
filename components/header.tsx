@@ -1,7 +1,7 @@
 import styles from "@/styles/header.module.css"
 import Image from "next/image";
 import Link from "next/link";
-import basePath from "@/next.config"
+
 
 const Header = () => {
   
@@ -10,7 +10,7 @@ const Header = () => {
       <div className={styles.titleWrapper}>
         <Link href="/" className={styles.titleLink}>
           <div className={styles.logoWrapper}>
-            <Image src={`${basePath}/robosub_logo.svg`} alt="" fill priority />
+            <Image src="/robosub_logo.svg" alt="" fill priority />
           </div>
           <div className={styles.title}>Palouse RoboSub</div>
         </Link>

@@ -4,7 +4,11 @@ import createMDX from "@next/mdx"
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      new URL('https://picsum.photos/*')
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        pathname: "**"
+      }
     ],
     unoptimized: true
   },

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import basePath from "@/next.config"
 
 const GalleryImage = ({ name, caption }: { name: string, caption: string }) => {
   
@@ -18,7 +17,7 @@ const GalleryImage = ({ name, caption }: { name: string, caption: string }) => {
   
   return (
     <div style={{ position: "relative", maxHeight: "100vh", minHeight:"60vh", width: "100%", marginBottom: "48px" }}>
-        <Image src={`${basePath}/gallery/${name}`} alt="" fill unoptimized style={{ objectFit: "contain", width: "100%" }} />
+        <Image src={`gallery/${name}`} alt="" fill unoptimized style={{ objectFit: "contain", width: "100%" }} />
       <div style={captionStyles}>{caption}</div>
     </div>
   )
