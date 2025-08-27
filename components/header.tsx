@@ -16,13 +16,13 @@ const Header = () => {
         </Link>
       </div>
       <div className={styles.linkWrapper}>
-        <Link href="/about" className={styles.link}>About</Link>
+        {/*<Link href="/about" className={styles.link}>About</Link>
         <Link href="/officers" className={styles.link}>Officers</Link>
         <Link href="/sponsors" className={styles.link}>Sponsors</Link>
         <Link href="/blog" className={styles.link}>Blog</Link>
         <Link href="/gallery" className={styles.link}>Gallery</Link>
         <Link href="/join" className={styles.joinButton}>JOIN US</Link>
-        <Link href="/donate" className={styles.donateButton}>DONATE</Link>
+        <Link href="/donate" className={styles.donateButton}>DONATE</Link>*/}
       </div>
     </header>
   )
