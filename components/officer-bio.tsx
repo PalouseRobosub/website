@@ -6,8 +6,10 @@ export const OfficersWrapper = ({ children }: { children: React.ReactNode }) => 
   const wrapperStyles: React.CSSProperties = {
     display: "flex",
     flexDirection: "row",
+    flexWrap:"wrap",
     marginBottom: "24px",
     width: "90vw",
+    maxWidth: "90vw",
     position: "relative",
     left: "50%",
     transform: "translateX(-50%)",
@@ -25,7 +27,7 @@ const OfficerBio = ({ children, imageSrc }: { children: React.ReactNode, imageSr
   
   return (
     <div className={styles.bioWrapper}>
-      <Image src={imageSrc} alt="" height={350} width={350} />
+      <Image src={imageSrc} alt="" height={250} width={250} />
       <div>
         {children}
       </div>
