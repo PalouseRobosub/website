@@ -21,3 +21,11 @@
     flex-direction: column;
     gap: 4px;
 }
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column-reverse;
+        gap: 24px;
+        align-items: start;
+    }
+}

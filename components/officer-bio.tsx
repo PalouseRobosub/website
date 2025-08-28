@@ -7,13 +7,14 @@ export const OfficersWrapper = ({ children }: { children: React.ReactNode }) => 
     display: "flex",
     flexDirection: "row",
     flexWrap:"wrap",
+    justifyContent: "center",
+    gap: "24px",
     marginBottom: "24px",
     width: "90vw",
     maxWidth: "90vw",
     position: "relative",
     left: "50%",
     transform: "translateX(-50%)",
-    justifyContent: "space-between"
   }
   
   return (
