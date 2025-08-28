@@ -71,11 +71,32 @@ a::before {
 }
 
 a:hover::before {
-  width: 100%;
+    width: 100%;
 }
 
 input[type="checkbox"] {
     accent-color: #A60F2D;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 4px 8px;
+}
+
+th {
+    background-color: #fff;
+}
+
+tr:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
 }
 
 @media (max-width: 768px) {
