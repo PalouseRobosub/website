@@ -1,3 +1,14 @@
+.search {
+    width: 100%;
+    font-size: 32px;
+    font-family: Montserrat;
+    padding: 8px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    accent-color: #A60F2D;
+    border: 2px solid #CECECE;
+}
+
 .postContainer {
     width: 85vw;
     position: relative;
@@ -7,6 +18,7 @@
 
 .post:nth-child(odd) {
     background-color: #EBEBEB;
+    border-radius: 4px;
 }
 
 .post {

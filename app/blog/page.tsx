@@ -42,6 +42,7 @@ const Page = async () => {
   return (
     <main>
       <h1>Palouse RoboSub Blog</h1>
+      <input className={styles.search} placeholder="Search" />
       <div className={styles.postContainer}>
         {sortedPosts.map((post, i) => (
           <Post data={post} key={i}/>
