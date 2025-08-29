@@ -9,12 +9,13 @@ export function generateStaticParams() {
   const slugs = posts.map((post) => ({
     slug: post.split(".")[0]
   }))
- return slugs
+  
+  return slugs
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { default: Post } = await import(`@/blog/${slug}.mdx`)
- 
+  const { default: Post } = await import(`@/blog-posts/${slug}.mdx`)
+  
   return <Post />
 }

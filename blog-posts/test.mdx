@@ -1,4 +1,17 @@
+import BlogMeta from "@/components/blog-meta";
+import BlogBack from "@/components/blog-back";
+
+export const meta = {
+  published: "08-27-2024",
+  updated: "08-27-2024",
+  title: "Markdown Demonstration Post",
+  author: "ChatGPT",
+  tags: ["example", "test", "ai"]
+}
+
 # Markdown Demonstration Post
+
+<BlogMeta meta={meta} />
 
 This is a dummy blog post that demonstrates **all the basic Markdown features** without using emojis.  
 
@@ -129,3 +142,5 @@ Markdown also supports definition-style lists:
 ## Conclusion
 
 This post demonstrates the **core Markdown syntax** features: headings, lists, links, images, code, tables, and more.
+
+<BlogBack/>
