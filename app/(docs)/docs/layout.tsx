@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import {Montserrat} from 'next/font/google'
+import { Montserrat, JetBrains_Mono } from 'next/font/google'
 import "../docs.css";
 import DocsSidebar from "@/components/docs-sidebar";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: "variable"
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-jetbrains"
 })
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className}`} style={bodyStyles}>
+      <body className={`${montserrat.className} ${jetBrainsMono.variable}`} style={bodyStyles}>
         <DocsSidebar />
         {children}
       </body>

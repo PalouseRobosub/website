@@ -102,6 +102,10 @@ tr:nth-child(even) {
     background-color: #ffffff;
 }
 
+code, pre {
+    font-family: "JetBrains Mono" !important;
+}
+
 @media (max-width: 768px) {
     main {
         padding: 0 5%;
