@@ -79,7 +79,7 @@ a:hover::before {
     width: 100%;
 }
 
-input[type="checkbox"] {
+input {
     accent-color: #A60F2D;
 }
 
