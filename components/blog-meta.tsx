@@ -1,4 +1,4 @@
-import type { PostMeta } from "@/app/blog/types";
+import type { PostMeta } from "@/app/(main)/blog/types";
 import styles from "@/styles/blog.module.css"
 
 const BlogMeta = ({ meta }: { meta: PostMeta }) => {
