@@ -24,6 +24,8 @@ main {
     padding: 0 15%;
     flex: 1;
     grid-area: main;
+    height: 100svh;
+    overflow-y: scroll;
 }
 
 h1 {

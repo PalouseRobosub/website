@@ -1,7 +1,11 @@
 .sidebar {
     width: 100%;
-    background-color: #A6A6A6;
+    background-color: #EBEBEB;
     grid-area: sidebar;
+    height: 100svh;
+    max-height: 100svh;
+    position: sticky;
+    top: 0;
 }
 
 .sidebarHeader {
@@ -46,9 +50,12 @@
     padding: 10px;
 }
 
+.route:hover {
+    background-color: #CCCCCC;
+}
+
 .folderWrapper {
     width: 100%;
-    padding: 10px;
 }
 
 .folder {
@@ -58,4 +65,16 @@
     gap: 8px;
     cursor: pointer;
     user-select: none;
+    padding: 10px;
+}
+
+.folder:hover {
+    background-color: #CCCCCC;
+}
+
+.folderChildren {
+    margin-left: 18px;
+    border-left: 2px solid #A60F2D;
+    position: relative;
+    top: -5px;
 }

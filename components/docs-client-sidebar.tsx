@@ -9,7 +9,7 @@ import { FolderClosed, FolderOpen } from "lucide-react";
 
 const Route = ({ page }: { page: Page }) => (
   <div className={styles.route}>
-    <Link href={`/docs/${page.path.split("docs-root/")[1].replace(".mdx", "")}`}>{page.name}</Link>
+    <Link href={`/docs/${page.path.split("docs-root/")[1].replace(".mdx", "")}`}>{page.name.replace(".mdx", "").replaceAll("_", " ")}</Link>
   </div>
 )
 
@@ -19,9 +19,9 @@ const Folder = ({ folder }: { folder: Dir }) => {
   return (
     <div className={styles.folderWrapper}>
       <div className={styles.folder} onClick={() => setOpen(!open)}>
-        {open ? <FolderOpen /> : <FolderClosed />}<div>{folder.name}</div>
+        {open ? <FolderOpen /> : <FolderClosed />}<div>{folder.name.replaceAll("_", " ")}</div>
       </div>
-      <div style={{ display: `${open ? "block" : "none"}`}}>
+      <div style={{ display: `${open ? "block" : "none"}`}} className={styles.folderChildren}>
         {folder.children.map((item, i) => {
           switch (item.type) {
             case "dir":
@@ -57,8 +57,7 @@ const DocsClientSidebar = ({ docsContents }: { docsContents: Dir }) => {
             <option key={i} value={i}>{sub.name}</option>
           ))}
         </select>
-        {selectedSub.name}
-        <input className={styles.search} type="search" placeholder="Search" />
+        {/*<input className={styles.search} type="search" placeholder="Search" />*/}
       </div>
       <div>
         {subContents.map((item, i) => {
