@@ -9,18 +9,18 @@ When coming up with a page name think short and concise. By doing this the endin
 
 To create a new page edit the URL in your browser to the namespace that you want to create the page in. This will look something like this to create the page ''testpage'' in the playground namespace:
 
-<code>
+/\<code\>
 robosub.eecs.wsu.edu/wiki/playground/testpage/
-</code>
+/\</code\>
 
-<wrap important>
+/\<wrap important\>
 Do not forget the ending ''/'' at the end of the URL!
-</wrap>
+/\</wrap\>
 
 By adding this ''/'' the server will automatically create the page in it's own namespace so that uploaded media files can be stored in a folder corresponding to the page that they are used on.
 ===== Namespaces =====
 
-Namespaces are analogous to a folder on your computer and resolve to folders on the server. Each page should reside in its own namespace. This is done by editing the URL to add a ''/'' following the page name prior to creating the page. If you have questions on this ask them on the [[slack>it|IT slack channel]].
+Namespaces are analogous to a folder on your computer and resolve to folders on the server. Each page should reside in its own namespace. This is done by editing the URL to add a ''/'' following the page name prior to creating the page. If you have questions on this ask them on the [[slack\>it|IT slack channel]].
 
 ===== Media =====
 
@@ -30,33 +30,33 @@ When uploading media ensure that the destination is the namespace of the page th
 
 The easiest way with multiple files is to install [[http://www.pandoc.org|pandoc]]. This is a cross-platform CLI tool. With it installed run the following command:
 
-<code bash>
-$ pandoc -f markdown_github -t dokuwiki -o <file_name>.txt <file_name>.md
-</code>
+/\<code bash\>
+$ pandoc -f markdown_github -t dokuwiki -o /\<file_name\>.txt /\<file_name\>.md
+/\</code\>
 
-This will convert the ''<file_name>.md'' file to ''<file_name>.txt''.
+This will convert the ''/\<file_name\>.md'' file to ''/\<file_name\>.txt''.
 
 ===== First Header =====
 
 The first header on every page is used to generate the page title in the sidebar navigation. Make these names as short and as descriptive as possible. Avoid using a name that has previously been used in that namespace.
 
 ===== Using the Wrap Plugin =====
-The Wrap Plugin is your friend. It allows for columns, centering, <wrap hi>highlighting</wrap>, <wrap em>emphasis</wrap>, and much more.
+The Wrap Plugin is your friend. It allows for columns, centering, /\<wrap hi\>highlighting/\</wrap\>, /\<wrap em\>emphasis/\</wrap\>, and much more.
 
 The following syntax is used for Wrap:
 
-<code html>
-<WRAP classes #id width :language>
+/\<code html\>
+/\<WRAP classes #id width :language\>
 "big" content
-</WRAP>
+/\</WRAP\>
 
-<wrap classes #id width :language>
+/\<wrap classes #id width :language\>
 "small" content
-</wrap>
-</code>
+/\</wrap\>
+/\</code\>
 
 The following are some common classes that Wrap provides:
-<WRAP center 60%>
+/\<WRAP center 60%\>
 ^ Class Name  ^ Description                                                                 ^
 | center      | Centers the contained objects on the page. (Useful with tables and images)  |
 | info        | Creates blue box with info icon                                             |
@@ -69,50 +69,50 @@ The following are some common classes that Wrap provides:
 | hi          | Highlights the text contained by the Wrap tags                              |
 | lo          | Deemphasizes the text contained by the Wrap tags                            |
 | em          | Emphasizes the text contained by the Wrap tags                              |
-</WRAP>
+/\</WRAP\>
 
 ==== WRAP v. wrap tags ====
 
 If something is really important use the WRAP tag otherwise stick to the wrap tag. Using the info class the two boxes below demonstrate the difference between a WRAP tag and a wrap tag.
 
-<WRAP info>
+/\<WRAP info\>
 This uses the WRAP tag
-</WRAP>
+/\</WRAP\>
 
-<wrap info>
+/\<wrap info\>
 This uses the wrap tag
-</wrap>
+/\</wrap\>
 
 ==== Stacking Classes ====
 
 It is possible to stack multiple classes into one Wrap tag. For example a centered alert box would look like this:
 
-<wrap alert center>
+/\<wrap alert center\>
 A wild alert has appeared!
-</wrap>
+/\</wrap\>
 
 The code looks like this:
 
-<code html>
-<wrap alert center>
+/\<code html\>
+/\<wrap alert center\>
 A wild alert has appeared!
-</wrap>
-</code>
+/\</wrap\>
+/\</code\>
 
 ==== Changing the Width of a Wrap ====
 
 You may have noticed that the width on the last alert box takes up the whole screen. This is because by default the center class sets width to 100%. The width can easily be changed with any of these width types ''%, px, em, ex, pt, pc, cm, mm, in''. ''%'' is the easiest to understand and is the best one to use in most cases. Here is an example of adding a width modifier to the alert from before:
 
-<wrap alert center 20%>
+/\<wrap alert center 20%\>
 A wild alert has appeared!
-</wrap>
+/\</wrap\>
 
 The code looks like this:
 
-<code html>
-<wrap alert center 20%>
+/\<code html\>
+/\<wrap alert center 20%\>
 A wild alert has appeared!
-</wrap>
-</code>
+/\</wrap\>
+/\</code\>
 
-This is by no means a comprehensive tutorial of the Wrap plugin. If you want to see all that is possible by default from wrap see this [[https://www.dokuwiki.org/_media/plugin:wrap_plugin_example9.png|image]]. If you have an idea for a custom Wrap class post in the [[slack>it|IT slack channel]].
+This is by no means a comprehensive tutorial of the Wrap plugin. If you want to see all that is possible by default from wrap see this [[https://www.dokuwiki.org/_media/plugin:wrap_plugin_example9.png|image]]. If you have an idea for a custom Wrap class post in the [[slack\>it|IT slack channel]].

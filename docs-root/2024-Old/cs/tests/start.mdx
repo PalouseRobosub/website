@@ -12,7 +12,7 @@ Example CMakeLists.txt entry:
     serial_subscriber.test                                                        
     test_serial_subscriber.cpp)                                                   
   add_dependencies(test_serial_subscriber serial_subscriber_example)              
-  target_link_libraries(test_serial_subscriber serial test_tools ${catkin_LIBRARIES} ${GTEST_LIBRARIES})
+  target_link_libraries(test_serial_subscriber serial test_tools $\{catkin_LIBRARIES\} $\{GTEST_LIBRARIES\})
 
 ===== Compiling and Running =====
 To compile all tests:
@@ -22,4 +22,4 @@ To run all tests:
   rsmake run_tests
   
 To run a single test:
-  rostest robosub <test>
+  rostest robosub /\<test\>

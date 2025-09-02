@@ -18,7 +18,7 @@ The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they 
   * if the sub is stationary and sitting upright, you should expect a (relatively) large value on the Z axis, and close to zero on the X and Y axes
   * if the sub is diving, the Z value should be less than when stationary (and would approach zero if the sub was in a free-fall
   * if the sub is rising, the Z value should be greater than when stationary
-  * The units are such that a value of ~256 on the sensor is equal to the force of gravity (1 g, or 9.81 m/s<sup>2</sup>).
+  * The units are such that a value of ~256 on the sensor is equal to the force of gravity (1 g, or 9.81 m/s/\<sup\>2/\</sup\>).
   * Therefore, wit the sub sitting stationary we would expect a value of ~256 on the Z-axis of the sensor
 
 === Gyroscope ===
@@ -49,7 +49,7 @@ The depth sensor and the battery voltage sensors are ADC based. This means that 
 
 Equation is:
 
-> depth_feet = (sensor_value * 0.1728) - 10.341
+\> depth_feet = (sensor_value * 0.1728) - 10.341
 
 === Battery Voltage Sensor ===
 
@@ -59,7 +59,7 @@ Equation is:
 
 Equation is:
 
-> actual_voltage = sensor_value * (3.3/1024*7.5)
+\> actual_voltage = sensor_value * (3.3/1024*7.5)
 
 ==== GPIO Sensors ====
 
@@ -108,9 +108,9 @@ R x [x1 y1 z1; x2 y2 z2;... xn yn zn]' = [rx1 ry1 rz1; rx2 ry2 rz2;... rxn ryn r
 
 Rotation in our system is made up of Yaw, Pitch, and Roll. To arrive at an arbitrary rotation specified by these values, begin at the unrotated state where the submarine's intrinsic XYZ axes align with the global XYZ axes. A rotation is then defined as a yaw, then pitch, then roll, around the original z axis, the yawed y axis, and then yawed-pitched x axis respectively. These are right-hand rotations, so positive yaw is to the left, positive pitch is down (cry moar) and positive roll is clockwise.
 
-<html><insert equation of rotating about arbitrary axis xyz
+/\<html\>/\<insert equation of rotating about arbitrary axis xyz
 
-<insert long-form r3D tracking Y and X axes></html>
+/\<insert long-form r3D tracking Y and X axes\>/\</html\>
 
 Try it out. Like it or not, getting the hang of these rotations is crucial to everything that follows.
 
@@ -184,7 +184,7 @@ Y1P1R1//Y2P2R2//Y3P3R3Y1P1R1 = Y1II//IP2I//IIR3* = Y1//P2//R3.
 
 Well look at that, doing a yaw, then a pitch, then a roll, around our tracked intrinsic axes, is equivalent to doing the roll first about the origin, followed by pitching about the origin, followed by yawing about the origin. This means, among other things, that r3D can be written FAR more efficiently.
 
-<html><r3D revised:></html>
+/\<html\>/\<r3D revised:\>/\</html\>
 
 This is also important from another avenue. Lets say I do two rotations. Now what's our current yaw, pitch, and roll position? It's not the sum of the two yaws and pitches and rolls. If I do two rotations, a yaw and roll, and then a pitch, where am I located? Pitching from that rolled orientation, versus a normal one, means that some of my pitching is going to add to my yaw at the cost of gaining true pitch. If I yawed and rolled 45 degrees, and then pitched -90 degrees, I'd be sitting above the global Y axis (yaw = 90) at a pitch of only -45 degrees, and a roll of 45 degrees. Likewise, if I yawed, then rolled, then yawed by 90 degrees, I'd be sitting below the global Y axis (yaw 90 degrees) and would have somehow gotten 45 degrees of pitch out of the bargain.
 
@@ -196,7 +196,7 @@ Yaw//Pitch//Roll = R
 
 Our r3D function is now simple enough, because these rotations are around the global XYZ axes, that we can follow through what each of the 9 elements of R equals as a function of the roll, pitch, and yaw values.
 
-<html><track out pure yaw, pitch, and roll rotations mutliplied together></html>
+/\<html\>/\<track out pure yaw, pitch, and roll rotations mutliplied together\>/\</html\>
 
 Okay, not so bad, right? If we look to the bottom left, we find that no matter what, R(3,3) is the negative sine of our pitch. So pitch = asind(R(3,3)).
 
@@ -205,7 +205,7 @@ And now look at the first two elements in the first column. cosine and sine of y
 A similar trick with the third row gets you the roll component from the arctan2d(R(3,3),R(3,2))
 
 So we get ir3D:\\
-<html><code for ir3D></html>
+/\<html\>/\<code for ir3D\>/\</html\>
 
 Some enterprising people might notice that there's a fatal issue, when pitch is exactly +/- 90 degrees. When that occurs, the other terms in the first column and third row are both zero. So ir3D will return a yaw and pitch of zero degrees, regardless of what yawing and rolling has taken place. This is a problem, because in the case of a 90 degree pitch, the sum of roll and yaw is what dictates the final value. We'd have to use those messier top-right terms to divine their sum.
 
@@ -219,7 +219,7 @@ R != r3D([dR dP dY])
 
 instead, R = r3D(1/n*[dR dP dY]) ^ n as the limit of n approaches infinity. You're continuously rolling and yawing from new orientations. If you kept it up long enough, you'd actually rotate until you're pointed straight-up and backwards. Essentially, you're rolling about the arbitrary axis defined by [.707 0 .707]
 
-<html><fill in later how to find how rotational velocity translates to continuous rotation around an arbitrary vector></html>
+/\<html\>/\<fill in later how to find how rotational velocity translates to continuous rotation around an arbitrary vector\>/\</html\>
 
 Now back to Sensors:
 
@@ -234,4 +234,4 @@ Depth Sensors:
 tbc
 
 ir3D:\\
-<html><insert function here></html>
+/\<html\>/\<insert function here\>/\</html\>

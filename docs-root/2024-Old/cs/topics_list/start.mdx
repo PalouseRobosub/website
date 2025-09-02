@@ -1,11 +1,11 @@
-<WRAP center round important 60%>
+/\<WRAP center round important 60%\>
 This page is stale and should be updated.
-</WRAP>
+/\</WRAP\>
 
 ====== ROS Topics ======
 This page is a description of all the topics we are using (or plan to use) on the sub. Below is a symbolic representation of data flow on the sub (with sensors as we have right now).
 
-{{:cs:topics_list:node_graph.png?800|}}
+\{\{:cs:topics_list:node_graph.png?800|\}\}
 ===== Sensors =====
 ==== /orientation ====
 Message: [[http://docs.ros.org/api/geometry_msgs/html/msg/Quaternion.html | geometry_msgs/Quaternion ]] \\
@@ -52,31 +52,31 @@ Results of the deep vision processing system. It's a list detailing all the obje
 
 ==== /hydrophones/[Frequency]/deltas ====
 Message: Duplicated for all frequencies in the pool. Contains the latest time deltas between the reference and other 3 hydrophones.
-<code>
+/\<code\>
 Header header
 duration d1
 duration d2
 duration d3
-</code>
+/\</code\>
 
 ==== /hydrophones/[Frequency]/timestamps ====
 Message: Duplicated for all frequencies in the pool. Contains the latest timestamps recorded by the system.
-<code>
+/\<code\>
 Header header
 Time ref
 Time t1
 Time t2
 Time t3
-</code>
+/\</code\>
 
 ==== /hydrophones/[Frequency]/debug ====
 Message: Used for debugging the hydrophone system.
-<code>
+/\<code\>
 Header header
 Int64 frequency
 Int64 avg_sig_strength
 Float64 approx_angle
-</code>
+/\</code\>
 
 ==== /hydrophones/bearing ====
 Message: [[http://docs.ros.org/api/geometry_msgs/html/msg/Vector3Stamped.html | geometry_msgs/Vector3Stamped]] \\

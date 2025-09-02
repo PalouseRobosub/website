@@ -1,4 +1,4 @@
-{{indexmenu_n>51}}
+\{\{indexmenu_n\>51\}\}
 
 ====== Primary System Design ======
 **Project Lead**: Ryan Summers
@@ -25,7 +25,7 @@ For the bulkhead system, raw battery voltage is fed to a single power distributi
 All devices that are connected to the CPU through a USB connection will have optional, magnetically-isolated 5V supplied off the USB hub. It is not mandatory that they make use of these supplies.
 
 Below is the current architecture of the power system in the submarine:
-{{:ee:power:power_diagram:power_diagram.jpg?800|}}
+\{\{:ee:power:power_diagram:power_diagram.jpg?800|\}\}
 
 ==== Sensor Feedback and Control Bridging ====
 
@@ -33,14 +33,14 @@ Another important feature of the electrical system is to provide a means for the
 
 The final purpose of the electrical system is to provide sensor feedback to the computer system so that it has information about it's current orientation. To do this, two sensor systems have been created. The depth sensor system is composed of four high-precision depth sensors placed at four different points on the support structure of the submarine. These sensors penetrate into the bulkhead and mate with a depth sensor reading microcontroller. This microcontroller is connected to the computer through a USB-UART converter and runs a ROS node natively on the microcontroller. The IMU sensor system is composed of a single high-accuracy IMU sensor. This sensor provides yaw, pitch, and roll to the computer. A ROS node must be written on the computer to interface with the data provided by the IMU sensor.
 
-{{:ee:system:electrical_communication.jpg?800|}} 
+\{\{:ee:system:electrical_communication.jpg?800|\}\} 
 
 ==== Bulkhead Connections ====
 Below is a preliminary diagram showing all electrical bulkhead connections. This diagram is not finalized and should be assumed as only an initial draft. Please confirm with electrical team before using.
 
-{{:ee:system:bulkhead_connections.jpg?800|}}
+\{\{:ee:system:bulkhead_connections.jpg?800|\}\}
 
 ==== Internal Layout ====
 Below is the current plans for internal component layout and wiring. All drawings are to scale.
 
-{{ :ee:system:internal-layout_1_.jpg?direct |}}
+\{\{ :ee:system:internal-layout_1_.jpg?direct |\}\}

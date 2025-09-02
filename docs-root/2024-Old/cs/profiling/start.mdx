@@ -5,20 +5,20 @@ The following instructions are based on [[http://projects.csail.mit.edu/pr2/wiki
 
 ===== C++ =====
 Run valgrind on your program:
-  valgrind --tool=callgrind <executable name>
-This will start up your node. Let it run for a while, then use ''rosnode kill'' to kill your node, and valgrind will dump its output to a file called ''callgrind.out.<pid>''.
+  valgrind --tool=callgrind /\<executable name\>
+This will start up your node. Let it run for a while, then use ''rosnode kill'' to kill your node, and valgrind will dump its output to a file called ''callgrind.out./\<pid\>''.
 
 Next, load up this output file with kcachegrind:
-  kcachegrind callgrind.out.<pid>
+  kcachegrind callgrind.out./\<pid\>
 
 ===== Python =====
 Run your program with profiling turned on:
-  python -m cProfile -o <profile file name> <script>.py
+  python -m cProfile -o /\<profile file name\> /\<script\>.py
 
-Same as the C++ instructions, let it run for a while and then use rosnode kill to kill your node. The output will be dumped to ''<profile file name>''.
+Same as the C++ instructions, let it run for a while and then use rosnode kill to kill your node. The output will be dumped to ''/\<profile file name\>''.
 
 View the output in kcachegrind:
-  pyprof2calltree -i <profile file name> -k
+  pyprof2calltree -i /\<profile file name\> -k
   
 ====== Notes on Optimizing Code ======
 Profiling does not tell you whether or not you should optimize your code, it only tells you **where** optimizing would do the most help. Only profile your code if you notice your program is running with a much higher CPU usage than what you would expect (or just for fun if you're curious). There's no need to profile every program you write.

@@ -8,7 +8,7 @@ We use our hydrophones to locate the pinger in the pool, which can be utilized f
 
 The arrival time calculations tend to be complicated by noise, which means that it is not possible to trivially detect rising edges. The ping can be thought of as an identical signal arriving at slightly different times on each of the hydrophones. In order to accurately calculate the time differences between each signal, a [[https://en.wikipedia.org/wiki/Cross-correlation|cross correlation]] is used. A cross correlation essentially slides one signal over the top of another, and at the point where the signals maximally overlap, the amount of shifting needed is equal to the time delay of the signal. Below is an example of a cross correlation with a sine wave. In the demo, you can see that at X offset = 0, the correlation result is maximum. Therefore, the time delay of the two signals is zero (as they are duplicates of eachother).
 
-{{https://media.giphy.com/media/VVPKOXc6aY1Lq/source.gif}}
+\{\{https://media.giphy.com/media/VVPKOXc6aY1Lq/source.gif\}\}
 
 Further simplifications can be applied to the problem as well. By ensuring that the hydrophones are close enough, it can be guaranteed that the arrival time difference will never exceed one half wavelength (the signals are sinusoidal with a maximum frequency of 40KHz). The cross correlation now only needs to be completed within +/- half a wavelength (which increases accuracy and decreases required processing). This means that the arrival time difference can never exceed approximately 12.5 microseconds. Because the speed of sound in water is 1498 m/s, the hydrophones must be spaced within 1.8cm of each other.
 
@@ -28,12 +28,12 @@ The main difficulty exists in sampling the signals. It is important that samples
 ===== System Design =====
 
 
-{{ :ee:hydrophones:hydrophones-system-architecture.jpg}}
+\{\{ :ee:hydrophones:hydrophones-system-architecture.jpg\}\}
 
 The hydrophones have a piezo sensors that outputs small voltages as sound hits them. To be able to read them, the hydrophone signals are filtered with a 1st order bandpass and then are gained by approximately 40-60dB. After the signals are amplified, they are then passed to the ADC for conversion. The ADC samples the hydrophone signals at 5MHz simultaneously and outputs the converted information over a custom, parallel interface. This interface is differential and utilizes DDR (Dual data rate). In order to read the ADC values, the Zynq SoC is used. The Zynq has a dual core ARM processor embedded in FPGA fabric. A custom Verilog module was created for reading the parallel interface output by the ADC. The data is then sent over the AXI4-Stream protocol to allow it to be transferred into the processor's RAM through the HP-AXI interface (AXI is a common communication protocol for custom hardware modules written in Verilog). In order to accommodate the high data rate of the analog measurements, the AXI stream is connected to a DMA engine. The DMA puts the data into the CPU RAM and tells the processor about it. At this point, the data has been successfully transferred into the computer and the cross correlation can be performed. The below sections delve into specifics of each of the different design areas.
 
 ==== Analog Design ====
-{{ :ee:hydrophones:analog-hydrozynq.jpg |}}
+\{\{ :ee:hydrophones:analog-hydrozynq.jpg |\}\}
 
 The analog signal goes through a five-stage amplification and filtering process. First, the signal is sent through two gain stages, each of which apply an adjustable gain to the signal. After the signal is gained into a reasonable voltage range, it is passed through a low-pass filter and then a high-pass filter to result in a bandpass filter of the signal.
 
@@ -41,7 +41,7 @@ Once the signal has been filtered and gained, it is preprocessed for the ADC. In
 
 
 ==== FPGA Design ====
-{{ :ee:hydrophones:fpga-hydrozynq.jpg |}}
+\{\{ :ee:hydrophones:fpga-hydrozynq.jpg |\}\}
 
 The FPGA has a number of parts to it, but its ultimate goal is to take samples sent from the ADC and transfer them into the processor's memory. Immediately, the [[https://en.wikipedia.org/wiki/Differential_signaling|differential signals]] are passed to the FPGA IO buffers to convert them to single-ended. After the single-ended conversion, a custom Verilog block was written that takes in the ADC's clock and data signals to properly digitize the data. It then provides this data on an [[https://www.xilinx.com/support/documentation/ip_documentation/ug761_axi_reference_guide.pdf|AXI-Stream]] interface. Because ADC reader block is driven off an external clock and the rest of the FPGA is clocked internally, care must be taken to cross the clock boundaries to prevent metastability. The Xilinx FIFO generator was used, as it generates an asynchronous read-write FIFO that can be used for synchronizing data with the internal FPGA clock.
 
@@ -84,19 +84,19 @@ This will automatically mount and copy over ''%%BOOT.bin%%'' to an SD card for t
 In order to efficiently debug through GDB and program on the fly, the [[https://store.digilentinc.com/jtag-hs3-programming-cable/|Digilent HS3]] can be used as a JTAG access point for GDB debug interfaces. To interact with the HydroZynq through JTAG, use the ''%%xmd%%'' command (provided by the Xilinx Vivado tool suite).
 
 After executing xmd from the command line, you will enter a shell-like environment. To connect to the ARM core for programming, enter:
-  > connect arm hw
+  \> connect arm hw
   
 Once connected, if you desired to program the FPGA or the ARM, stop the ARM CPU:
-  > stop
+  \> stop
 
 To program a new bitstream:
-  > fpga -f [bitstream_file_path]
+  \> fpga -f [bitstream_file_path]
   
 To load a new ELF onto the CPU:
-  > dow [elf_file_path]
+  \> dow [elf_file_path]
   
 Finally, the CPU can be restarted:
-  > run
+  \> run
   
 Once XMD has been started, a remote GDB server is automatically instantiated. To connect to the GDB server, use the ''%%software/debug.sh%%'' script to launch up a GDB session.
   [hydrozynq-repo-path]/software/debug.sh
@@ -122,7 +122,7 @@ The HydroZynq currently sends out all samples used in the cross correlation and 
   python [hydrozynq-repo-path]/scripts/correlation_receiver.py
   
 The data and correlation results are sent using a trivial packet format:
-{{ :ee:hydrophones:wavedrom.png |Packet Formats}}
+\{\{ :ee:hydrophones:wavedrom.png |Packet Formats\}\}
 
 All data is little-endian integers. Bit sizes are shown in parentheses. Data packets send the raw ADC reading for each point and correlation packets send the correlation function values for each time shift calculated.
 
@@ -158,4 +158,4 @@ In debug mode, the HydroZynq records for 2.1 seconds, dumps all 2.1 seconds of d
 | Analog-to-Digital Converter | LTC2171-14 | [[http://cds.linear.com/docs/en/datasheet/21721014fb.pdf|Datasheet]]|
 
 === Hydrophone dimensions: ===
-{{:ee:hydrophones:as-1_hydrophone_dimensions.jpg}}
+\{\{:ee:hydrophones:as-1_hydrophone_dimensions.jpg\}\}

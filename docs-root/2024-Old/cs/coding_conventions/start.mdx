@@ -22,12 +22,12 @@ More than one blank line in a row is not allowed. \\
 **Rational**: If you need to break up your code into logical chunks it is better to use a single newline and a comment describing the next code block.
 ===== C++ =====
 running 
-  astyle -A1 -N -n <file name>
+  astyle -A1 -N -n \<file name\>
 on your C++ files should clean them up nicely.
 ===== Python =====
 
 Nodes should be defined in classes with the constructor called in the "main" section.
-<code python>
+\<code python\>
 def Node():
     def __init__():
         # define pubs and subs here
@@ -37,4 +37,4 @@ if __name__=='__main__':
     rospy.init_node()
     Node()
     rospy.spin()    
-</code>
+\</code\>

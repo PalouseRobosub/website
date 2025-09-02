@@ -37,7 +37,7 @@ This removes the need to add the -c flag repeatedly. This script can also be sym
 === Sloth alias ===
 
 You can set up an alias in your bashrc. To do so run (replace "~/vision_dev" with path to your vision_dev repo):
-   echo "alias sloth='~/vision_dev/sloth/./robosub_sloth.sh'" >> ~/.bashrc
+   echo "alias sloth='~/vision_dev/sloth/./robosub_sloth.sh'" \>\> ~/.bashrc
    source ~/.bashrc
 
 ----
@@ -48,8 +48,8 @@ The full list of keybindings used in sloth can be found in the [[https://github.
 
 **__Default keybindings__**
 
-<WRAP group>
-<WRAP 20% column>
+/\<WRAP group\>
+/\<WRAP 20% column\>
   * **Space**
   * **Backspace**
   * **PgDown**
@@ -61,8 +61,8 @@ The full list of keybindings used in sloth can be found in the [[https://github.
   * **Esc**
   * **Shift+l**
   * **Shift+c**
-</WRAP>
-<WRAP column>
+/\</WRAP\>
+/\<WRAP column\>
 Mark image as labeled/confirmed and go to next\\
 Next image/frame\\
 Previous image/frame\\
@@ -74,31 +74,31 @@ Delete selected annotations\\
 Exit insert mode\\
 Mark current image as labeled\\
 Mark all annotations in image as confirmed
-</WRAP>
-</WRAP>
+/\</WRAP\>
+/\</WRAP\>
 
 
 **__Robosub Specific__**
 
-<WRAP group>
-<WRAP 20% column>
+/\<WRAP group\>
+/\<WRAP 20% column\>
   * **F5**
   * **Ctrl+Shift+Del**
   * **c**
   * **n**
-</WRAP>
-<WRAP column>
+/\</WRAP\>
+/\<WRAP column\>
 Toggle the visibility of label names on annotation boxes\\
 Delete all annotations from the current image and mark it as unlabeled\\
 Copy all annotations from the previous image to this one\\
 Mark image as labeled/confirmed and copy annotations to next image. \\
 (Equivalent to **Space** then **c**)
-</WRAP>
-</WRAP>
+/\</WRAP\>
+/\</WRAP\>
 
 **__Annotations__**
-<WRAP group>
-<WRAP 20% column>
+/\<WRAP group\>
+/\<WRAP 20% column\>
   * **s**
   * **p**
   * **t**
@@ -109,8 +109,8 @@ Mark image as labeled/confirmed and copy annotations to next image. \\
   * **4**
   * **5**
   * **6**
-</WRAP>
-<WRAP column>
+/\</WRAP\>
+/\<WRAP column\>
 Start Gate Post\\
 Path Marker\\
 Torpedo Target\\
@@ -121,8 +121,8 @@ Die 3\\
 Die 4\\
 Die 5\\
 Die 6
-</WRAP>
-</WRAP>
+/\</WRAP\>
+/\</WRAP\>
 
 ----
 === Sloth Mouse Controls ===
@@ -132,19 +132,19 @@ While creating annotations, the following are useful mouse controls.
 
   * **Right Click and Drag**
 
-<WRAP indent>
-<WRAP indent>
+/\<WRAP indent\>
+/\<WRAP indent\>
 Resize an annotation. Resizing is based upon the quadrant of the annotation clicked on.
-</WRAP>
-</WRAP>
+/\</WRAP\>
+/\</WRAP\>
 
   * **Ctrl+Left Click**
 
-<WRAP indent>
-<WRAP indent>
+/\<WRAP indent\>
+/\<WRAP indent\>
 Select multiple annotations at once.
-</WRAP>
-</WRAP>
+/\</WRAP\>
+/\</WRAP\>
 
 ===== Data Management =====
 ----
@@ -171,5 +171,5 @@ There are a number of commands to be used with ''%%rslabel%%'', including ''%%sh
 ----
 ==== For Windows Users ====
 
-People who want to label on Windows you can use this tool to check, download and upload labels. To use this just extract the folder in zip anywhere and run ''%%WindowsSftp.exe%%'', remember that ''%%.dll%%'' file must be in the same folder as ''%%.exe%%'' {{ :cs:vision:image_tagging:robosub-windows-tools.zip |}}
+People who want to label on Windows you can use this tool to check, download and upload labels. To use this just extract the folder in zip anywhere and run ''%%WindowsSftp.exe%%'', remember that ''%%.dll%%'' file must be in the same folder as ''%%.exe%%'' \{\{ :cs:vision:image_tagging:robosub-windows-tools.zip |\}\}
 

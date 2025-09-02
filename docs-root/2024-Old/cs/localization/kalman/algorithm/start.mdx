@@ -1,7 +1,7 @@
 ====== Kalman Filter Algorithm ======
-<WRAP center round important 60%>
+\<WRAP center round important 60%\>
 Note: This section is currently under revision.
-</WRAP>
+\</WRAP\>
 
 This section covers the Kalman Filter Algorithm. First we'll cover the State Space format of modeling and measuring a discrete-time dynamic system of estimated states, noisy inputs, and noisy measurements.  Second, we'll explore all the different pieces of information about our system necessary to inform the algorithm. Third, the specific Kalman Filter Algorithm constructed based off of those parameters. Finally, we'll use some example state spaces and measurements to see how well we track.
 
@@ -10,37 +10,37 @@ Note: all images below have been created with simple Matlab Scripts. If seeing t
 
 ===== Section 1 - State Space Format =====
 
-The State Space Format is a universally standardized format for dynamic systems in the signals and controls community.  In the continuous-time domain, the derivative of the state $\dot{x}(t)$ is a linear function of $x(t)$.  In the discrete-time domain, where we'll be operating, the next state $x[k+1]$ is a linear function of the current state $x[k]$.
+The State Space Format is a universally standardized format for dynamic systems in the signals and controls community.  In the continuous-time domain, the derivative of the state $\dot\{x\}(t)$ is a linear function of $x(t)$.  In the discrete-time domain, where we'll be operating, the next state $x[k+1]$ is a linear function of the current state $x[k]$.
 
 
 $$
-X_{k+1} = AX_k + B(u_k + \sim\mathcal{N}(0,Q^2)) \\
-Y_k = CX_k + \sim\mathcal{N}(0,\sigma_m^2)
+X_\{k+1\} = AX_k + B(u_k + \sim\mathcal\{N\}(0,Q^2)) \\
+Y_k = CX_k + \sim\mathcal\{N\}(0,\sigma_m^2)
 $$
 
 Vector $X_k$ is the State Vector which contains all states of the system at time-step $k$.  These include things like position, velocity, orientation, voltage, etc. Matrix $A$ is the Transmission Matrix, which contains the dynamics of the system, and calculates the next state given the current state. $B$ is the input matrix, which describes the dynamics of inputs $u$.  
 
-Vector $Q$ is the Process Noise of the system, which is the combination of the variance of the inputs $\sigma_u^2$ and an estimated degree of possible external forces $\sigma_{ext}^2$. $Q^2 = \sigma_u^2 + \sigma_{ext}^2$  Random forces from bumping into walls, random currents in the water, diver interaction, and other unpredictable perturbations.  Put another way, $Q$ describes the uncertainty involved when predicting into to future, even given perfect information about the present State. Were there no external forces, perfect actuators, and a perfect initial state $x_0$, the system state could be predicted perfectly into the future.  This is obviously not the case in the real world, hence the need to specify uncertainty in the model, and thus in predicting the future states.
+Vector $Q$ is the Process Noise of the system, which is the combination of the variance of the inputs $\sigma_u^2$ and an estimated degree of possible external forces $\sigma_\{ext\}^2$. $Q^2 = \sigma_u^2 + \sigma_\{ext\}^2$  Random forces from bumping into walls, random currents in the water, diver interaction, and other unpredictable perturbations.  Put another way, $Q$ describes the uncertainty involved when predicting into to future, even given perfect information about the present State. Were there no external forces, perfect actuators, and a perfect initial state $x_0$, the system state could be predicted perfectly into the future.  This is obviously not the case in the real world, hence the need to specify uncertainty in the model, and thus in predicting the future states.
 
 Vector $Y_k$ is the measurement vector. It contains the values taken from the sensors. Matrix $C$ is the Emission Matrix, which describes the linear function that relates the system state to the measurement values. $\sigma_m$ is the noise vector which describes how noisy each individual sensor measurement is.
 
 ===== Section 2 - Kalman Filter Algorithm =====
 
-The Kalman Filter is a two-stage process of prediction and measurement.  First, based on the previous state estimate $\hat{X}_{k-1}$ and inputs $u_{k-1}$, an initial current state estimate $\hat{X}_{k'}$ is predicted. The confidence of the Previous Estimate is contained in the Covariance Matrix $P$  From this estimate, a further estimate $\hat{Y}_k$ of what the sensors //should// be reading given $\hat{X}_{k'}$ is calculated using the Emission Matrix $C$.
+The Kalman Filter is a two-stage process of prediction and measurement.  First, based on the previous state estimate $\hat\{X\}_\{k-1\}$ and inputs $u_\{k-1\}$, an initial current state estimate $\hat\{X\}_\{k'\}$ is predicted. The confidence of the Previous Estimate is contained in the Covariance Matrix $P$  From this estimate, a further estimate $\hat\{Y\}_k$ of what the sensors //should// be reading given $\hat\{X\}_\{k'\}$ is calculated using the Emission Matrix $C$.
 
-Second, the true, noisy measurements $Y_k$ are received and compared with the expected sensor values $\hat{Y}_k$.  A compromise between the noisy measurements and the expected measurement is arrived at based upon the noise of the sensors $\sigma_m$ and the uncertainty of the measurement predictions calculated from $P$.  This compromise is encapsulated in a value $\hat{K}$ terms the 'Kalman Gain'. The official $\hat{X}_{k}$ is then calculated from the Emission Matrix $C$ and the compromise of sensor values.  The estimate of our state for this time step is made, and the process repeats to estimate the state $X_{k+1}$ at the next time step.
+Second, the true, noisy measurements $Y_k$ are received and compared with the expected sensor values $\hat\{Y\}_k$.  A compromise between the noisy measurements and the expected measurement is arrived at based upon the noise of the sensors $\sigma_m$ and the uncertainty of the measurement predictions calculated from $P$.  This compromise is encapsulated in a value $\hat\{K\}$ terms the 'Kalman Gain'. The official $\hat\{X\}_\{k\}$ is then calculated from the Emission Matrix $C$ and the compromise of sensor values.  The estimate of our state for this time step is made, and the process repeats to estimate the state $X_\{k+1\}$ at the next time step.
 
 $$
-\hat{X}_{k'} = A\hat{X}_{k-1} + Bu_{k-1}, \qquad
-P_{k'} = AP_{k-1}A' + Bdiag(Q^2)B' \\
+\hat\{X\}_\{k'\} = A\hat\{X\}_\{k-1\} + Bu_\{k-1\}, \qquad
+P_\{k'\} = AP_\{k-1\}A' + Bdiag(Q^2)B' \\
 
-\hat{K} = P_{k'}C'/(CPC'+diag(\sigma_m^2)) \\
+\hat\{K\} = P_\{k'\}C'/(CPC'+diag(\sigma_m^2)) \\
 
-\hat{X}_k = \hat{X}_{k'} + \hat{K}(Y_k - C\hat{X}_{k'}),\qquad 
-P_k = (I_{n} - \hat{K}C)P_{k'}
+\hat\{X\}_k = \hat\{X\}_\{k'\} + \hat\{K\}(Y_k - C\hat\{X\}_\{k'\}),\qquad 
+P_k = (I_\{n\} - \hat\{K\}C)P_\{k'\}
 $$
 
-<inline code example to be explicit>
+\<inline code example to be explicit\>
 
 
 ===== Section 3 - Kalman Filter Initialization =====
@@ -49,7 +49,7 @@ The above update loop requires initialization. Each execution of the loop relies
 
 Process Noise $Q$ and sensor noise $\sigma_m$ must be estimated.  $Q$ should likely be loaded from a calibration file, and $\sigma_m$ dynamically created alongside $C$ with information from such a file.
 
-Once the model is created, initial parameters must be selected.  A good default is to set your state estimate $\hat{X}_0$ to be all zeros, or their equivalent. For instance, if the 9 elements of the 3x3 orientation matrix are part of your state, they would be set as an identity matrix $I_3$.  This initial guess at our state is accompanied by a the covariance matrix $P_0$ being a diagonal matrix of //very large// numbers.  This will ensure that all predictions of the estimated state from the model are ignored in the face of //any// sensor measurement that might have some semblance of an idea of what the state is.  The model should still begin to produce reliable results and be taken seriously in a short number of time steps, as even after a single measurement, the state estimate $\hat{X}$ has a better (smaller) variance than any sensor measurement, and raw sensor measurements typically are pretty good on their own.
+Once the model is created, initial parameters must be selected.  A good default is to set your state estimate $\hat\{X\}_0$ to be all zeros, or their equivalent. For instance, if the 9 elements of the 3x3 orientation matrix are part of your state, they would be set as an identity matrix $I_3$.  This initial guess at our state is accompanied by a the covariance matrix $P_0$ being a diagonal matrix of //very large// numbers.  This will ensure that all predictions of the estimated state from the model are ignored in the face of //any// sensor measurement that might have some semblance of an idea of what the state is.  The model should still begin to produce reliable results and be taken seriously in a short number of time steps, as even after a single measurement, the state estimate $\hat\{X\}$ has a better (smaller) variance than any sensor measurement, and raw sensor measurements typically are pretty good on their own.
 
 Finally, calibration values must be estimated or directly measured and stored upon start-up.  Things like the specific orientation and magnitude of the local magnetic field, the magnitude of gravity (direction is always tautologically 'down' along the z axis), and the drift of individual gyroscopes.  These parameters, among others, are vital to the utilization of your sensor data to estimate the world, and are liable to change with location or time.  Often times calculating these parameters require specific manipulation of the submarine - such as keeping the submarine perfectly still for measuring gyroscopic drift - and should potentially be made part of an executable calibration-script to be run at the push of a button once the submarine is appropriately staged.
 
@@ -59,15 +59,15 @@ Other sections will elaborate on how to build these matrices and perform these c
 ===== Section 4 - Simulation ===== 
 In the simulation, the vehicle on the 2D plane has thrusters to let it control orientation and forward motion.  The process noise in the system is relatively low, but the sensors are noisy and ping less frequently.  From a constant starting point and random orientation, the submarine attempts to reach its target, meandering less as it becomes more confident in its knowledge of the world.
 
-The Scaled Covariance axes is a heatmap of the covariance matrix $P$ scaled by the standard deviations $\sigma_x, \sigma_y,$ and $\sigma_\theta$ of each of the sensors.  The derivative values $\dot{x}, \dot{y},$ and $\dot{\theta}$ are scaled by $\frac{\sigma_x}{dt}, \frac{\sigma_y}{dt},$ and $\frac{\sigma_\theta}{dt}$  Note how the variances along the diagonal mostly drop below unity - suggesting the submarine is //more confident// in it's state estimation $\hat{X}$ than any individual sensor reading. Note also that the variances are all lower when the sensors are reporting in more frequently.  Finally note how the variances are all lower when the submarine is moving quickly. Disagreements between expected and measured position become much more significant when projected into the future with a high velocity.
+The Scaled Covariance axes is a heatmap of the covariance matrix $P$ scaled by the standard deviations $\sigma_x, \sigma_y,$ and $\sigma_\theta$ of each of the sensors.  The derivative values $\dot\{x\}, \dot\{y\},$ and $\dot\{\theta\}$ are scaled by $\frac\{\sigma_x\}\{dt\}, \frac\{\sigma_y\}\{dt\},$ and $\frac\{\sigma_\theta\}\{dt\}$  Note how the variances along the diagonal mostly drop below unity - suggesting the submarine is //more confident// in it's state estimation $\hat\{X\}$ than any individual sensor reading. Note also that the variances are all lower when the sensors are reporting in more frequently.  Finally note how the variances are all lower when the submarine is moving quickly. Disagreements between expected and measured position become much more significant when projected into the future with a high velocity.
 
 With sensor reporting at every 3 seconds:
 
-{{ cs:localization:kalman:kalman_sim3s.gif }}
+\{\{ cs:localization:kalman:kalman_sim3s.gif \}\}
 
 With sensor reporting at every 0.5 seconds:
 
-{{ cs:localization:kalman:kalman_sim_halfs.gif }}
+\{\{ cs:localization:kalman:kalman_sim_halfs.gif \}\}
 
 ===== Section 5 - Matlab Code =====
 
@@ -76,7 +76,7 @@ Unfortunately the code looks more complicated than what's above, because I throu
 === Model / Sensor Parameters ===
 Here we initialize all the matrices we'll need for our model. $A$ Transition Matrix, $B$ Input Matrix, $X$ State Vector, $u$ input vector, and Process noise $Q$, as well as general parameters like our time step $dt$ and physical parameters of our vehicle like mass and rotational inertia.  The Emission Matrix $C$ is also generated here, with corresponding sensor noises $\sigma$. 
 
-<code matlab>
+\<code matlab\>
 %% Model parameters 
 clear all
 close all
@@ -144,12 +144,12 @@ P(:,:,1) = 9999*eye(6);    %covariance matrix of state estimation
 X(3,1) = 100;   %random initial orientation
 
 
-</code>
+\</code\>
 
 === Initializing Graphic Objects ==
 This was just necessary to produce those nice .gif files. Ignore this unless you have some weird interest in matlab graphing syntax.
 
-<code matlab>
+\<code matlab\>
 %% Initialize graphics
 close all
 f1 = figure(1);
@@ -184,24 +184,24 @@ colorbar
 
 frame(1) = getframe(f1);
 tic;
-</code>
+\</code\>
 
 
 === Model / Kalman Update Loop ===
 
 Here's the meat of what you're looking for - third codeblock down, the Kalman Update section
-<code matlab>
+\<code matlab\>
 %% Model / Filter update loop
 for k = 1:T/dt    
-</code>
+\</code\>
 == Control System Update ==
-<code matlab>
+\<code matlab\>
 %% Control System
     %calculate error
     err(1,k+1) = sqrt(sum((goal-X_est([1,2],k)).^2));
     err(2,k+1) = atan2d(goal(2)-X_est(2,k),goal(1)-X_est(1,k)) - X_est(3,k);
     err(2,k+1) = -err(2,k+1);   %correct for handed-ness
-    while(abs(err(2,k+1))>180)
+    while(abs(err(2,k+1))\>180)
         err(2,k+1) = err(2,k+1) - sign(err(2,k+1))*360;
     end
     
@@ -215,25 +215,25 @@ for k = 1:T/dt
     u_r = f_goal(2) * [1;-1];
     %Combine thrusts to acomplish goals - limit each goal to 50% thrust to truncate demand.
     u(:,k) = sign(u_t).*min(abs(u_t),thrust/2) + sign(u_r).*min(abs(u_r),thrust/2); 
-</code>
+\</code\>
 
 == Model Update ==
-<code matlab>
+\<code matlab\>
     %% Model Submarine/thrusters (Reality normally does this job)
     %calculate new state from last state
     X(:,k+1) = A*X(:,k) + B*(rr(X(3,k))*motor*u(:,k) + Q*randn(3,1));
     
     %correct rollover
-    while(abs(X(3,k+1))>180)
+    while(abs(X(3,k+1))\>180)
         X(3,k+1) = X(3,k+1) - sign(X(3,k+1))*360;
     end
     
     %calculate new sensor measurements from new state
     Y(:,k+1) = C*X(:,k+1) + sigma.*randn(3,1);
-</code>
+\</code\>
 
 == Kalman Update Loop ==
-<code matlab>
+\<code matlab\>
     %% Run Kalman Filter
     %Estimate new state from last state estimate
     X_est(:,k+1) = A*X_est(:,k) + B*(rr(X_est(3,k))*motor*u(:,k));
@@ -253,13 +253,13 @@ for k = 1:T/dt
     end
     
     %Correct rollover
-    while(abs(X_est(5,k+1))>180)
+    while(abs(X_est(5,k+1))\>180)
         X_est(3,k+1) = X_est(3,k+1) - sign(X_est(3,k+1))*360;
     end
-</code>
+\</code\>
 
 == Graphic Update ==
-<code matlab>
+\<code matlab\>
  %% Graphic update
     %figure(1)
     tT.String = ['Position at Time = ',num2str(k*dt+dt),'sec'];
@@ -293,24 +293,24 @@ for k = 1:T/dt
     tic;
     
     frame(ceil(k/2)+1) = getframe(f1);
-</code>
+\</code\>
 
 That's the entirety of the update loop. It will stop when Time ''T/dt'' runs out or it hits an arbitrary stop condition
 
-<code matlab>
+\<code matlab\>
  %% Stop condition - close to target 
-    if(sum(abs(goal-X_est(1:2,k+1))) < .3)
+    if(sum(abs(goal-X_est(1:2,k+1))) \< .3)
         break;
     end
     
 end  %ends for k=1:T/dt loop
-</code>
+\</code\>
 
 === Graphics cleanup ===
 
 Why are you reading this?  It's uninteresting.
 
-<code matlab>
+\<code matlab\>
 %% clean up chart, close out and create gif
 delete(utext);
 for n=1:10
@@ -323,4 +323,4 @@ end
 movie2gif(frame, 'kalman_sim_halfs.gif', 'DelayTime', dt,'Loopcount',inf)
 
 %%%End Program%%%
-</code>
+\</code\>

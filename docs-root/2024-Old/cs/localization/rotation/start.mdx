@@ -1,7 +1,7 @@
 ====== 3D Rotation ======
-<WRAP center round important 60%>
+\<WRAP center round important 60%/\>
 Note: This section is currently under revision.
-</WRAP>
+\<WRAP/\>
 
 3D Rotation can be accomplished in a number of ways.  Computer systems often favor Quaternions for certain mathematical properties.  However Quaternions are not terribly easy for humans to interpret or understand specific values.
 
@@ -12,18 +12,18 @@ This system describes an arbitrary rotation in 3D space with roll, pitch, and ya
 
 Yaw $\theta$ describes rotation about z-axis. Pitch $\phi$ describes rotation about the y-axis. Roll $\psi$ describes rotation about the x-axis.  All rotations described here are right-handed.
 
-These three values can be used to generate a 3x3 orthonormal matrix, with a determinant of 1, that rotates any $\begin{bmatrix} x,y,z \end{bmatrix}$ vector.
+These three values can be used to generate a 3x3 orthonormal matrix, with a determinant of 1, that rotates any $\begin\{bmatrix\} x,y,z \end\{bmatrix\}$ vector.
 
 ==== Roll ====
 To Roll a vector about the x-axis, left-multiply it by the rotation vector $R_\psi$.
 
 $$
 R_\psi =
-\begin{bmatrix}
+\begin\{bmatrix\}
 1 & 0 & 0 \\
 0 & cos(\psi) & -sin(\psi) \\ 
 0 & sin(\psi) & cos(\psi)
-\end{bmatrix}
+\end\{bmatrix\}
 $$
 
 ==== Pitch ====
@@ -31,11 +31,11 @@ To Pitch a vector about the y-axis, left-multiply it by the rotation vector $R_\
 
 $$
 R_\phi =
-\begin{bmatrix}
+\begin\{bmatrix\}
 cos(\phi) & 0 & sin(\phi) \\ 
 0 & 1 & 0 \\ 
 -sin(\phi) & 0 & cos(\phi)
-\end{bmatrix}
+\end\{bmatrix\}
 $$
 
 ==== Yaw ====
@@ -43,11 +43,11 @@ To Pitch a vector about the y-axis, left-multiply it by the rotation vector $R_\
 
 $$
 R_\theta =
-\begin{bmatrix}
+\begin\{bmatrix\}
 cos(\theta) & -sin(\theta) & 0 \\ 
 sin(\theta) & cos(\theta) & 0 \\ 
 0 & 0 & 1
-\end{bmatrix}
+\end\{bmatrix\}
 $$
 
 ==== Complete Rotation ====
@@ -59,119 +59,119 @@ Order of operation is important.  The complete $R$ matrix describes the vehicle 
 However, our rotation matrices do not provide rotations about our vehicle's intrinsic axes.  They rotate vectors about the global, static $x,y,z$ axes.  Thus, to achieve a complete rotation, the vector must be first rolled, then pitched, then yawed, relative to these constant axes.  These matrices are meant to operate on 3x1 column vectors on right right-hand side.  As such, order of operation goes from right to left as more rotations are tacked onto the system.
 
 $$
-R_{\psi,\phi,\theta} = R_\theta R_\phi R_\psi \\
+R_\{\psi,\phi,\theta\} = R_\theta R_\phi R_\psi \\
 
 R = 
-\begin{bmatrix}
+\begin\{bmatrix\}
 cos(\theta) & -sin(\theta) & 0 \\ 
 sin(\theta) & cos(\theta) & 0 \\ 
 0 & 0 & 1
-\end{bmatrix}
+\end\{bmatrix\}
 
-\begin{bmatrix}
+\begin\{bmatrix\}
 cos(\phi) & 0 & sin(\phi) \\ 
 0 & 1 & 0 \\ 
 -sin(\phi) & 0 & cos(\phi)
-\end{bmatrix}
+\end\{bmatrix\}
 
-\begin{bmatrix}
+\begin\{bmatrix\}
 1 & 0 & 0 \\
 0 & cos(\psi) & -sin(\psi) \\ 
 0 & sin(\psi) & cos(\psi)
-\end{bmatrix} \\
+\end\{bmatrix\} \\
 
 R([\psi,\phi,\theta]) =
-\begin{bmatrix}
+\begin\{bmatrix\}
 cos(\theta)sin(\phi) & cos(\theta)sin(\phi)sin(\psi) - sin(\theta)cos(\psi) & cos(\theta)sin(\phi)cos(\psi) + sin(\theta)sin(\psi) \\
 sin(\theta)cos(\phi) & sin(\theta)sin(\phi)sin(\psi) + cos(\theta)cos(\psi) & sin(\theta)sin(\phi)cos(\psi) - cos(\theta)sin(\psi) \\
 -sin(\phi) & cos(\phi)sin(\psi) & cos(\phi)cos(\psi)
-\end{bmatrix}
+\end\{bmatrix\}
 $$
 
 Additionally, it is important to be able to reverse the process, and identify which combination of roll, pitch, and yaw describes the current orientation.  This will be a non-unique combination of values, as there are an arbitrary number of ways to reach a given orientation.  However, this process will yield consistent results.
 
 $$
-\theta = \arctan(R_{21},R_{11}),\quad [-180^o,180^o] \\
-\phi = \arctan(-R_{31},\sqrt{R_{32}^2 + R_{33}^2}),\quad [-90^o,90^o] \\
-\psi = \arctan(R_{32},R_{33}),\quad [-180^o,180^o]
+\theta = \arctan(R_\{21\},R_\{11\}),\quad [-180^o,180^o] \\
+\phi = \arctan(-R_\{31\},\sqrt\{R_\{32\}^2 + R_\{33\}^2\}),\quad [-90^o,90^o] \\
+\psi = \arctan(R_\{32\},R_\{33\}),\quad [-180^o,180^o]
 $$
 
-In the event that $\phi = \pm90^o$ the other values must be determined using the more complicated four elements in the upper-right corner. When pitched by $\pm90^o$ yaw and roll become meaningless as independent values - only their sum or difference remain.  Thus we can describe the orientation vector as $\begin{bmatrix}0 & \phi & \theta^* \end{bmatrix}$ or as $\begin{bmatrix}\psi^* & \phi & 0\end{bmatrix}$. We will go with the first version, reporting the roll parameter as equal to zero.  For an arbitrary rotation including a pitch of $\phi = +90^o$ the yaw is reported as $\theta^* = \theta-\psi$. For an arbitrary rotation including a pitch of $\phi = +90^o$ the yaw is reported as $\theta^* = \theta+\psi$. 
+In the event that $\phi = \pm90^o$ the other values must be determined using the more complicated four elements in the upper-right corner. When pitched by $\pm90^o$ yaw and roll become meaningless as independent values - only their sum or difference remain.  Thus we can describe the orientation vector as $\begin\{bmatrix\}0 & \phi & \theta^* \end\{bmatrix\}$ or as $\begin\{bmatrix\}\psi^* & \phi & 0\end\{bmatrix\}$. We will go with the first version, reporting the roll parameter as equal to zero.  For an arbitrary rotation including a pitch of $\phi = +90^o$ the yaw is reported as $\theta^* = \theta-\psi$. For an arbitrary rotation including a pitch of $\phi = +90^o$ the yaw is reported as $\theta^* = \theta+\psi$. 
 
 Looking at the formulation for the elements of $R$ above and assuming $\phi = \pm90^o$ we can find how to reverse-calculate our $\theta^*$
 
 $$
-\theta^* = \arctan(-R_{12},R_{22})
+\theta^* = \arctan(-R_\{12\},R_\{22\})
 $$
 
 ===== Inverse Rotation =====
-To reverse the rotation of an $ \begin{bmatrix} x,y,z \end{bmatrix} $ matrix, you multiply it by the inverse of the rotation matrix $R^{-1}$.  The inverse of an orthagonal matrix is equal to its transpose.
+To reverse the rotation of an $ \begin\{bmatrix\} x,y,z \end\{bmatrix\} $ matrix, you multiply it by the inverse of the rotation matrix $R^\{-1\}$.  The inverse of an orthagonal matrix is equal to its transpose.
 
 $$
 RU = U^R \\
 
-\begin{bmatrix}
-R_{11} & R_{12} & R_{13} \\
-R_{21} & R_{22} & R_{23} \\
-R_{31} & R_{32} & R_{33}
-\end{bmatrix} 
+\begin\{bmatrix\}
+R_\{11\} & R_\{12\} & R_\{13\} \\
+R_\{21\} & R_\{22\} & R_\{23\} \\
+R_\{31\} & R_\{32\} & R_\{33\}
+\end\{bmatrix\} 
 
 
 
 
-\begin{bmatrix}
+\begin\{bmatrix\}
 x \\
 y \\
 z 
-\end{bmatrix}
+\end\{bmatrix\}
 
 =
 
-\begin{bmatrix}
-x^{R} \\
-y^{R} \\
-z^{R}  
-\end{bmatrix} \\
+\begin\{bmatrix\}
+x^\{R\} \\
+y^\{R\} \\
+z^\{R\}  
+\end\{bmatrix\} \\
 \\
 
-R^{\mathrm {T}}RU = R^{\mathrm {T}}U^R = U \\
+R^\{\mathrm \{T\}\}RU = R^\{\mathrm \{T\}\}U^R = U \\
 
-\begin{bmatrix}
-R_{11} & R_{12} & R_{13} \\
-R_{21} & R_{22} & R_{23} \\
-R_{31} & R_{32} & R_{33}
-\end{bmatrix}
+\begin\{bmatrix\}
+R_\{11\} & R_\{12\} & R_\{13\} \\
+R_\{21\} & R_\{22\} & R_\{23\} \\
+R_\{31\} & R_\{32\} & R_\{33\}
+\end\{bmatrix\}
  
-^{\mathrm {T}}
+^\{\mathrm \{T\}\}
 
 
 
-\begin{bmatrix}
+\begin\{bmatrix\}
 x^R \\
 y^R \\
 z^R 
-\end{bmatrix}
+\end\{bmatrix\}
 
 =
 
-\begin{bmatrix}
+\begin\{bmatrix\}
 x \\
 y \\
 z  
-\end{bmatrix}
+\end\{bmatrix\}
 
 $$
 
-It is worth stating explicitly that $R^{-1} \neq R(-\psi,-\phi,-\theta)$. If you yaw, then pitch, then roll into an orientation, you //cannot// anti-yaw, then anti-pitch, then anti-roll from that orientation to get back to the origin.  You'd have to anti-roll, then anti-pitch, then anti-yaw.  It must be rotated completely in reverse.  It must be multiplied by its //transpose// $R^{\mathrm {T}}$.
+It is worth stating explicitly that $R^\{-1\} \neq R(-\psi,-\phi,-\theta)$. If you yaw, then pitch, then roll into an orientation, you //cannot// anti-yaw, then anti-pitch, then anti-roll from that orientation to get back to the origin.  You'd have to anti-roll, then anti-pitch, then anti-yaw.  It must be rotated completely in reverse.  It must be multiplied by its //transpose// $R^\{\mathrm \{T\}\}$.
 
 $$
-U \neq (R_{-\theta} R_{-\phi} R_{-\psi})(R_\theta R_\phi R_\psi) U \\
-U = (R_{-\psi} R_{-\phi} R_{-\theta}) (R_\theta R_\phi R_\psi) U \\
-U = (R_{-\psi} (R_{-\phi} (R_{-\theta} R_\theta) R_\phi) R_\psi) U \\
-U = (R_{-\psi} (R_{-\phi} (I) R_\phi) R_\psi) U \\
-U = (R_{-\psi} (R_{-\phi} R_\phi) R_\psi) U \\
-U = (R_{-\psi} (I) R_\psi) U \\
-U = (R_{-\psi} R_\psi) U \\
+U \neq (R_\{-\theta\} R_\{-\phi\} R_\{-\psi\})(R_\theta R_\phi R_\psi) U \\
+U = (R_\{-\psi\} R_\{-\phi\} R_\{-\theta\}) (R_\theta R_\phi R_\psi) U \\
+U = (R_\{-\psi\} (R_\{-\phi\} (R_\{-\theta\} R_\theta) R_\phi) R_\psi) U \\
+U = (R_\{-\psi\} (R_\{-\phi\} (I) R_\phi) R_\psi) U \\
+U = (R_\{-\psi\} (R_\{-\phi\} R_\phi) R_\psi) U \\
+U = (R_\{-\psi\} (I) R_\psi) U \\
+U = (R_\{-\psi\} R_\psi) U \\
 U = (I) U \\
 
 
@@ -189,23 +189,23 @@ We often want to calculate where our vector is at after rotating first by $R_1$,
 Were we to tell our submarine's control system to perform a relative rotation of $R(\psi_1,\phi_1,\theta_1)$, and then once accomplishing it make another relative rotation $R(\psi_2,\phi_2,\theta_2)$, and then finally tell it to make a third relative rotation $R(\psi_3,\phi_3,\theta_3)$, we would calculate the result as
 
 $$
-R_{123}U = (R_1(R_2(R_3U)))
+R_\{123\}U = (R_1(R_2(R_3U)))
 $$
 and **NOT**
 $$
-R_{123}U \neq (R_3(R_2(R_1U))
+R_\{123\}U \neq (R_3(R_2(R_1U))
 $$
 
 Be sure to remember this, or you'll get headaches down the line.
 
 Now we have a different question.  Say we are at orientation $R_1$ and we want to rotate to another arbitrary rotation $R_2$.  For instance, we are at orientation $R_1(20,-40,7)$ and we tell our control system we want to go to the absolute orientation $R_1(70,10,-40)$.  What rotation will move us between these two orientations?
 
-Using what we know from above, about the order of operation, we can make an equation.  Recall that $R_{err}$ will rotate us from where we are currently, at $R_1$. Thus we must apply it //before// $R_1$:
+Using what we know from above, about the order of operation, we can make an equation.  Recall that $R_\{err\}$ will rotate us from where we are currently, at $R_1$. Thus we must apply it //before// $R_1$:
 
 $$
-R_1R_{err}U = R_2U \\
-R_1^{\mathrm {T}}R_1R_{err}U = R_1^{\mathrm {T}}R_2U\\ \\
-R_{err} = R_1^{\mathrm {T}}R_2 \\
+R_1R_\{err\}U = R_2U \\
+R_1^\{\mathrm \{T\}\}R_1R_\{err\}U = R_1^\{\mathrm \{T\}\}R_2U\\ \\
+R_\{err\} = R_1^\{\mathrm \{T\}\}R_2 \\
 $$
 
 
@@ -220,7 +220,7 @@ A Rotation matrix's Transpose is equal to its inverse.
 
 
 $$
-1=\det(I)=\det(R^{\mathrm {T} }R)=\det(R^{\mathrm {T} })\det(R)=(\det(R))^{2} \\
+1=\det(I)=\det(R^\{\mathrm \{T\} \}R)=\det(R^\{\mathrm \{T\} \})\det(R)=(\det(R))^\{2\} \\
 
 \det(R) = \pm1
 
@@ -230,7 +230,7 @@ $$
 
 To produce a 3x3 rotation matrix from roll $\psi$, pitch $\phi$, and yaw $\theta$ use the following matlab code or it's C++ equivalent:
 
-<code matlab>
+\<code matlab\>
 
 function [R] = r3D(omega) % omega = [roll; pitch; yaw]
 
@@ -245,11 +245,11 @@ R = [cosd(omega(3)) -sind(omega(3)) 0;...
     0 sind(omega(1)) cosd(omega(1))];
     
 end
-</code>
+\</code\>
 
 To find an equivalent roll $\psi$, pitch $\phi$, and yaw $\theta$ //given// a 3x3 rotation matrix $R$ use the following code:
 
-<code matlab>
+\<code matlab\>
 
 function [omega] = ir3D(R)
 
@@ -265,5 +265,5 @@ function [omega] = ir3D(R)
 
    omega = [psi;phi;theta]; %omega = [roll;pitch;yaw]
 end
-</code>
+\</code\>
 

@@ -1,119 +1,119 @@
 ====== Control System ======
-The control system follows basic [[http://www.eurotherm.com/pid-control-made-easy|PID theory]], but has two additional parameters called hysteresis (H) and windup (W). The hysteresis essentially creates a deadband. If the error $E$ defined in ($\ref{eq:error}$) is below the hysteresis level, the error can be assumed as (set to) zero, and thus no corrective action is required. The windup term acts to limit the integral portion of the accumulated error. If the integral value is above the windup level, it will be truncated to the windup value. Therefore, the integral can never increase or decrease infinitely because it will always be capped by the windup.
+The control system follows basic [[http://www.eurotherm.com/pid-control-made-easy|PID theory]], but has two additional parameters called hysteresis (H) and windup (W). The hysteresis essentially creates a deadband. If the error $E$ defined in ($\ref\{eq:error\}$) is below the hysteresis level, the error can be assumed as (set to) zero, and thus no corrective action is required. The windup term acts to limit the integral portion of the accumulated error. If the integral value is above the windup level, it will be truncated to the windup value. Therefore, the integral can never increase or decrease infinitely because it will always be capped by the windup.
 
 Now that we have explained the P, I, D, W, and H parameters of the control system, we're going to discuss the basic functions of the control system. Below is a simple linear algebra equation that represents our submarine's controls.
 
 $$
-\begin{equation} \label{eq:control}
+\begin\{equation\} \label\{eq:control\}
 MC = F
-\end{equation}
+\end\{equation\}
 $$
 
-In ($\ref{eq:control}$), $M$ is the maximum available force each thruster can apply on the submarine and $C$ is the thruster control signal (Note that this parameter is normalized and within the bounds [-1,1]). By multiplying the total available force of a thruster by the command signal, we can represent the force on the submarine by the thruster as $F$.
+In ($\ref\{eq:control\}$), $M$ is the maximum available force each thruster can apply on the submarine and $C$ is the thruster control signal (Note that this parameter is normalized and within the bounds [-1,1]). By multiplying the total available force of a thruster by the command signal, we can represent the force on the submarine by the thruster as $F$.
 
 ===== Thruster Force =====
 
-Let's first take a closer look at $M$ in ($\ref{eq:control}$). All of our thrusters are identical, which means the total force that they can output is the same. However, the position and orientation of each thruster changes how much force it can output along the X, Y, Z, and rotational axes.
+Let's first take a closer look at $M$ in ($\ref\{eq:control\}$). All of our thrusters are identical, which means the total force that they can output is the same. However, the position and orientation of each thruster changes how much force it can output along the X, Y, Z, and rotational axes.
 
 By breaking down forces into translational forces and rotational forces, it can be seen that each thruster will cause translational movement in the submarine in the form of moving forward, strafing, or diving and rotational movement in the form of pitching, rolling, or yawing. Therefore, it is useful to represent a thruster as a combination of all six forces.
 
 $$
-\begin{equation} \label{eq:motor_def}
+\begin\{equation\} \label\{eq:motor_def\}
 Thruster = 
-\begin{bmatrix} 
-F_{x} \\ F_{y} \\ F_{z} \\ M_{r} \\ M_{p} \\ M_{y} \\
-\end{bmatrix}
-\end{equation}
+\begin\{bmatrix\} 
+F_\{x\} \\ F_\{y\} \\ F_\{z\} \\ M_\{r\} \\ M_\{p\} \\ M_\{y\} \\
+\end\{bmatrix\}
+\end\{equation\}
 $$
 
-where $F_{x}$ is the force in the x direction (forward), $F_{y}$ is the force in the y direction (strafe), $F_{z}$ is the force in the z direction (dive), $M_{r}$ is the roll moment (the tendency to cause the submarine to roll), $M_{p}$ is the pitch moment, and $M_{y}$ is the yaw moment.
+where $F_\{x\}$ is the force in the x direction (forward), $F_\{y\}$ is the force in the y direction (strafe), $F_\{z\}$ is the force in the z direction (dive), $M_\{r\}$ is the roll moment (the tendency to cause the submarine to roll), $M_\{p\}$ is the pitch moment, and $M_\{y\}$ is the yaw moment.
 
-We can therefore express $M$ in ($\ref{eq:control}$) as a matrix of each of the thruster forces and moments
+We can therefore express $M$ in ($\ref\{eq:control\}$) as a matrix of each of the thruster forces and moments
 
 $$
-\begin{equation} \label{eq:control:M}
+\begin\{equation\} \label\{eq:control:M\}
 M = 
-\begin{bmatrix}
-F_{1,x} & F_{2,x} & \dots & F_{n,x} \\
-F_{1,y} & F_{2,y} & \dots & F_{n,y} \\
-F_{1,z} & F_{2,z} & \dots & F_{n,z} \\
-M_{1,r} & M_{2,r} & \dots & M_{n,r} \\
-M_{1,p} & M_{2,p} & \dots & M_{n,p} \\
-M_{1,y} & M_{2,y} & \dots & M_{n,y}
-\end{bmatrix}
-\end{equation}
+\begin\{bmatrix\}
+F_\{1,x\} & F_\{2,x\} & \dots & F_\{n,x\} \\
+F_\{1,y\} & F_\{2,y\} & \dots & F_\{n,y\} \\
+F_\{1,z\} & F_\{2,z\} & \dots & F_\{n,z\} \\
+M_\{1,r\} & M_\{2,r\} & \dots & M_\{n,r\} \\
+M_\{1,p\} & M_\{2,p\} & \dots & M_\{n,p\} \\
+M_\{1,y\} & M_\{2,y\} & \dots & M_\{n,y\}
+\end\{bmatrix\}
+\end\{equation\}
 $$
 
 where moments $M_x$ are calculated by crossing the position with the orientation.
 
 ===== Control Command =====
 
-The parameter $C$ in ($\ref{eq:control}$) is fairly straightforward. This parameter contains a single value bounded by [-1,1] to scale each thruster force by. Therefore, C can be represented as
+The parameter $C$ in ($\ref\{eq:control\}$) is fairly straightforward. This parameter contains a single value bounded by [-1,1] to scale each thruster force by. Therefore, C can be represented as
 
 $$
-\begin{equation} \label{eq:control:C}
+\begin\{equation\} \label\{eq:control:C\}
 C = 
-\begin{bmatrix}
-C_{1} \\ C_{2} \\ \vdots \\ C_{n}
-\end{bmatrix}
-\end{equation}
+\begin\{bmatrix\}
+C_\{1\} \\ C_\{2\} \\ \vdots \\ C_\{n\}
+\end\{bmatrix\}
+\end\{equation\}
 $$
 
-where $C_{x}$ represents the scale factor for thruster x. Take note that conceptually, it is easy to separate translational from rotational goals
+where $C_\{x\}$ represents the scale factor for thruster x. Take note that conceptually, it is easy to separate translational from rotational goals
 
 $$
-\begin{equation} \label{eq:c:simplification}
+\begin\{equation\} \label\{eq:c:simplification\}
 C = C_t + C_r
-\end{equation}
+\end\{equation\}
 $$
 
 where $C_t$ is the translational control signal and $C_r$ is the rotational control signal.
 
 ===== Total Force =====
 
-$F$ in ($\ref{eq:control}$) is the necessary force to apply to the submarine to cause a transition from the current state to a desired state. By substituting ($\ref{eq:control:M}$) and ($\ref{eq:control:C}$) into ($\ref{eq:control}$), it can be seen that the dimensions of F are also known
+$F$ in ($\ref\{eq:control\}$) is the necessary force to apply to the submarine to cause a transition from the current state to a desired state. By substituting ($\ref\{eq:control:M\}$) and ($\ref\{eq:control:C\}$) into ($\ref\{eq:control\}$), it can be seen that the dimensions of F are also known
 
 $$
-\begin{equation} \label{eq:control:expanded}
-\begin{bmatrix}
-F_{1,x} & F_{2,x} & \dots & F_{n,x} \\
-F_{1,y} & F_{2,y} & \dots & F_{n,y} \\
-F_{1,z} & F_{2,z} & \dots & F_{n,z} \\
-M_{1,r} & M_{2,r} & \dots & M_{n,r} \\
-M_{1,p} & M_{2,p} & \dots & M_{n,p} \\
-M_{1,y} & M_{2,y} & \dots & M_{n,y}
-\end{bmatrix}
-\begin{bmatrix}
-C_{1} \\ C_{2} \\ \vdots \\ C_{n}
-\end{bmatrix}
+\begin\{equation\} \label\{eq:control:expanded\}
+\begin\{bmatrix\}
+F_\{1,x\} & F_\{2,x\} & \dots & F_\{n,x\} \\
+F_\{1,y\} & F_\{2,y\} & \dots & F_\{n,y\} \\
+F_\{1,z\} & F_\{2,z\} & \dots & F_\{n,z\} \\
+M_\{1,r\} & M_\{2,r\} & \dots & M_\{n,r\} \\
+M_\{1,p\} & M_\{2,p\} & \dots & M_\{n,p\} \\
+M_\{1,y\} & M_\{2,y\} & \dots & M_\{n,y\}
+\end\{bmatrix\}
+\begin\{bmatrix\}
+C_\{1\} \\ C_\{2\} \\ \vdots \\ C_\{n\}
+\end\{bmatrix\}
 =
-\begin{bmatrix}
-F_{x} \\ F_{y} \\ F_{z} \\ M_{r} \\ M_{p} \\ M_{y} \\
-\end{bmatrix}
+\begin\{bmatrix\}
+F_\{x\} \\ F_\{y\} \\ F_\{z\} \\ M_\{r\} \\ M_\{p\} \\ M_\{y\} \\
+\end\{bmatrix\}
 = F
-\end{equation}
+\end\{equation\}
 $$
 
 Therefore, $F$ is also a vector with 6 elements in it. Each element of $F$ is the summation of each of the rows of $M$ multiplied by the weights in $C$. Because the mass and inertial moments of the submarine are also known, $F$ can also be calculated utilizing the current and desired state.
 
 ===== Solving the Equation =====
-Now that all of the parameters of ($\ref{eq:control}$) have been defined, we can use it to find our control. Notice that there are two knowns within the system, both $M$ and $F$. $M$ can be found by measuring the position and orientation of each thruster. $F$ results from the desired position of the sub. To determine $F$, P, I, D, W, H, and Error need to be known. Let
+Now that all of the parameters of ($\ref\{eq:control\}$) have been defined, we can use it to find our control. Notice that there are two knowns within the system, both $M$ and $F$. $M$ can be found by measuring the position and orientation of each thruster. $F$ results from the desired position of the sub. To determine $F$, P, I, D, W, H, and Error need to be known. Let
 
 $$
-\begin{equation} \label{eq:error}
+\begin\{equation\} \label\{eq:error\}
 Error = E = S_d - S_c 
-\end{equation}
+\end\{equation\}
 $$
 
 where $S_d$ is the desired state of the submarine and $S_c$ is the current state of the submarine. State is defined as 
 
 $$
-\begin{equation} \label{eq:state}
+\begin\{equation\} \label\{eq:state\}
 S = 
-\begin{bmatrix}
+\begin\{bmatrix\}
 P_x \\ P_y \\ P_z \\ R_r \\ R_p \\ R_y
-\end{bmatrix}
-\end{equation}
+\end\{bmatrix\}
+\end\{equation\}
 $$
 
 where $P_n$ is the value for the current position and $R_n$ is the value for the current rotation. Then $F$ can be found by
@@ -124,36 +124,36 @@ $$
 
 after both windup and hysteresis are applied to $E$. Note that $E'$ is the derivative of $E$ over time, $I$ is the integral state for the accumulated error for each of the states within $E$, and $K_x$ are the respective P, I, and D weights.
 
-Because both $F$ and $M$ are known, ($\ref{eq:control}$) can be solved for $C$
+Because both $F$ and $M$ are known, ($\ref\{eq:control\}$) can be solved for $C$
 
 $$
-\begin{equation} \label{eq:control:solved}
-C = M^{-1}F
-\end{equation}
+\begin\{equation\} \label\{eq:control:solved\}
+C = M^\{-1\}F
+\end\{equation\}
 $$
 
-Therefore, to solve for the control messages to send to the thruster, the inverted matrix $M^{-1}$ can be multiplied into the variable parameter $F$. The control packet $C$ can then be sent to the thruster controller to result in the desired movement and the cycle can be completed.
+Therefore, to solve for the control messages to send to the thruster, the inverted matrix $M^\{-1\}$ can be multiplied into the variable parameter $F$. The control packet $C$ can then be sent to the thruster controller to result in the desired movement and the cycle can be completed.
 
-Note that $M$ must be an invertible matrix. If $M$ has fewer than 6 thrusters, the solution is not solvable because the submarine does not have control of 6 axes (it has less than 6 motors, so it can therefore not have control of 6 axes). If $M$ has greater than 6 thrusters, then the system is over-actuated and a [[https://en.wikipedia.org/wiki/Singular_value_decomposition|SVD pseudo-inverse]] calculation can be done to determine $M^{-1}$.
+Note that $M$ must be an invertible matrix. If $M$ has fewer than 6 thrusters, the solution is not solvable because the submarine does not have control of 6 axes (it has less than 6 motors, so it can therefore not have control of 6 axes). If $M$ has greater than 6 thrusters, then the system is over-actuated and a [[https://en.wikipedia.org/wiki/Singular_value_decomposition|SVD pseudo-inverse]] calculation can be done to determine $M^\{-1\}$.
 
-Also note that the following simplification can be made to solve for $C_r$ and $C_t$ from ($\ref{eq:c:simplification}$) by setting $F_a$ or $M_a$ to zero in $F$
+Also note that the following simplification can be made to solve for $C_r$ and $C_t$ from ($\ref\{eq:c:simplification\}$) by setting $F_a$ or $M_a$ to zero in $F$
 
 $$
-\begin{equation} \label{eq:ct}
-C_t = M^{-1}
-\begin{bmatrix}
+\begin\{equation\} \label\{eq:ct\}
+C_t = M^\{-1\}
+\begin\{bmatrix\}
 F_x \\ F_y \\ F_z \\ 0 \\ 0 \\ 0 \\
-\end{bmatrix}
-\end{equation}
+\end\{bmatrix\}
+\end\{equation\}
 $$
 
 $$
-\begin{equation} \label{eq:cr}
-C_r = M^{-1}
-\begin{bmatrix}
+\begin\{equation\} \label\{eq:cr\}
+C_r = M^\{-1\}
+\begin\{bmatrix\}
 0 \\ 0 \\ 0 \\ M_r \\ M_p \\ M_y \\
-\end{bmatrix}
-\end{equation}
+\end\{bmatrix\}
+\end\{equation\}
 $$
 
 ====== Control System Notes======

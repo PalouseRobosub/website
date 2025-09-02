@@ -6,7 +6,7 @@ Previous iterations of the sub have used Seabotix thrusters, which are DC motors
 
 ===== Current =====
 
-The new submarine is using AC T200 thrusters by Blue Robotics, which are controlled via the BlueESC, which is integrated directly within the thruster. These controllers communicate via an I<sup>2</sup>C interface, therefore an intermediate microcontroller is used to translate serial commands from the computer to I<sup>2</sup>C.
+The new submarine is using AC T200 thrusters by Blue Robotics, which are controlled via the BlueESC, which is integrated directly within the thruster. These controllers communicate via an I/\<sup\>2/\</sup\>C interface, therefore an intermediate microcontroller is used to translate serial commands from the computer to I/\<sup\>2/\</sup\>C.
 
 ====== T200 + BlueESC Information ======
 
@@ -21,9 +21,9 @@ Power Cable:
 
 Signalling:
 
-  * Yellow - PWM control (tie to ground if using I<sup>2</sup>C)
-  * Green - I<sup>2</sup>C clock
-  * White - I<sup>2</sup>C data
+  * Yellow - PWM control (tie to ground if using I/\<sup\>2/\</sup\>C)
+  * Green - I/\<sup\>2/\</sup\>C clock
+  * White - I/\<sup\>2/\</sup\>C data
   * Black - ground
 
 ==== I2C Interface ====
@@ -32,7 +32,7 @@ The thrusters are controlled by sending a throttle command between -32767 and +3
 
 The BlueESC also can provide us with information concerning motor RPM, voltage, current, and temperature.
 
-When shipped from the factory, the thrusters all use the I<sup>2</sup>C address of 0x29. To change the address, the firmware must be re-flashed. We have programmed our thrusters with the addresses 0x30-0x37.
+When shipped from the factory, the thrusters all use the I/\<sup\>2/\</sup\>C address of 0x29. To change the address, the firmware must be re-flashed. We have programmed our thrusters with the addresses 0x30-0x37.
 
 ====== Computer-Thruster Interface ======
 
@@ -41,7 +41,7 @@ The microcontroller code receives incoming commands from the computer and dispat
 ==== Computer to Microcontroller ====
 
 The following types of commands should be accepted by the microcontroller:\\
-{{:ee:thrusters:computer_to_micro_cmds.svg}}
+\{\{:ee:thrusters:computer_to_micro_cmds.svg\}\}
 
 
 The first two commands are the basic interface for controlling the thrusters and getting information. There is the third macro command for reading all the registers of a thruster. There is no macro command for talking to all thrusters because this would require the microcontroller to know what thrusters exist/are active on the sub, which would complicate the code. The final command is a method for checking if a thruster is alive and responding, it will return a bool true/false value.
@@ -49,7 +49,7 @@ The first two commands are the basic interface for controlling the thrusters and
 ==== Microcontroller to Computer ====
 
 The computer should expect to receive the following packets from the microcontroller:\\
-{{:ee:thrusters:micro_to_computer_cmds.svg}}
+\{\{:ee:thrusters:micro_to_computer_cmds.svg\}\}
 
 The IDs for responses correspond to the IDs for the commands as described in the previous section. The "Read all Sensors" response contains 8 bytes of data (B0-B7), which are described below:
 

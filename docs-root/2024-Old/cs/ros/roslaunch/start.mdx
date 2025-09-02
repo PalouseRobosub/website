@@ -3,16 +3,16 @@
 Normally this is used to start nodes based on a launch file.
 
 Normal Usage:
-  roslaunch <PACKAGE> <LAUNCH_FILE>
+  roslaunch /\<PACKAGE\> /\<LAUNCH_FILE\>
   
 ==== Listing the Nodes Launched ====
 
 This will list the nodes that a launch file will run on stdout.
 
-  roslaunch <PACKAGE> <LAUNCH_FILE> --nodes
+  roslaunch /\<PACKAGE\> /\<LAUNCH_FILE\> --nodes
   
 ==== Topic Remapping/Argument Replacement ====
 
 This allows for changing the topic that a node publishes or subscribes to. This is really useful when using image_view. 
 
-  roslaunch <PACKAGE> <LAUNCH_FILE> <ARG>:=<NEW_VALUE> <TOPIC>:=<NEW_TOPIC>
+  roslaunch /\<PACKAGE\> /\<LAUNCH_FILE\> /\<ARG\>:=/\<NEW_VALUE\> /\<TOPIC\>:=/\<NEW_TOPIC\>

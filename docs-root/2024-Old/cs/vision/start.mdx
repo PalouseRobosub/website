@@ -1,8 +1,8 @@
 ====== Vision ======
 
-<WRAP alert>
+/\<WRAP alert\>
 This page is **stale** and needs to be reviewed. It may be deleted or radically changed in the near future.
-</WRAP>
+/\</WRAP\>
 ===== Core Functionality =====
 
   * The vision system on the sub is performed by multiple vision nodes. Each currently contains a number of different processors, explained later, which perform a task on the latest images captured from the [[cs:cameras:start|cameras]]. These images are synchronized with each other in time.
@@ -26,8 +26,8 @@ The ColorProcessor contains a FilterSet. This FilterSet will sequentially apply 
 === Parameters ===
 The parameters for the ColorProcessor part of a vision node should be formatted as follows:
   filters:
-      - [filter name]: {[filter parameters]}
-      - [filter name]: {[filter parameters]}
+      - [filter name]: \{[filter parameters]\}
+      - [filter name]: \{[filter parameters]\}
 Where the [filter name] is known by the ColorProcessor allowing it to create the proper filter and the [filter parameters] are parsed by the filter. An unlimited number of filters is allowed. Each filter in the list will operate on the result of the previous filter's output.
 
 ----
@@ -57,7 +57,7 @@ The FeatureProcessor contains a single ObstacleDetector which is an abstract cla
 The parameters used by the FeatureProcessor of each vision node are formatted as follows:
   features:
       detector: [detector name]
-      params: {[detector parameters]}
+      params: \{[detector parameters]\}
 There should be only one of these blocks in each parameter file where [detector name] is the string mapped to the init function for the desired detector and [detector parameters] is the set of parameters required by the detector.
 
 ----
@@ -92,6 +92,6 @@ You will then see many windows open each with a unique image.
 
 ===== UML =====
 
-{{ :cs:vision:visionuml.png?direct&1000 | Vision UML}}
+\{\{ :cs:vision:visionuml.png?direct&1000 | Vision UML\}\}
 
-{{ :cs:vision:visionuml.pdf | Vision UML }}
+\{\{ :cs:vision:visionuml.pdf | Vision UML \}\}

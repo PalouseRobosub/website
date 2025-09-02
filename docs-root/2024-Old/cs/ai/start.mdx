@@ -21,45 +21,45 @@ Our current AI was re-written using SMACH. There are several utility files such 
   - SubscribeState.py - a state that was made which accept also topic to which you want to subscribe. It is also modified to pass over any input/output keys. **In future this file will also contain SynchronousSubscribeState that subscribes to two topics and moves once it has two**
 
 There is a useful tool to see state machine and transitions of it called [[http://wiki.ros.org/smach_viewer|smach_viewer]]. To run it, run
-<code bash> 
+\<code bash\> 
 rosrun smach_viewer smach_viewer.py
-</code>
+\</code\>
 An example of what our AI looks like in smach_viewer is this screenshot below
-`{{ :cs:ai:gate_ai.png?nolink |}}`
+`\{\{ :cs:ai:gate_ai.png?nolink |\}\}
 ===== Things to know when developing AI =====
   * When inheriting from **SubscribeState** instead of **SmachState**, you need to use **self.exit("outcome")** instead of **return "outcome"**
   * Every python script that is going to run any state machine **must have** in its main function these lines of code below.
-<code python>
+\<code python\>
 while rospy.get_time() == 0:
     continue
-</code>
+\</code\>
   * Every time you create control_wrapper instance, you need to set depth value again.
   * If your state is using control wrapper to move, right before final outcome make sure to set changed yaw/roll/pitch/forward to 0.
   * Control wrapper forward and strafe do not use relative same way as yaw and pitch, use instead **strafeLeftError()** and **forwardError()**
-  * Some current AI files use parameters from roscore server for different configuration of values. They will crash if they do not load parameters. Parameters are located in <wrap em>/ros/robosub/param/</wrap> or some may be located in individual utility folders. To load parameters run
-<code bash>
+  * Some current AI files use parameters from roscore server for different configuration of values. They will crash if they do not load parameters. Parameters are located in \<wrap em\>/ros/robosub/param/\</wrap\> or some may be located in individual utility folders. To load parameters run
+\<code bash\>
 rosparam load [param_file_name].yaml
-</code>
+\</code\>
   * Every time you restart roscore you need to reload parameters
   * Our vision detection requires undistortion to be running. 
 
 
 ===== Example Flow Chart =====
-<flow>
+\<flow\>
 graph LR;
-    A(SM_ROOT)-->|execute|B[START_SWITCH];
+    A(SM_ROOT)--\>|execute|B[START_SWITCH];
     subgraph RoboSub
-    B-->C[GATE_TASK];
-    C-->D[PATH_MARKER_TASK1];
-    D-->E[DICE_TASK];
-    E-->F[PATH_MARKER_TASK2];
-    F-->G[GOTO_PINGER];
-    G-->H{Where am I?};
-    H-->|Roulette|I[ROULETTE_TASK];
-    H-->|Square|J[SQUARE_TASK];
+    B--\>C[GATE_TASK];
+    C--\>D[PATH_MARKER_TASK1];
+    D--\>E[DICE_TASK];
+    E--\>F[PATH_MARKER_TASK2];
+    F--\>G[GOTO_PINGER];
+    G--\>H\{Where am I?\};
+    H--\>|Roulette|I[ROULETTE_TASK];
+    H--\>|Square|J[SQUARE_TASK];
     end
-    I-->EN((end))
-    J-->EN((end))
+    I--\>EN((end))
+    J--\>EN((end))
 click B "start_switch"
 click C "gate_task"
 click D "path_marker_task"
@@ -70,4 +70,4 @@ click I "roulette_task"
 click J "square_task"
 style A fill:#f9f,stroke:#333,stroke-width:2px;
 style EN fill:#f9f,stroke:#333,stroke-width:2px;
-</flow>
+\</flow\>

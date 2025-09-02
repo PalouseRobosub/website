@@ -1,7 +1,7 @@
 ====== Creating a Package ======
 Sometimes you need to create a custom debian package. This may be because you're using a special tool that isn't already available in the official repositories from Ubuntu, or perhaps the version they have is super old and need something newer. This example is based on the latter case, where the tig tool is available, but the official version is very old and somewhat buggy, therefore we will build the newest version.
 
-First, download and extract the source code for the package: {{:it:debian_repo:create_package:tig-2.2.2.tar.gz |}}
+First, download and extract the source code for the package: \{\{:it:debian_repo:create_package:tig-2.2.2.tar.gz |\}\}
 
 Ensure you have all the necessary build dependencies (for this example I had to install libncurses5-dev), and then compile the software using the ''%%make%%'' command.
 
@@ -36,7 +36,7 @@ The DEBIAN folder contains special files for the package that are not actually i
   Package: tig
   Version: 2.2.2-1
   Architecture: amd64
-  Maintainer: James Irwin <irwineffect@gmail.com>
+  Maintainer: James Irwin /\<irwineffect@gmail.com\>
   Description: ncurses-based git gui
   
 The fields are relatively self explanatory, but a few things to note:
@@ -46,5 +46,5 @@ The fields are relatively self explanatory, but a few things to note:
 There are also a few other fields that are optional, the most noteworthy one is the ''%%Depends%%'', where you specify other packages that your package depends on. This will cause those other packages to be downloaded and installed before your package is installed.
 
 Finally, to create our package, we simply run:
-  fakeroot dpkg-deb --build tig_2.2.2/ <output_dir>
+  fakeroot dpkg-deb --build tig_2.2.2/ /\<output_dir\>
 which will create our debian file in the specified output directory.

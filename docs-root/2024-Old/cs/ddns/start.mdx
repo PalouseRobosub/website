@@ -1,22 +1,22 @@
 ====== Dynamic DNS Server Setup ======
-<WRAP important>
+/\<WRAP important\>
 This should only be done on one device on the network!
-</WRAP>
+/\</WRAP\>
 
 Need to use dnsmasq to act as DHCP/DNS server:
 http://blogging.dragon.org.uk/howto-setup-dnsmasq-as-dns-dhcp/
 
 Right now the sub computer acts as the DNS server, should make router do this.
 
-{{ :cs:ddns:dnsmasq_settings.zip | current dnsmasq settings}}
+\{\{ :cs:ddns:dnsmasq_settings.zip | current dnsmasq settings\}\}
 
 Also important is to set a static IP in /etc/network/interfaces file:
 
-<code text>
+/\<code text\>
 auto lo etho
 iface lo inet loopback
 iface eth0 inet static
      address 192.168.0.7
      netmask 255.255.255.0
      gateway 192.168.0.1
-</code>
+/\</code\>
