@@ -1,26 +1,47 @@
-import styles from "@/styles/docs-sidebar.module.css"
-import Image from "next/image";
+import { readdirSync } from "fs";
+import path from "path";
+import DocsClientSidebar from "./docs-client-sidebar";
+
+export interface Page {
+  name: string,
+  path: string,
+  type: "page"
+}
+
+export interface Dir {
+  name: string,
+  path: string,
+  type: "dir",
+  children: (Dir|Page)[]
+}
 
 const DocsSidebar = () => {
+  const indexDir = (dir: string): Dir => {
+    const entries = readdirSync(dir, { encoding: "utf-8", withFileTypes: true })
+    
+    return {
+      name: path.basename(dir),
+      path: dir,
+      type: "dir",
+      children: entries.map(entry => {
+            const fullPath = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+              return indexDir(fullPath);
+            } else {
+              return {
+                name: entry.name,
+                path: fullPath,
+                type: "page"
+              };
+            }
+          })
+    }
+  }
+  
+  const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
   
   return (
-    <nav className={styles.sidebar}>
-      <div className={styles.sidebarHeader}>
-        <div className={styles.logoWrapper}>
-          <Image src="/robosub_logo.svg" alt="" fill priority />
-        </div>
-        <div>
-          Palouse RoboSub Technical Documentation
-        </div>
-        <select className={styles.subSelect}>
-          <option>Old</option>
-          <option>Shark Bait</option>
-          <option>Guppy</option>
-          <option>Leviathan</option>
-        </select>
-        <input className={styles.search} type="search" placeholder="Search" />
-      </div>
-    </nav>
+    <DocsClientSidebar docsContents={docsContents} />
   )
 }
 
