@@ -1,0 +1,35 @@
+====== Sensor System - Inquiry ======
+
+The sensor system is a key feature for RoboSub. It is expected to provide yaw, pitch, and roll information to the rest of the RoboSub software so that a control system can receive feedback about the current position of the sub. However, sensors have posed a large problem for the club in the past. This document will describe a preliminary investigation into some possible avenues for sensor data acquisition and will outline what the club has learned so far about sensors. This document will additionally outline the pro's and con's of different sensor systems.
+
+===== Notes on Manual Sensor Fusion vs. Automatic Sensor Fusion =====
+
+One main concept described in this page is the discussion of automatic vs. manual sensor fusion. The idea of automatic sensor fusion is that an on-board processor (such as the BNO055) will sample on-board accelerometers, gyroscopes, and magnetometers in order to generate a yaw, pitch, and roll data output. Because the processing is done on the co-processor, complex algorithms are not needed for converting raw data values, and a large amount of development time is saved. However, this method has difficulty with interference. It has been found that our thrusters create a magnetic field with a strength relating to the current they are using. This can cause substantial distortion in the magnetometer reading. Thankfully, the BNO055 has the option for relative orientation to reduce distortions introduced by competing magnetic fields. When the relative orientation is selected, the magnetometer data output is not used in the yaw, pitch, and roll calculations.\\
+When doing manual sensor fusion, all disturbances can be accounted for and the most accurate yaw, pitch, and roll outputs can be achieved. However, this method requires a large amount of development time to perfect (typically many months) and even more time to validate the integrity of the outputs. Manual sensor fusion allows for the correction of magnetic distortions introduced by the thrusters so that we can generate absolute yaw, pitch, and roll instead of relative orientation.
+
+===== FPGA Manual Sensor Fusion =====
+
+This project proposes the use of an FPGA for reading a number of sensors on a PCB. The benefit of an FPGA design would be that all sensor data can be read as soon as it is available on the sensor. That way, all of the registers of all of the different sensors can be consolidated into a single device (on the FPGA). Whenever the computer would like to read sensor information, it can query a packet from the FPGA. Because of the large amount of GPIO on the FPGA, we would also be able to trigger reads based on the interrupt outputs available on a large number of sensors.\\
+However, the use of an FPGA design poses the problem of constrained development time. With the use of an FPGA, a complex PCB must be designed and verified, and then FPGA firmware must be developed with an efficient SPI/I<sup>2</sup>C/UART interface for talking to each of the sensors. This development time makes the viability of this idea potentially unfeasible. Additionally, this idea only provides raw sensor values. This data must then be passed through manual sensor fusion algorithms to provide yaw/pitch/roll or quaternion outputs.
+
+===== Microcontroller Manual Sensor Fusion =====
+
+This method was used previously on the 2016 sensor design. Unfortunately, this design has not yet been tested for efficiency. This method is simpler than the FPGA design because a complex circuit board layout is not required and microcontroller firmware is easier to develop than FPGA firmware, but has the constraint of less microcontroller resources. Many sensors will need to be placed onto a shared bus, such as SPI or I2C, and the external interrupt functionality for all of the sensors could potentially not be used if input pins are not available on the microcontroller.\\
+Additionally, this design requires manual sensor fusion from raw data values from the sensors.
+
+===== Automatic Sensor Fusion =====
+
+By using embedded, specialized processors, automatic sensor fusion can be used. The BNO055 is a part developed specifically for robotic applications. The device allows for raw data outputs and automatic sensor fusion outputs. The sensor can be configured for absolute and relative position either using the magnetometer or ignoring it. This allows the sensor to ignore disturbances introduced by the thrusters. However, the relative orientation sensor is subject to drift over time. However, if the sensor is placed at a sufficient distance from the thrusters, magnetic disturbances can be minimized and absolute orientation can be used.
+
+This sensor provides the yaw, pitch, and roll data values directly and completely avoids complex sensor fusion algorithms. This simplifies overall design and decreases the design complexity which reduces overall time required for system development.
+
+===== Method Comparison =====
+
+^ Method               ^ Development Time              ^ Data Rate                          ^ Resistance to Interference                                  ^
+| FPGA Manual Fusion   | Extremely Large (4-5 months)  | Maximum data rate for each sensor  | Extremely resistant with extensive testing and development  |
+| Micro Manual Fusion  | Large (3-4 months)            | 100-200Hz                          | Extremely resistant with extensive testing and development  |
+| Automatic Fusion     | Low (1-2 months)              | 100Hz Fusion                       | Unknown, good if isolated, can use relative position        |
+
+===== Next Steps =====
+
+Because of limited development time constraints, an automatic sensor fusion chip will be used. The specific chip has not yet been selected. Cheap options include the BNO055.

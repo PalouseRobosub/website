@@ -1,0 +1,213 @@
+====== Trilateration Setup======
+Below is the math for calculating the location of the pinger in the water relative to our submarine. Because we know the absolute location of the pinger in the pool, we can calculate the sub's position in the pool.
+
+{{:cs:hydrophones:trilateration_setup:trilateration_derivation.pdf|Original derivation}} by Brian Moore.
+
+===== Problem Setup =====
+
+
+The derivation is based on the assumption that we have 4 hydrophones. One is considered the reference hydrophone, while the others are located along the x, y, and z axes.
+
+$h_0$ is at location $(0,0,0)$ \\
+$h_x$ is at location $(\delta,0,0)$ \\
+$h_y$ is at location $(0,\epsilon,0)$ \\
+$h_z$ is at location $(0,0,\zeta)$ \\
+
+We define the ping source is at location 
+$$
+l_{pinger} = (x,y,z)
+$$
+
+When a ping is received by the hydrophones, the hardware outputs delta-timestamps $\Delta t_x$, $\Delta t_y$, $\Delta t_z$, which corresponds to the difference in time between when the ping was received by $h_0$ and $h_{x,y,z}$, respectively.
+
+Let's define $p_0$ as the absolute distance between $h_0$ and the pinger at location $(x,y,z)$.
+$$
+p_0 = \sqrt{x^2 + y^2 + z^2}
+$$
+
+These three time differences are multiplied by the speed of sound in water ($c_s$) to determine the difference in distance between the the reference hydrophone and pinger and each other hydrophone $h_{x,y,z}$.
+$$
+\Delta x = \Delta t_x * c_s \\
+\Delta y = \Delta t_y * c_s \\
+\Delta z = \Delta t_z * c_s \\
+$$
+In other words, $h_x$ is $\Delta x$ meters closer to the pinger than $h_0$, and $h_0$ is $p_0$ meters from the pinger.
+
+The final calculations for $x$, $y$, and $z$ will be in terms of $\Delta x$, $\Delta y$, and $\Delta z$
+
+Let's define the distances from the other hydrophones to the pinger:
+$$
+p_x = \sqrt{(x-\delta)^2 + y^2 + z^2} \\
+p_y = \sqrt{x^2 + (y-\epsilon)^2 + z^2} \\
+p_z = \sqrt{x^2 + y^2 + (z-\zeta)^2} \\
+$$
+
+Let's put this information together:
+$$
+\Delta x = p_0 - p_x = \sqrt{x^2 + y^z + z^2} - \sqrt{(x-\delta)^2 + y^2 + z^2} \\
+\Delta y = p_0 - p_y = \sqrt{x^2 + y^z + z^2} - \sqrt{x^2 + (y-\epsilon)^2 + z^2} \\
+\Delta z = p_0 - p_z = \sqrt{x^2 + y^z + z^2} - \sqrt{x^2 + y^2 + (z-\zeta)^2} \\
+$$
+
+Since we know $\Delta x$, $\Delta y$, $\Delta z$, $\delta$, $\epsilon$, and $\zeta$ we can solve for $x$, $y$, $z$!
+
+===== Solving for Position =====
+Using $h_x$ and its measurements, we will derive a formula for $x$. The same steps can be used for solving $y$ and $z$.
+
+First, let's start with the final equation from the previous section:
+$$
+\Delta x = \sqrt{x^2 + y^z + z^2} - \sqrt{(x-\delta)^2 + y^2 + z^2}
+$$
+Also recall that
+$$
+p_0 = \sqrt{x^2 + y^2 + z^2} \\
+p_x = \sqrt{(x-\delta)^2 + y^2 + z^2}
+$$
+Therefore
+$$
+p_0^2 - p_x^2 = (x^2 + y^2 + z^2) - ((x-\delta)^2 + y^2 + z^2)
+$$
+Simplifying, we get
+$$
+p_0^2 - p_x^2 = x^2 - (x-\delta)^2 \\
+= x^2 - (x^2 - 2\delta x + \delta^2) \\
+= 2 \delta x - \delta^2
+$$
+Note that
+$$
+p_0^2 - p_x^2 = (p_0+p_x)(p_0-p_x) \\
+p_0-p_x = \frac{p_0^2 - p_x^2}{p_0+p_x}
+$$
+Therefore
+$$
+p_0-p_x = \frac{2 \delta x - \delta^2}{p_0+p_x}
+$$
+
+Recall that
+$$
+\Delta x = p_0 - p_x \\
+p_x = p_0 - \Delta x
+$$
+
+Combining this with the previous equation, we can substitute $\Delta x$ for $p_0-p_x$ on the left side and $p_0 - \Delta x$ for $p_x$ on the right side, which gives us
+$$
+\Delta x = \frac{2 \delta x - \delta^2}{2p_0 - \Delta x}
+$$
+Let's now take this result and solve for $x$
+$$
+\Delta x = \frac{2 \delta x - \delta^2}{2p_0 - \Delta x} \\
+\Delta x (2p_0 - \Delta x) = 2 \delta x - \delta^2 \\
+\Delta x (2p_0 - \Delta x) + \delta^2 = 2 \delta x  \\
+\frac{\Delta x (2p_0 - \Delta x) + \delta^2}{2 \delta} =  x  \\
+$$
+Following this same technique, we can also derive equations for $y$ and $z$.
+$$
+x = \frac{\Delta x (2p_0 - \Delta x) + \delta^2}{2 \delta} \\
+y = \frac{\Delta y (2p_0 - \Delta y) + \epsilon^2}{2 \epsilon} \\
+z = \frac{\Delta z (2p_0 - \Delta z) + \zeta^2}{2 \zeta}
+$$
+It can be seen that $x$, $y$, and $z$ are dependent not only in the time delays, but also on $p_0$. Therefore, it is necessary to find an expression for $p_0$ in terms of $\Delta x$, $\Delta y$, $\Delta z$, $\delta$, $\epsilon$, and $\zeta$.
+
+First, remember that
+$$
+p_0 = \sqrt{x^2 + y^2 + z^2} \\
+p_0^2 = x^2 + y^2 + z^2
+$$
+We can solve for $p_0^2$ using $x^2$, $y^2$, and $z^2$. Let's take our result for $x$, calculate $x^2$, and expand.
+$$
+x = \frac{\Delta x (2p_0 - \Delta x) + \delta^2}{2 \delta} \\
+
+x^2 = \left(\frac{\Delta x (2p_0 - \Delta x) + \delta^2}{2 \delta}\right)^2 \\
+
+x^2 = \frac{(\Delta x (2p_0 - \Delta x) + \delta^2)^2}{(2 \delta)^2} \\
+
+x^2 = \frac{(\delta^2 + 2p_0\Delta x  - \Delta x^2 )^2}{(2 \delta)^2} \\
+
+
+x^2 = \frac{(-\delta^2 \Delta x^2 - 2p_0\Delta x^3 + \Delta x^4) +
+             (2p_0 \delta^2 \Delta x + 4p_0^2 \Delta x^2  - 2p_0 \Delta x^3) + 
+             (\delta^4 + 2p_0 \delta^2 \Delta x  - \delta^2 \Delta x^2)}
+           {4 \delta^2} \\
+           
+x^2 = \frac{4p_0^2 \Delta x^2 - 4p_0 \Delta x^3 + 4p_0 \delta^2 \Delta x + \Delta x^4 - 2\delta^2\Delta x^2 + \delta^4 }
+           {4 \delta^2} \\
+
+x^2 = \frac{p_0^2 (4\Delta x^2) + p_0 (-4\Delta x^3 + 4 \delta^2 \Delta x) + (\Delta x^2 - \delta^2)^2}
+           {4 \delta^2} \\
+
+x^2 = p_0^2 \frac{4\Delta x^2}{4 \delta^2} + p_0 \frac{-4\Delta x^3 + 4 \delta^2 \Delta x}{4 \delta^2} + \frac{(\Delta x^2 - \delta^2)^2}{4 \delta^2} \\
+
+x^2 = p_0^2 \frac{4\Delta x^2}{4 \delta^2} + p_0 \frac{4\Delta x}{4\delta^2}(-\Delta x^2 + \delta^2) + \frac{(\Delta x^2 - \delta^2)^2}{4 \delta^2} \\
+
+x^2 = p_0^2 \left(\frac{\Delta x}{\delta}\right)^2 + p_0 \frac{\Delta x}{\delta^2}(\delta^2 -\Delta x^2) + \left(\frac{\Delta x^2 - \delta^2}{2 \delta}\right)^2 \\
+$$
+
+We can derive a similar equation for $y^2$ and $z^2$
+$$
+x^2 = p_0^2 \left(\frac{\Delta x}{\delta}\right)^2 + p_0 \frac{\Delta x}{\delta^2}(\delta^2 -\Delta x^2) + \left(\frac{\Delta x^2 - \delta^2}{2 \delta}\right)^2 \\
+
+y^2 = p_0^2 \left(\frac{\Delta y}{\epsilon}\right)^2 + p_0 \frac{\Delta y}{\epsilon^2}(\epsilon^2 -\Delta y^2) + \left(\frac{\Delta y^2 - \epsilon^2}{2 \epsilon}\right)^2 \\
+
+z^2 = p_0^2 \left(\frac{\Delta z}{\zeta}\right)^2 + p_0 \frac{\Delta z}{\zeta^2}(\zeta^2 -\Delta z^2) + \left(\frac{\Delta z^2 - \zeta^2}{2 \zeta}\right)^2 \\
+$$
+
+Notice that each of these equations are in the form 
+$$
+p_0^2 e + p_0 f + g
+$$
+
+Let's define the following variables:
+$$
+a_x = \left(\frac{\Delta x}{\delta}\right)^2 \qquad 
+b_x = \frac{\Delta x}{\delta^2}(\delta^2 -\Delta x^2) \qquad
+c_x = \left(\frac{\Delta x^2 - \delta^2}{2 \delta}\right)^2 \\
+
+a_y = \left(\frac{\Delta y}{\epsilon}\right)^2 \qquad 
+b_y = \frac{\Delta y}{\epsilon^2}(\epsilon^2 -\Delta y^2) \qquad
+c_y = \left(\frac{\Delta y^2 - \epsilon^2}{2 \epsilon}\right)^2 \\
+
+a_z = \left(\frac{\Delta z}{\zeta}\right)^2 \qquad 
+b_z = \frac{\Delta z}{\zeta^2}(\zeta^2 -\Delta z^2) \qquad
+c_z = \left(\frac{\Delta z^2 - \zeta^2}{2 \zeta}\right)^2
+$$
+
+Therefore, we can rewrite $x^2$, $y^2$, and $z^2$ as
+$$ \begin{equation} \label{eq:squared_pos_from_p0_simplified}
+x^2 = p_0^2 a_x + p_0 b_x + c_x \\
+y^2 = p_0^2 a_y + p_0 b_y + c_y \\
+z^2 = p_0^2 a_z + p_0 b_z + c_z
+\end{equation}
+$$
+
+Recall that
+$$
+\begin{equation} \label{eq:p_0_from_position}
+p_0^2 = x^2 + y^z + z^2
+\end{equation}
+$$
+Combining equations $\ref{eq:squared_pos_from_p0_simplified}$ and $\ref{eq:p_0_from_position}$, we get
+$$
+p_0^2 = (p_0^2 a_x + p_0 b_x + c_x) + (p_0^2 a_y + p_0 b_y + c_y) + (p_0^2 a_z + p_0 b_z + c_z) \\
+p_0^2 = p_0^2(a_x + a_y + a_z) + p_0(b_x + b_y + b_z) + (c_x+c_y+c_z) \\
+0 = p_0^2(a_x + a_y + a_z - 1) + p_0(b_x + b_y + b_z) + (c_x+c_y+c_z)
+$$
+
+Letting 
+$$
+a = a_x + a_y + a_z - 1 \\
+b = b_x + b_y + b_z \\
+c = c_x + c_y + c_z
+$$
+we can simplify to
+$$
+\begin{equation} \label{eq:p_0_final}
+0 = p_0^2 a + p_0 b + c
+\end{equation}
+$$
+
+Equation $\ref{eq:p_0_final}$ is a simple quadratic equation we can use to solve for $p_0$, which will give us 2 possible values. Now that we have $p_0$, we can plug it in and solve for $x$,$y$, and $z$!
+
+===== Error Analysis =====
+
+===== Additional Notes =====
+

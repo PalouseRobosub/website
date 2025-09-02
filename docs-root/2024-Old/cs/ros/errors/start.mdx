@@ -1,0 +1,24 @@
+===== Errors and Known Solutions =====
+If you get the following error:
+<code>ImportError: "from catkin_pkg.package import parse_package" failed: No module named catkin_pkg.package</code>
+
+Make sure that you have installed "catkin_pkg", it is up to date and on the PYTHONPATH:
+<code bash>
+$ pip install catkin_pkg
+</code>
+----
+Error: 
+<code>ImportError: No module named rospkg</code>
+Fix:
+<code bash>
+$ apt-get install python-rospkg
+$ export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages
+</code>
+This is kinda a hack, haven't bothered to figure out how to properly install python-rospkg to the proper python location for indigo
+
+----
+
+If you get this error:
+<code>ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies: ardrone_autonomy: Unsupported OS [mint] </code>
+
+when running any rosdep command, add the flag ''--os=ubuntu:trusty'' to the command.

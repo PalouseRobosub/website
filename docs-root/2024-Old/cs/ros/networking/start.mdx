@@ -1,0 +1,14 @@
+====== Networking ======
+
+===== Introduction =====
+ROS can be used across a network, with different nodes running on different computers. One computer should be designated as the "server" computer, which runs the rosmaster server (this program, along with a few others, is started up when you run `roscore`). It makes little difference as to which computer runs `roscore`, as the server is not a CPU-intensive task. For convenience, we always set the sub to be our rosmaster server.
+
+ROS relies heavily on DNS resolution to map computer hostnames to ip addresses. Normally our router does the DNS resolution, therefore minimal configuration is necessary for network setup. You simply need to configure both your account on the sub and your account on your computer to look at the sub for the rosmaster. One person on the sub should run ''roscore'' and leave it running in the background.
+
+===== Sub Setup =====
+Open up your ~/.bashrc and add the following line:
+  export ROS_MASTER_URI="http://cobalt:11311"
+===== Personal Computer Setup =====
+Open up your ~/.bashrc and add the following line:
+  export ROS_MASTER_URI="http://cobalt:11311"
+

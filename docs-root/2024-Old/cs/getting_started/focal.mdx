@@ -1,0 +1,26 @@
+====== Foxy Prerequisite Software Setup ======
+
+<WRAP center round alert 60%>
+This page needs modification and should not be used until it is completed
+</WRAP>
+
+The following instructions should be used if you are running a Ubuntu 20.04 (focal) derivative.
+
+  sudo sh -c 'echo "deb http://robosub.eecs.wsu.edu/repo/ /" > /etc/apt/sources.list.d/robosub.list'
+  wget http://robosub.eecs.wsu.edu/repo/repository_key -O - | sudo apt-key add -
+  sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu focal main" > /etc/apt/sources.list.d/ros2-latest.list'
+  wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+  sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu focal main" > /etc/apt/sources.list.d/gazebo-latest.list'
+  wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+  sudo sh -c 'echo "deb https://packagecloud.io/github/git-lfs/ubuntu/ xenial main" > /etc/apt/sources.list.d/github_git-lfs.list'
+  wget https://packagecloud.io/github/git-lfs/gpgkey -O - | sudo apt-key add -
+  sudo aptitude update
+  sudo aptitude install robosub-kinetic robosub-simulator-kinetic git-lfs
+  git lfs install
+  
+  (Note, if aptitude does not work, use sudo apt instead)
+  
+To configure your path to know about ROS software, run  
+  echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+  
+Next, continue with the instructions on the [[cs:getting_started:#getting_our_code|getting start page]].

@@ -1,0 +1,9 @@
+====== USB Setup ======
+To cause USB devices to show up as a special name (i.e. /dev/sensor_microcontroller instead of /dev/ttyUSB0), we need to modify our UDEV rules.
+
+First, open up 
+  /etc/udev/rules.d/50-usb.rules
+Then add a line for the USB device, such as
+  SUBSYSTEM=="tty", ATTRS{idVendor}=="2a03", ATTRS{idProduct}=="0043", ATTRS{idSerial}=="41, SYMLINK+="sensor_arduino"
+To properly identify the vendor ID, product ID, and serial number, you should run 
+  udevadm monitor --attribute-walk [port]

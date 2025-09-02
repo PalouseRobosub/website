@@ -1,0 +1,450 @@
+====== Multilateration======
+Previous derivations on this topic were made in years passed to enable calculations with limited numbers of hydrophone channels.  This page provides a generalized algorithm for locating a pinger in 3D in a robust, linear manner with an arbitrary number of arbitrarily placed hydrophones.  This solution is an unambiguous, precise result that evaluates at all distances and does not require that the signal originate in the far-field.
+
+This method of calculation requires 5 or more hydrophones.  Substituting a depth sensor for one of the required hydrophones is possible, and covered below.  The submarine does //not// need to be held level to make use of the depth sensor.
+
+The exact math to implement for the solution can be found by scrolling directly to the bottom of this page.
+
+
+
+===== Problem Setup =====
+
+Apart from a minimum number of hydrophones, there are no constraints on the set-up of the system.  One hydrophone $h_0$ is used as a reference and lies at the origin by definition.  A second hydrophone $h_1$ serves as a static reference point against the origin hydrophone. It may still be placed at an arbitrary location.  All other hydrophones $h_n$ for $n>1$ are evaluated against these two hydrophones.
+
+
+
+$h_0$ is at location $h_0 = (0,0,0)$ \\
+$h_1$ is at location $h_1 = (x_1,y_1,z_1)$ \\
+$h_n$ is at location $h_n = (x_n,y_n,z_n)$ \\
+
+The ping source is at location 
+$$
+p_{pinger} = (X,Y,Z)
+$$
+
+When a ping is received by the hydrophones, the hardware outputs differences in time-of-arrival from the origin, $\Delta t_n$, which corresponds to the difference in time between when the ping was received by $h_0$ and $h_n$, which is a function of their pathlengths to the pinger.
+
+$$
+\Delta t_n = \frac{\sqrt{(X-x_n)^2 + (Y-y_n)^2 + (Z-z_n)^2} - \sqrt{X^2 + Y^2 + Z^2}}{c_s}
+$$
+
+These time differences $\Delta t_n$ are multiplied by the speed of sound $c_s$ (~1500m/s) to find path-length differences $\Delta r_n$
+
+$$
+\Delta r_n = \Delta t_n * c_s = \sqrt{(X-x_n)^2 + (Y-y_n)^2 + (Z-z_n)^2} - \sqrt{X^2 + Y^2 + Z^2}
+$$
+
+With these measured values, $x_n,y_n,z_n,\Delta r_n,$ for each hydrophone, we can fill in all values for the linear expression between our measurements, and theposition of the pinger $(X,Y,Z)$.
+
+===== Linear Equation =====
+
+The linear equation takes the form:
+
+$$
+A_nx = C_n - B_n \\
+
+
+\begin{bmatrix}
+\begin{vmatrix} 2x_1 & 2x_n \\ \Delta r_1 & \Delta r_n \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_n \\ \Delta r_1 & \Delta r_n \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_n \\ \Delta r_1 & \Delta r_n \\ \end{vmatrix}
+\end{bmatrix}
+
+\begin{bmatrix}
+X \\
+Y \\
+Z \\
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_n^2+y_n^2+z_n^2) \\ \Delta r_1 & \Delta r_n \\ \end{vmatrix}
+\end{bmatrix}
+-
+\begin{bmatrix}
+\begin{vmatrix} \Delta r_1^2 & \Delta r_n^2 \\ \Delta r_1 & \Delta r_n \\ \end{vmatrix}
+\end{bmatrix}
+$$
+
+This linear relationship is valid for all $n>1$. Note that the straight lines in the equations denote 2x2 determinants. 
+
+In order to get a definitive answer for the three unknown values $X, Y,$ and $Z,$ we need at least three of these linear relations.  Hence we need at least 3 hydrophones apart from the origin hydrophone $h_0$ and the static reference hydrophone $h_1$. Or a total of 5 hydrophones minimum.
+
+$$
+Ax = C - B \\
+
+\begin{bmatrix} A_{x2} & A_{y2} & A_{z2} \\ A_{x3} & A_{y3} & A_{z3}\\ A_{x4} & A_{y4} & A_{z4}\\ \end{bmatrix}
+\begin{bmatrix} X \\ Y \\ Z \\ \end{bmatrix}
+=
+\begin{bmatrix} C_2 \\ C_3 \\ C_4\\ \end{bmatrix}
+-
+\begin{bmatrix} B_2 \\ B_3 \\ B_4\\ \end{bmatrix} \\
+
+
+\begin{bmatrix}
+\begin{vmatrix} 2x_1 & 2x_2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix}
+\\
+\begin{vmatrix} 2x_1 & 2x_3 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_3 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_3 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix}
+\\
+\begin{vmatrix} 2x_1 & 2x_4 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_4 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_4 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix}
+\end{bmatrix}
+
+\begin{bmatrix}
+X \\
+Y \\
+Z \\
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_2^2+y_2^2+z_2^2) \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix} \\
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_3^2+y_3^2+z_3^2) \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix} \\
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_4^2+y_4^2+z_4^2) \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix} \\
+\end{bmatrix}
+-
+\begin{bmatrix}
+\begin{vmatrix} \Delta r_1^2 & \Delta r_2^2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix} \\
+\begin{vmatrix} \Delta r_1^2 & \Delta r_3^2 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix} \\
+\begin{vmatrix} \Delta r_1^2 & \Delta r_4^2 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix} \\
+\end{bmatrix}
+$$
+
+Which would then be resolved as
+$$
+X = A^{-1}(C-B) \\
+
+\begin{bmatrix} X \\ Y \\ Z \\ \end{bmatrix}
+=
+\begin{bmatrix} A_{x2} & A_{y2} & A_{z2} \\ A_{x3} & A_{y3} & A_{z3}\\ A_{x4} & A_{y4} & A_{z4}\\ \end{bmatrix}^{-1}
+\left(
+\begin{bmatrix} C_2 \\ C_3 \\ C_4\\ \end{bmatrix}
+-
+\begin{bmatrix} B_2 \\ B_3 \\ B_4\\ \end{bmatrix} 
+\right)
+$$
+
+
+===== Rotation =====
+In the event the submarine is rotated off of the default orientation $R(\psi,\phi,\theta) = R(0,0,0)$ then the relative estimation of the pinger's position will be off, and a correction must be made to get the absolute coordinates $p_{pinger}=(X,Y,Z)$. 
+
+If the array is rotated by $R$ then the relative position of the pinger has been rotated in the local frame by the inverse $R^T$
+
+$$
+R^T * X_{global} = X_{local} = A^{-1}(C-B)
+$$
+
+Therefore:
+ 
+$$
+X_{global} = RA^{-1}(C-B)
+$$
+
+Which is our desired solution.  Working backwards, we can also properly write the linear system for each individual hydrophone as:
+$$
+A_nR^TX_{global} = (C_n-B_n)
+$$
+
+===== Depth Sensor Substitution =====
+Now that the evaluation of $(X,Y,Z)$ is part of a linear system, it is easy to see how direct measurements of any of the states can substitute for hydrophone measurements.
+
+$$
+\begin{bmatrix} A_{x2} & A_{y2} & A_{z2} \\ A_{x3} & A_{y3} & A_{z3}\\ 0 & 0 & 1\\ \end{bmatrix}
+\begin{bmatrix} X \\ Y \\ Z \\ \end{bmatrix}
+=
+\begin{bmatrix} C_2 \\ C_3 \\ z_{pinger}\\ \end{bmatrix}
+-
+\begin{bmatrix} B_2 \\ B_3 \\ z_{sub}\\ \end{bmatrix} \\
+$$
+
+Which requires only 4 hydrophones, $h_0,h_1,h_2,$ and $h_3$ plus the depth sensor measuring $z_{sub}$ to compared against the known depth of the pinger $z_{pinger}$.
+
+However, the depth sensor will always measure the absolute depth of the submarine regardless of the submarine's orientation $R(\psi,\phi,\theta)$.  Thus the difference measured will always be $z_{pinger}-z_{sub} = Z_{global}$.
+
+Thus in order to properly set up the system, we must use the formula derived in the Rotation section:
+
+$$
+A_nR^TX_{global} = (C_n-B_n)
+$$
+
+Which properly applied gives us the full equation:
+
+$$
+\begin{bmatrix}
+ 
+\begin{bmatrix} A_{x2} & A_{y2} & A_{z2} \\ A_{x3} & A_{y3} & A_{z3}\\ \end{bmatrix}
+*
+\begin{bmatrix} R \end{bmatrix}^T
+
+\\
+\begin{bmatrix} 0 & 0 & 1 \end{bmatrix} 
+\end{bmatrix}
+
+\begin{bmatrix} X \\ Y \\ Z \\ \end{bmatrix}
+=
+\begin{bmatrix} C_2 \\ C_3 \\ z_{pinger}\\ \end{bmatrix}
+-
+\begin{bmatrix} B_2 \\ B_3 \\ z_{sub}\\ \end{bmatrix} \\
+$$
+
+Which finally lets us calculate the full solution:
+
+===== Full Solution =====
+
+$$
+\begin{bmatrix} X \\ Y \\ Z \\ \end{bmatrix}
+=
+\begin{bmatrix}
+ 
+\begin{bmatrix} A_{x2} & A_{y2} & A_{z2} \\ A_{x3} & A_{y3} & A_{z3}\\ \end{bmatrix}
+*
+\begin{bmatrix} R \end{bmatrix}^T
+
+\\
+\begin{bmatrix} 0 & 0 & 1 \end{bmatrix} 
+\end{bmatrix}^{-1}
+\left(
+\begin{bmatrix} C_2 \\ C_3 \\ z_{pinger}\\ \end{bmatrix}
+-
+\begin{bmatrix} B_2 \\ B_3 \\ z_{sub}\\ \end{bmatrix} 
+\right)
+\\
+$$
+
+With polar bearings:
+
+$$
+Azimuth = arctan\left(\frac{Y}{X}\right), \qquad
+Inclination = arctan\left(\frac{Z}{\sqrt{X^2+Y^2}}\right), \qquad
+Range = \sqrt{X^2 + Y^2 + Z^2} \\
+
+$$
+
+given:
+$$
+R = R(\psi,\phi,\theta), \qquad 
+\Delta r_n = \Delta t_n * c_s, \qquad 
+h_n = (x_n,y_n,z_n)\\ 
+
+A_{xn} = det\begin{vmatrix} 2x_1 & 2x_n \\ \Delta r_1 & \Delta r_n \end{vmatrix}, \qquad
+A_{yn} = det\begin{vmatrix} 2y_1 & 2y_n \\ \Delta r_1 & \Delta r_n \end{vmatrix}, \qquad
+A_{zn} = det\begin{vmatrix} 2z_1 & 2z_n \\ \Delta r_1 & \Delta r_n \end{vmatrix}, \\
+
+B_n = det\begin{vmatrix} \Delta r_1^2 & \Delta r_n^2 \\ \Delta r_1 & \Delta r_n \end{vmatrix}, \qquad
+C_n = det\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_n^2+y_n^2+z_n^2) \\ \Delta r_1 & \Delta r_n \end{vmatrix}
+
+
+
+$$
+
+
+===== Coding Implementation =====
+
+The elements of the linear equations all being determinates is enumerated as such to maintain the underlying structure of the calculations.  However, calculating all those determinates is cumbersome for a real implementation.  Because the results are all 2x2 determinates with common 2nd rows, we can simplify the calculation significantly.  As such, the following implementation may be preferable:
+
+$$
+AR^TX_{global} = C - B \\  
+
+A = 
+
+\begin{bmatrix}
+\begin{vmatrix} 2x_1 & 2x_2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix}
+\\
+\begin{vmatrix} 2x_1 & 2x_3 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_3 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_3 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix}
+\\
+\begin{vmatrix} 2x_1 & 2x_4 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2y_1 & 2y_4 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix},
+&
+\begin{vmatrix} 2z_1 & 2z_4 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix}
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+\Delta r_2 & -\Delta r_1 & 0 & 0 \\
+\Delta r_3 & 0 & -\Delta r_1 & 0 \\
+\Delta r_4 & 0 & 0 & -\Delta r_1  
+\end{bmatrix}
+
+\cdot
+2
+\cdot
+
+\begin{bmatrix}
+x_1 & y_1 & z_1 \\
+x_2 & y_2 & z_2 \\
+x_3 & y_3 & z_3 \\
+x_4 & y_4 & z_4 
+\end{bmatrix}
+
+\\
+
+C =
+
+\begin{bmatrix}
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_2^2+y_2^2+z_2^2) \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix} \\
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_3^2+y_3^2+z_3^2) \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix} \\
+\begin{vmatrix} (x_1^2+y_1^2+z_1^2) & (x_4^2+y_4^2+z_4^2) \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix} \\
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+\Delta r_2 & -\Delta r_1 & 0 & 0 \\
+\Delta r_3 & 0 & -\Delta r_1 & 0 \\
+\Delta r_4 & 0 & 0 & -\Delta r_1  
+\end{bmatrix}
+
+\begin{bmatrix}
+(x_1^2+y_1^2+z_1^2) \\
+(x_2^2+y_2^2+z_2^2) \\
+(x_3^2+y_3^2+z_3^2) \\
+(x_4^2+y_4^2+z_4^2) 
+\end{bmatrix}
+
+\\
+
+B =
+
+\begin{bmatrix}
+\begin{vmatrix} \Delta r_1^2 & \Delta r_2^2 \\ \Delta r_1 & \Delta r_2 \\ \end{vmatrix} \\
+\begin{vmatrix} \Delta r_1^2 & \Delta r_3^2 \\ \Delta r_1 & \Delta r_3 \\ \end{vmatrix} \\
+\begin{vmatrix} \Delta r_1^2 & \Delta r_4^2 \\ \Delta r_1 & \Delta r_4 \\ \end{vmatrix} \\
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+\Delta r_2 & -\Delta r_1 & 0 & 0 \\
+\Delta r_3 & 0 & -\Delta r_1 & 0 \\
+\Delta r_4 & 0 & 0 & -\Delta r_1  
+\end{bmatrix}
+
+\begin{bmatrix}
+\Delta r_1^2 \\
+\Delta r_2^2 \\
+\Delta r_3^2 \\
+\Delta r_4^2
+\end{bmatrix}
+
+$$ 
+
+We've taken the 2x2 determinate operation and transformed it into a matrix product.  Now all the elements more clearly become the result of the measurements and the position of the hydrophones:
+
+$$
+
+\begin{bmatrix}
+\Delta r_2 & -\Delta r_1 & 0 & 0 \\
+\Delta r_3 & 0 & -\Delta r_1 & 0 \\
+\Delta r_4 & 0 & 0 & -\Delta r_1  
+\end{bmatrix}
+
+\cdot
+2
+\cdot
+
+\begin{bmatrix}
+x_1 & y_1 & z_1 \\
+x_2 & y_2 & z_2 \\
+x_3 & y_3 & z_3 \\
+x_4 & y_4 & z_4 
+\end{bmatrix}
+
+\begin{bmatrix}
+R
+\end{bmatrix}^T
+
+
+\begin{bmatrix}
+X \\
+Y \\
+Z
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+\Delta r_2 & -\Delta r_1 & 0 & 0 \\
+\Delta r_3 & 0 & -\Delta r_1 & 0 \\
+\Delta r_4 & 0 & 0 & -\Delta r_1  
+\end{bmatrix}
+
+\left(
+\begin{bmatrix}
+(x_1^2+y_1^2+z_1^2) \\
+(x_2^2+y_2^2+z_2^2) \\
+(x_3^2+y_3^2+z_3^2) \\
+(x_4^2+y_4^2+z_4^2) 
+\end{bmatrix}
+
+-
+\begin{bmatrix}
+\Delta r_1^2 \\
+\Delta r_2^2 \\
+\Delta r_3^2 \\
+\Delta r_4^2
+\end{bmatrix}
+\right)
+
+\\
+
+r_{det} = 
+\begin{bmatrix}
+\Delta r_2 & -\Delta r_1 & 0 & 0 \\
+\Delta r_3 & 0 & -\Delta r_1 & 0 \\
+\Delta r_4 & 0 & 0 & -\Delta r_1  
+\end{bmatrix},
+
+\quad
+
+H = 
+\begin{bmatrix}
+x_1 & y_1 & z_1 \\
+x_2 & y_2 & z_2 \\
+x_3 & y_3 & z_3 \\
+x_4 & y_4 & z_4 
+\end{bmatrix}
+
+\\
+
+
+r_{det} \cdot 2HR^TX_{global} = r_{det} \cdot (|H|^2 - \Delta r^2) \\
+
+X_{global} = inv(r_{det} \cdot 2HR^T) \cdot r_{det} \cdot (|H|^2 - \Delta r^2)
+
+$$
+
+Which is a much simpler implementation.  Only $r_{det}$ and $\Delta r^2$ need to be re-calculated upon every measurement. 
+
+A few notes:
+
+- $r_{det}$ cannot be factored out of the equation because it is not a full-rank invertible matrix.
+
+- The role of rotation matrix $R(\psi,\phi,\theta)$ is much more evident here. The submarine being rotated off of alignment with the global coordinate space is equivalent to the positions of all the hydrophones $H$ being rotated by the same amount.
+
+- When mixing in the depth sensor in place of your fourth non-reference hydrophone $h_4$, remove the 4th row from $H$ and $\Delta r^2$, as well as the third row and fourth column from $r_{det}$. 
+
