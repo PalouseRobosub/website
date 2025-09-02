@@ -83,15 +83,18 @@ export default function Home() {
     <main style={{ position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center" }}>
       <div>
         <div style={cautionStripe}></div>
-        <div style={cautionStripe1}></div>
-        <div style={cautionStripe2}></div>
+{/*         <div style={cautionStripe1}></div> */}
+{/*         <div style={cautionStripe2}></div> */}
       </div>
       <p>
         We are currently in the process of overhauling our website. Check back soon for updates!
       </p>
+      <p>
+        While you wait, why don't you check out our <a href="https://www.linkedin.com/company/105879707/">Linkedin</a> or <a href="mailto:robosub.vcea@wsu.edu">email us</a>!
+      </p>
       <div>
         <div style={cautionStripe3}></div>
-        <div style={cautionStripe4}></div>
+        // <div style={cautionStripe4}></div>
         <div style={cautionStripe}></div>
       </div>
     </main>
