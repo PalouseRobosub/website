@@ -59,7 +59,7 @@ const DocsClientSidebar = ({ docsContents }: { docsContents: Dir }) => {
         </select>
         {/*<input className={styles.search} type="search" placeholder="Search" />*/}
       </div>
-      <div>
+      <div className={styles.contents}>
         {subContents.map((item, i) => {
           switch (item.type) {
             case "dir":

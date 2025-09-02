@@ -78,3 +78,8 @@
     position: relative;
     top: -5px;
 }
+
+.contents {
+    height: 100%;
+    overflow-y: scroll;
+}
