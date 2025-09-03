@@ -16,7 +16,7 @@ export const OfficersWrapper = ({ children }: { children: React.ReactNode }) => 
     left: "50%",
     transform: "translateX(-50%)",
   }
-  
+
   return (
     <div style={wrapperStyles}>
       {children}
@@ -25,15 +25,26 @@ export const OfficersWrapper = ({ children }: { children: React.ReactNode }) => 
 }
 
 const OfficerBio = ({ children, imageSrc }: { children: React.ReactNode, imageSrc: string }) => {
-  
-  return (
-    <div className={styles.bioWrapper}>
-      <Image src={imageSrc} alt="" height={250} width={250} />
+	const bioStyles: React.CSSProperties = {
+		minWidth: "300px"
+	}
+
+  // return (
+  //   <div className={styles.bioWrapper}>
+  //     <Image src={imageSrc} alt="" height={250} width={250} />
+  //     <div>
+  //       {children}
+  //     </div>
+  //   </div>
+  // )
+	return (
+    <div className={styles.bioWrapper} style={bioStyles}>
       <div>
         {children}
       </div>
     </div>
   )
+
 }
 
 export default OfficerBio;

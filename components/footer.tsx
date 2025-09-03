@@ -4,7 +4,7 @@ import { SiInstagram, SiGithub } from "@icons-pack/react-simple-icons";
 import Image from "next/image";
 
 const Footer = () => {
-  
+
   return (
     <footer className={styles.footer}>
       <div>
@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
           <div className={styles.flexRow}>
             <Image src="/involve.svg" alt="Involve" height={24} width={24} style={{ borderRadius: "4px" }} />
-            <a href="https://wsu.presence.io/organization/palouse-robosub" target="_blank" style={{color: "white"}}>WSU Involve</a>
+            <a href="https://wsu.presence.io/organization/palouse-robosub" target="_blank" style={{color: "white"}}>WSU Presence</a>
           </div>
         </div>
         <div className={styles.flexCol} style={{ marginRight: "10px" }}>
