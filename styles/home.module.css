@@ -49,6 +49,7 @@
 .section {
     width: 100%;
     padding: 0 20%;
+    margin-bottom: 20px;
 }
 
 .flexRow {
