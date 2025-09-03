@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{background:"#a60f2d"}}>
-      <body className={`${montserrat.className} ${jetBrainsMono.variable}`} style={{background:"white"}}>
+    <html lang="en">
+      <body className={`${montserrat.className} ${jetBrainsMono.variable}`}>
         <Header />
         {children}
         <Footer />

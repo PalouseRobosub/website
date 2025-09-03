@@ -1,5 +1,5 @@
 import styles from "@/styles/officer-bio.module.css"
-import Image from "next/image";
+// import Image from "next/image";
 
 export const OfficersWrapper = ({ children }: { children: React.ReactNode }) => {
 
@@ -25,9 +25,6 @@ export const OfficersWrapper = ({ children }: { children: React.ReactNode }) => 
 }
 
 const OfficerBio = ({ children, imageSrc }: { children: React.ReactNode, imageSrc: string }) => {
-	const bioStyles: React.CSSProperties = {
-		minWidth: "300px"
-	}
 
   // return (
   //   <div className={styles.bioWrapper}>
@@ -38,7 +35,7 @@ const OfficerBio = ({ children, imageSrc }: { children: React.ReactNode, imageSr
   //   </div>
   // )
 	return (
-    <div className={styles.bioWrapper} style={bioStyles}>
+    <div className={styles.bioWrapper}>
       <div>
         {children}
       </div>

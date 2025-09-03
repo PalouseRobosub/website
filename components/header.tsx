@@ -1,13 +1,13 @@
 "use client"
 
 import styles from "@/styles/header.module.css"
-// import { Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 const Header = () => {
-  const [menuOpen/*, setMenuOpen*/] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className={styles.header}>
@@ -20,7 +20,7 @@ const Header = () => {
             <div className={styles.title}>Palouse RoboSub</div>
           </Link>
         </div>
-        {/*<div className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}><Menu/></div>*/}
+        <div className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}><Menu/></div>
         <div className={styles.linkWrapper}>
           <Link href="/about" className={styles.link}>About</Link>
           <Link href="/officers" className={styles.link}>Officers</Link>

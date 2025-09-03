@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { readdirSync } from "fs";
 import { join } from "path";
-import { PostMeta } from "../blog/types";
+import { PostMeta } from "./blog/types";
 
 const Page = async () => {
 
@@ -31,7 +31,7 @@ const Page = async () => {
       </div>
 	  <div className={styles.graySection}>
 	  <br/>
-		<p style={{ textAlign: "center" }}>WSU's Palouse RoboSub club develops underwater submarines designed to participate in the intercollegiate RoboSub national competitions. Located in the basement of Dana Hall, Palouse RoboSub combines Electrical, Mechanical, and Computer Engineering to create complex AUVs and ROVs.</p>
+		<p style={{ textAlign: "center" }}>WSU&apos;s Palouse RoboSub club develops underwater submarines designed to participate in the intercollegiate RoboSub national competitions. Located in the basement of Dana Hall, Palouse RoboSub combines Electrical, Mechanical, and Computer Engineering to create complex AUVs and ROVs.</p>
         <h2 style={{ fontSize: "40px" }}>Support Palouse RoboSub!</h2>
         <div className={styles.flexRow}>
           <div>If you are a student please consider <Link href="/join">joining</Link>!</div>
@@ -55,7 +55,7 @@ const Page = async () => {
             </div>
             <div className={styles.post}>
               <Link href={`/blog/${sortedPosts[1].slug}`}>{sortedPosts[1].title}</Link>
-              <div>{sortedPosts[0].published}</div>
+              <div>{sortedPosts[1].published}</div>
             </div>
 			{/*<div className={styles.post}>
               <Link href={`/blog/${sortedPosts[2].slug}`}>{sortedPosts[2].title}</Link>
