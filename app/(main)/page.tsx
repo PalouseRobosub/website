@@ -25,7 +25,7 @@ const Page = async () => {
 
   return (
     <main className={styles.main}>
-      <Image src="/group.jpg" height={634} width={1024} alt="" className={styles.mainPhoto} />
+      <Image src="/group.webp" priority height={634} width={1024} alt="" className={styles.mainPhoto} />
       <div className={styles.titleWrapper}>
         <h1 className={styles.title}>Palouse RoboSub</h1>
       </div>
