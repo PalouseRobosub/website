@@ -1,0 +1,50 @@
+# UPS Setup
+
+## Installing NUT for the OpenUPS
+
+```bash
+$ sudo aptitude install nut
+```
+
+Add the following to /etc/nut/ups.conf:
+
+```
+[openups]
+    driver = usbhid-ups
+    port = auto
+    desc = "OpenUPS"
+```
+And comment out the line ''maxretry = 3''.
+
+Try if it works:
+
+```bash
+$ sudo upsdrvctl start
+```
+
+Then, edit ''/etc/nut/nut.conf'' such that the last line reads
+
+```
+MODE=standalone
+```
+
+Finally reboot and run
+
+```bash
+$ sudo upsc openups@localhost
+```
+
+This should display information about the connected UPS. Check the ''device.model'' parameter and make sure that it is OPEN-UPS
+
+### Open UPS Default Settings By Battery
+
+To load these parameters, you will need to install the **[ Windows tool](http://www.mini-box.com/OpenUPS )** provided by Mini-Box. When you run it, you should see something like this:
+\{\{:cs:ups_setup:openups_settings.png?400|\}\}
+
+By switching to the settings submenu, you will be able to load the parameters through the **All parameters: File ===\> OpenUPS (settings.ini)**. Use the correct settings file from below for your battery.
+
+If you have need to update these files, please send the request to the [[slack\>it|IT Channel]]
+
+#### LiFePo4 3 cell 9.9V 4200 mAh
+
+\{\{ :cs:ups_setup:zippy_settings.7z |\}\}

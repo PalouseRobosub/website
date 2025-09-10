@@ -1,0 +1,27 @@
+# Simulator Bridge
+The simulator bridge is ROS node which subscribes to the /gazebo/model_states message that gazebo publishes. The model states message ([ModelStates](http://docs.ros.org/indigo/api/gazebo_msgs/html/msg/ModelStates.html)) contains position, orientation, linear velocity, and angular velocity for each model in the simulator. This includes the sub, the top of the water, the start gate, the pinger, etc. The simulator bridge is responsible for taking the model states input and outputting the following information on the specified topics:
+
+### /position
+Message: [ geometry_msgs/Vector3 ](https://docs.ros2.org/foxy/api/geometry_msgs/msg/Vector3.html ) \\
+The true current position of the sub, given as x, y, z.
+
+### /orientation
+Message: [ geometry_msgs/QuaternionStamped ](https://docs.ros2.org/foxy/api/geometry_msgs/msg/QuaternionStamped.html ) \\
+The true current orientation of the sub, given as quaternion.
+
+### /orientation/pretty
+Message: [ robosub_msgs/Euler ](https://gitlab.com/PalouseRobosub/Software/robosub_msgs/-/blob/master/msg/Euler.msg ) \\
+The true current orientation of the sub, given as roll, pitch, yaw. This is for human readability only. Any nodes wishing to make use of this data should subscribe to the /orientation topic.
+
+### /depth
+Message: [ robosub_msgs/Float32Stamped ](https://gitlab.com/PalouseRobosub/Software/robosub_msgs/-/blob/master/msg/Float32Stamped.msg ) \\
+The true current depth of the sub, calculated by subtracting the z position of the sub from the z position of the top of the water.
+
+
+### /obstacles/positions
+Message: [ robosub_msgs/ObstaclePosArray ](https://gitlab.com/PalouseRobosub/Software/robosub_msgs/-/blob/master/msg/ObstaclePosArray.msg ) \\
+The true current position of a list of obstacles in the pool. This list is taken from the [ robosub_simulator/obstacles.yaml ](https://gitlab.com/PalouseRobosub/Software/robosub_simulator/-/blob/master/param/obstacles.yaml ).
+
+### /hydrophone/30khz/delta
+Message: [ robosub_msgs/HydrophoneDeltas ](https://gitlab.com/PalouseRobosub/Software/robosub_msgs/-/blob/master/msg/HydrophoneDeltas.msg ) \\
+Simulated hydrophone system output. This is calculated based on the position of the subs hydrophones and the pinger.

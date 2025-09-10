@@ -1,0 +1,19 @@
+# Embed PDFs
+
+PDFs can be embedded into the page with a document viewer using the following syntax:
+
+```
+\{\{pdfjs\>doc_location\}\}
+```
+
+The size of the viewer can be changed by adding the optional height and width fields to the tag:
+
+```
+\{\{pdfjs width,height\>doc_location\}\}
+```
+
+The default size is 100%,300px. The sizes can be specified using any web sizing standard, i.e. px, %, pt, em. If only one size is given it is interpreted as the height. As such if you only want to make the viewer taller the syntax is:
+
+```
+\{\{pdfjs height\>doc_location\}\}
+```

@@ -1,0 +1,76 @@
+# Trilateration
+\<WRAP alert\>
+This method of interpreting hydrophone data has been deprecated in favor of [[cs::hydrophones:pinger_bearing:start| this method]].
+\</WRAP\>
+
+\<WRAP info\>
+Before reading this page, make sure to check out the **Problem Setup** section of [[cs:hydrophones:trilateration_setup:start|this page]].
+\</WRAP\>
+
+This page is a summary of how we use the hydrophones to figure out our position.
+
+Note that $\delta$, $\epsilon$, and $\zeta$ are defined as:
+
+
+$h_0$ is at location $(0,0,0)$ \\
+$h_x$ is at location $(\delta,0,0)$ \\
+$h_y$ is at location $(0,\epsilon,0)$ \\
+$h_z$ is at location $(0,0,\zeta)$ \\
+
+The primary results from [[cs:hydrophones:trilateration_setup:start|this derivation]] are equations $\ref\{eq:xyz\}$ and $\ref\{eq:p0_initial\}$.
+$$
+\begin\{equation\} \label\{eq:xyz\} 
+x = \frac\{\Delta x (2p_0 - \Delta x) + \delta^2\}\{2 \delta\} \\
+y = \frac\{\Delta y (2p_0 - \Delta y) + \epsilon^2\}\{2 \epsilon\} \\
+z = \frac\{\Delta z (2p_0 - \Delta z) + \zeta^2\}\{2 \zeta\} 
+\end\{equation\}$$
+
+$$ \begin\{equation\}\label\{eq:p0_initial\}
+0 = p_0^2(a_x + a_y + a_z - 1) + p_0(b_x + b_y + b_z) + (c_x+c_y+c_z)
+\end\{equation\}
+$$
+
+With variable definitions given by $\ref\{eq:variable_definitions\}$.
+
+$$ \begin\{equation\} \label\{eq:variable_definitions\}
+a_x = \left(\frac\{\Delta x\}\{\delta\}\right)^2 \qquad
+b_x = \frac\{\Delta x\}\{\delta^2\}(\delta^2 -\Delta x^2) \qquad
+c_x = \left(\frac\{\Delta x^2 - \delta^2\}\{2 \delta\}\right)^2 \\
+
+
+a_y = \left(\frac\{\Delta y\}\{\epsilon\}\right)^2 \qquad 
+b_y = \frac\{\Delta y\}\{\epsilon^2\}(\epsilon^2 -\Delta y^2) \qquad
+c_y = \left(\frac\{\Delta y^2 - \epsilon^2\}\{2 \epsilon\}\right)^2 \\
+
+a_z = \left(\frac\{\Delta z\}\{\zeta\}\right)^2 \qquad 
+b_z = \frac\{\Delta z\}\{\zeta^2\}(\zeta^2 -\Delta z^2) \qquad
+c_z = \left(\frac\{\Delta z^2 - \zeta^2\}\{2 \zeta\}\right)^2
+\end\{equation\}
+$$
+
+Let us simplify eq. $\ref\{eq:p0_initial\}$ using the following substitution:
+$$
+a = (a_x + a_y + a_z - 1) \\
+b = (b_x + b_y + b_z) \\
+c = (c_x+c_y+c_z)
+$$
+
+This gives us eq. $\ref\{eq:p0_initial_simple\}$, which is an ordinary quadratic equation.
+$$ \begin\{equation\}\label\{eq:p0_initial_simple\}
+0 = p_0^2 a + p_0 b + c
+\end\{equation\}
+$$
+
+Applying the quadratic formula to eq. $\ref\{eq:p0_initial_simple\}$, we can solve for $p_0$.
+
+$$ \begin\{equation\}\label\{eq:p0_solved\}
+p_0 = \frac\{-b \pm \sqrt\{b^2 - 4ac\}\}\{2a\}
+\end\{equation\}
+$$
+
+This will give us two possible solutions for $p_0$. We can combine this result with eq. $\ref\{eq:xyz\}$ to solve for $x$, $y$, and $z$.
+
+# Reversing the Problem
+Here we describe how the simulator takes the position of the sub and calculates fake hydrophone timing data. \<WRAP todo\>
+Need figure this part out!
+\</WRAP\>

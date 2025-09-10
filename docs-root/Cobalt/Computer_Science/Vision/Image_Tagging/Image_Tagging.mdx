@@ -1,0 +1,11 @@
+
+# Image Tagging
+
+
+## labelImg
+
+For complete details on using labelImg, see [https://github.com/tzutalin/labelImg](https://github.com/tzutalin/labelImg).
+
+We use labelImg to tag objects in images. labelImg can be installed with pip with the command ''pip3 install labelImg''. Once installed you can run ''labelImg'' from a terminal. When running labelImg with no arguments, you will have to use the labelImg interface to select and image or directory to open, and you will need to type in labels manually. Because of this it can be more efficient to run labelImg with image_directory and predefined_classes arguments. If you have a dataset with images in a directory called ''images'' and a label file called ''labels.txt'', you can run labelImg as shown below to open the image directory and have a list of labels to select from:
+
+  labelImg images labels.txt

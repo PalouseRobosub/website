@@ -1,0 +1,29 @@
+# Coordinate System
+
+## Global Frame
+The global frame is such that the x,y origin is at the pinger, and z=0 is at the surface. Positive z is up. Yaw is relative to magnetic north. Pitch and Roll are relative to the gravity vector.
+
+
+## Axes
+
+  * X+ - front of the sub
+  * Y+ - left of the sub
+  * Z+ - above the sub
+
+## Rotations
+
+  * Yaw+ - Counterclockwise around Z+ axis (this is opposite of magnetic) (Yaw **Left** positive)
+  * Roll+ - Counterclockwise around X+ axis (Roll **Right** is positive)
+  * Pitch+ - Counterclockwise around Y+ axis (Pitch **Down** is positive)
+
+
+## TF Frames
+
+  * ''world'' - Global frame defined above
+  * ''cobalt'' - The frame defining the sub's orientation relative to the ''world'' frame based upon the localization node output.
+  * ''cobalt_sim'' - The frame defining the sub's orientation relative to the ''world'' frame based upon Gazebo's output.
+
+### TF Graph
+
+A visual representation of the TF tree will be placed here in future.
+

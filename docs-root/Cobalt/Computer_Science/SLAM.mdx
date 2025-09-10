@@ -1,0 +1,92 @@
+# SLAM
+# Simultaneous Localization and Mapping
+
+## Overview
+In robot navigation, a SLAM algorithm is used to construct a map of the robot's environment, while simultaneously locating the robot within that map. There are many different SLAM algorithms, but we are currently using a visual based system using the sub's right and left cameras. This allows us to link the system to Object Detection.
+
+The specific system we are using is [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2), an open source feature based visual slam system which we modified for the sub. The paper describing the system can be found [here](https://arxiv.org/pdf/1610.06475.pdf).
+
+The algorithm works by detecting features (such as edges and corners) in an image, and locates them in space using triangulation with other known map points.
+
+
+
+ \{\{:cs:slam:selection_005.png\}\}
+The sub in simulated environment.
+
+ \{\{:cs:slam:selection_004.png\}\}
+
+The view of a single keyframe with detected map points.
+
+
+ \{\{:cs:slam:selection_007.png\}\}
+A viewer that plots the detected map points.
+
+
+
+
+
+## Structure
+The SLAM algorithm is complex, but it links to the rest of the sub's system through a single node at ~/ros/src/robosub_orb_slam/src/ros_stereo.cc. The node:
+
+Subscribes to:
+  * /camera/left/image_raw - collects image data from left robosub camera.
+  * /camera/right/image_raw - collects image data from right robosub camera.
+
+Publishes to:
+  * /SLAMpoints - the 3d location of the map points in space, and the 2d location of the map points on each image frame.
+
+## How to Run
+
+```bash
+$ roslaunch robosub_orb_slam slam.launch use_viewer:=True
+```
+
+## How it Works
+
+\{\{:cs:slam:orb2.png\}\}
+
+ORB-SLAM2 is a feature based algorithm that takes keyframes from video output and extracts keypoints or features (such as corners), and uses them to establish location of the sub and its surroundings.
+
+It consists of three main modules: Tracking, Local Mapping, and Loop Closing.
+### Tracking
+
+-Tracking localizes the camera by comparing features in a local map.  
+
+-Detects features using the [FAST Algorithm](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_fast/py_fast.html).
+
+-Describes features using [ORB Algorithm](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_orb/py_orb.html).
+
+-Selects a new keyframe.
+
+-If localization is lost, uses Place Recognition module to relocate.
+
+
+
+### Local Mapping
+
+-Keyframes are added to co-visibility graph Spanning Tree.
+
+-New Map points are creates by triangulating matching ORB features from different keyframes.
+
+-Validity of map point is checked by seeing if it is found in other keyframes where it is predicted to be. Must be seen by at least 3 other keyframes.
+
+
+### Loop Closing
+
+-Loop closing is when the sub recognizes that it has returned to a previous location and adjust map points to accommodate.
+
+-To detect possible loops, check bag of words vectors in Place Recognition module of the current keyframe and its neighbors in the co-visibility graph.
+
+-If loop candidate is found preform similarity transform.
+
+-Fuse map points and preform bundle adjustment.
+### Map
+
+Each map point stores:
+    *Its 3D position in the world coordinate system.
+
+    *ORB descriptor.
+
+    *The maximum dmax and minimum dmin distances at which the point can be observed, according to the scale invariance limits of the ORB features.
+### Place Recognition
+

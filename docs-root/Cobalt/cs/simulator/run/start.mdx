@@ -1,5 +1,0 @@
-===== Running Gazebo Simulator =====
-
-Next build everything by running ''%%rsmake%%''. Then run the following command:
-   ros2 launch robosub_simulator gazebo.launch.py [gui:=false] [minimal:=true]  
-This will load the proper param files, start up gazebo with the correct world, spawn the sub, and finally, start the simulator bridge, control system, and thruster nodes. If you want to run additional software nodes (vision, hydrophones, AI, etc.), you will need to start them manually. You can use the optional parameters to disable the gui or launch the minimal simulator without the control system or thrusters started.

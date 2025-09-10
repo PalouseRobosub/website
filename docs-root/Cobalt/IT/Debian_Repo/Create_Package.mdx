@@ -1,0 +1,50 @@
+# Creating a Package
+Sometimes you need to create a custom debian package. This may be because you're using a special tool that isn't already available in the official repositories from Ubuntu, or perhaps the version they have is super old and need something newer. This example is based on the latter case, where the tig tool is available, but the official version is very old and somewhat buggy, therefore we will build the newest version.
+
+First, download and extract the source code for the package: \{\{:it:debian_repo:create_package:tig-2.2.2.tar.gz |\}\}
+
+Ensure you have all the necessary build dependencies (for this example I had to install libncurses5-dev), and then compile the software using the ''%%make%%'' command.
+
+After this point is where things can get dicey depending on the software. You need to figure out all the necessary build outputs you want to put in the debian package and where they are supposed to go on a person's computer when installing. You can usually figure out pretty easily for simple programs where there is just a single output binary, but it can get more complex for larger programs that also install custom libraries. However, most make scripts also have an ''%%install%%'' subcommand that you can run that will install the code on your computer, which you can look at to figure out what's necessary. 
+
+In this case, tig would normally would get installed in your home directory, to look like this:
+  ~
+  ├── bin
+  │   └── tig
+  └── etc
+      └── tigrc
+
+Therefore we want the ''%%tig%%'' binary and the ''%%tigrc%%'' configuration file, which we will put in the ''%%/usr/local/%%'' directory. While we theoretically could install the files anywhere on someone's computer, the [Filesystem Hierarchy Standard](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) establishes conventions for where files are supposed to be installed.
+
+Now that have the files we want to install, we can now actually start creating our debian package. First, create a directory that we will be putting everything. By convention, the folder name should be ''%%softwarename_version%%''. Therefore we will create our ''%%tig_2.2.2%%'' directory and within it create a directory structure as follows:
+
+  tig_2.2
+  ├── DEBIAN
+  │   └── control
+  └── usr
+      └── local
+          ├── bin
+          │   └── tig
+          └── etc
+              └── tigrc
+              
+The idea here is that (with the exception of the DEBIAN folder) is that everything will get installed in relative to the root directory. So after installing this package, it will create 2 files:
+  /usr/local/bin/tig
+  /usr/local/etc/tigrc
+
+The DEBIAN folder contains special files for the package that are not actually installed on the computer. You can have all sorts of scripts that get run before/during/after the package is installed, but at minimum you must have a ''%%control%%'' file, which gives basic information about the package. Let's create the control file:
+  Package: tig
+  Version: 2.2.2-1
+  Architecture: amd64
+  Maintainer: James Irwin /\<irwineffect@gmail.com\>
+  Description: ncurses-based git gui
+  
+The fields are relatively self explanatory, but a few things to note:
+  * The version field should contain the version number of the software itself, and then the version number of the package, separated by a dash. It's important to increment these when you change the package so that people's computers see the package as newer than the currently installed version.
+  * For binary programs the architecture field must be correct, for processor-independent programs (like python, bash, perl, etc.) the field should be "all"
+
+There are also a few other fields that are optional, the most noteworthy one is the ''%%Depends%%'', where you specify other packages that your package depends on. This will cause those other packages to be downloaded and installed before your package is installed.
+
+Finally, to create our package, we simply run:
+  fakeroot dpkg-deb --build tig_2.2.2/ /\<output_dir\>
+which will create our debian file in the specified output directory.

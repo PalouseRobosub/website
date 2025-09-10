@@ -1,0 +1,43 @@
+## Legacy Documentation
+#### Sloth and Darknet
+
+Since we use Darknet, there are special configurations needed. After having cloned the [vision_dev](https://github.com/PalouseRobosub/vision_dev) repository, add the following line to your .bashrc, replacing the dummy path with the path to the vision_dev/sloth directory so that sloth can create darknet files.
+
+  export PYTHONPATH=/path/to/vision_dev/sloth:$PYTHONPATH
+
+----
+
+#### Using sloth output with Darknet
+When attempting to use tagged images with darknet, the annotation file will need to be in the correct format. To convert to this format, use the following command
+
+  sloth convert /\<original file\> /\<new_filename\>.darknet
+
+This will ask sloth to convert an annotation file in one format to the correct *.darknet format.
+
+Once the file is in this format, you will need to run the `sloth_to_darknet.py` script which will generate the multiple files darknet requires based upon the compact information in the *.darknet file.
+
+The following is an example command to generate said files.
+
+  ./sloth_to_darknet.py -f /path/to/label/file -o /path/to/annotation/dir/ (optional)[-t training_list_filename.txt]
+
+----
+#### Getting Data to Label
+
+We use the download_data.sh and download_data_current.sh scripts from the [vision_dev](https://github.com/PalouseRobosub/vision_dev) repository to get data from the server. Make sure that you always do a git pull before getting new data because the scripts change frequently.
+
+First claim one or more batches to label from the current spreadsheet of data. The current spreadsheet is located [here](https://docs.google.com/spreadsheets/d/1j1Be_AjXxf2mgat3-XOz6fC_jkZvzBypRoEFcbkvcxA/edit?usp=sharing). Note which numbers you want.
+
+Once you have claimed some batches run the following command in vision_dev to download and extract the data:
+
+  ./download_data.sh bag_prefix_0 ## ## ##
+
+For example if you want batch numbers 00 04 and 12 of the path_marker batch you would run:
+
+  ./download_data.sh path_marker_0 00 04 12
+
+Before downloading the data it will ask you for a username and password, please ask in either the it or general channels on [slack](https://palouserobosub.slack.com)
+
+#### Uploading Data
+/\<WRAP indent\>
+Here is the [upload link](http://robosub-vm.eecs.wsu.edu/labelupload/) for .json files. Just drag and drop it.
+/\</WRAP\>

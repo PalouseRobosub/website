@@ -2,10 +2,11 @@
     width: 100%;
     background-color: #EBEBEB;
     grid-area: sidebar;
-    height: 100svh;
-    max-height: 100svh;
-    position: sticky;
-    top: 0;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebarHeader {
@@ -80,6 +81,5 @@
 }
 
 .contents {
-    height: 100%;
     overflow-y: scroll;
 }

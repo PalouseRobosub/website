@@ -1,0 +1,354 @@
+# Pinger Bearing
+This page describes the math used to calculate our bearing towards the pinger using our hydrophones. A solution is derived in 2 dimensions to show how it works, then the final result from that is extrapolated to 3 dimensions. The speed of sound of water is defined as $c_s$.
+## Assumptions
+### Planar Wave
+Imagine dropping a rock in the middle of a pond. At first the ripples look very circular, but by the time they reach the shore they look like straight lines. We assume that the wave front of the ping is planar, which basically means that even though the wave front is curved, the curvature is small enough from the perspective of the hydrophones such that the wave front actually looks flat. This makes our calculations a lot easier.
+
+## 2D Derivation
+We have 3 hydrophones, located at the following positions:
+
+$H_0$ is at location $(0,0)$ \\
+$H_x$ is at location $(x,0)$ \\
+$H_y$ is at location $(0,y)$ \\
+
+\{\{:cs:hydrophones:pinger_bearing:0.svg?300|\}\}
+
+We shall simulate a wave traveling towards our hydrophone array. First, it hits $H_x$ at time $t_x$
+
+\{\{:cs:hydrophones:pinger_bearing:1.svg?300|\}\}
+
+The wave continues, hitting $H_y$ at time $t_y$
+
+\{\{:cs:hydrophones:pinger_bearing:2.svg?300|\}\}
+
+Finally, the wave hits $H_0$ at time $t_0$
+
+\{\{:cs:hydrophones:pinger_bearing:3.svg?300|\}\}
+
+Because the wave emanating from the pinger hit $H_x$ before it hit $H_0$, we know that $H_x$ must be closer to the pinger than $H_0$. In fact, $H_x$ must be exactly $d_x = c_s(t_0 - t_x)$ meters closer to the pinger than $H_0$. Likewise, $H_y$ is $d_y = c_s(t_0 - t_y)$ meters closer to the pinger than $H_0$.
+\{\{:cs:hydrophones:pinger_bearing:labeled.svg?300|\}\}
+
+Our main goal is to calculate a vector pointing from the $H_0$ to the pinger. This vector is perpendicular to the wave front, and is shown in blue in the diagram below:
+
+\{\{:cs:hydrophones:pinger_bearing:vector.svg?300|\}\}
+
+We can also describe the vector in $i,j$ notation:
+$$
+\begin\{bmatrix\} 
+\hat\{i\} \\ \hat\{j\}
+\end\{bmatrix\}
+=
+\begin\{bmatrix\} 
+\cos(\theta) \\ \sin(\theta)
+\end\{bmatrix\}
+$$
+
+Also recall the cosine identity:
+$$
+\cos(\theta) = \frac\{\text\{adj\}\}\{\text\{hyp\}\}
+$$
+
+Notice how the wavefront, axis to the hydrophones, and our vector make a few right triangles? We highlighted two in green and magenta:
+\{\{:cs:hydrophones:pinger_bearing:triangles.svg?300|\}\}
+
+Let's focus on the green triangle first. We know the hypotenuse of the triangle is $x$, and the long side of the triangle is $d_x$, therefore, we know $\cos(\theta)$:
+$$
+\cos(\theta) = \frac\{d_x\}\{x\}
+$$
+
+Next, let's look at the magenta triangle. We know the hypotenuse is $y$ and the short side is $d_y$, and can calculate:
+$$
+\cos(\phi) = \frac\{d_y\}\{y\}
+$$
+
+However, recall that $\phi = 90-\theta$, therefore
+$$
+\cos(\phi) = \cos(90-\theta) = \sin(\theta)
+$$
+
+We now know how to calculate $\hat\{i\}$ and $\hat\{j\}$:
+$$
+\begin\{bmatrix\} 
+\hat\{i\} \\ \hat\{j\}
+\end\{bmatrix\}
+=
+\begin\{bmatrix\} 
+\cos(\theta) \\ \sin(\theta)
+\end\{bmatrix\}
+=
+\begin\{bmatrix\} 
+d_x/x \\ d_y/y
+\end\{bmatrix\}
+$$
+
+## 3D Result
+Extrapolating the 2D result into 3 dimensions, we have:
+
+$H_0$ is at location $(0,0,0)$ \\
+$H_x$ is at location $(x,0,0)$ \\
+$H_y$ is at location $(0,y,0)$ \\
+$H_z$ is at location $(0,0,z)$ \\
+
+Given that our hydrophones receive the ping at times $t_0$, $t_x$, $t_y$, and $t_z$ respectively, we can calculate:
+
+$$
+\begin\{bmatrix\} 
+d_x \\ d_y \\ d_z
+\end\{bmatrix\}
+=
+c_s
+\begin\{bmatrix\} 
+ t_0 - t_x \\ t_0 - t_y \\ t_0 - t_z
+\end\{bmatrix\}
+$$
+
+
+$$
+\begin\{bmatrix\} 
+\hat\{i\} \\ \hat\{j\} \\ \hat\{k\}
+\end\{bmatrix\}
+=
+\begin\{bmatrix\} 
+d_x/x \\ d_y/y \\ d_z/z
+\end\{bmatrix\}
+$$
+
+## Generalized Case
+
+Below describes how to calculate the bearing in the event that the three hydrophones are not orthogonal to each other or do not lie along the $x$, $y$, or $z$ axes.  This solution still requires the far-field assumption be valid.  The derivation is covered first. The direct solution can be found further below.
+
+### Generalized Derivation
+
+The measurement of static vector fields by 3 or more sensors is a very common application.  Magnetometers, accelerometers, depth sensor arrays, and hydrophones on this submarine can all potentially be analyzed in this way.  A measurement typically manifests as the dot product between a vector describing the particular sensor, and the vector describing the phenomenon being measured.  
+
+A dot product is the sum of the products of each corresponding component of two vectors.  This scalar sum is equal to the product of the magnitudes of the vectors, multiplied by the cosine of the angle between them.
+
+$$ 
+\vec\{a\} = (a_x, a_y, a_z) \\
+mag(\vec\{a\}) = |\vec\{a\}| = \sqrt\{a_x^2 + a_y^2 + a_z^2\} \\
+\vec\{a\} \cdot \vec\{b\} = a_xb_x + a_yb_y + a_zb_z = |\vec\{a\}||\vec\{b\}|\cos(\theta)
+$$
+
+In this case, the vectors are the position vector of a given hydrophone $H_n$ and the position vector of the pinger $P$.
+
+$$\vec\{H_n\} \cdot \vec\{P\} = |\vec\{H_n\}||\vec\{P\}|\cos(\theta)$$
+
+However, because we're calculating a difference between our sensor and a reference, the measurement does not actually reflect a dot product of these two vectors, but rather a dot product between the hydrophone vector $H_n$ and the unit vector of the pinger $\hat\{P\}$.  This is also known as a 'projection.'  Phrased another way, it describes how large of a component in $H_n$ lies parallel to $\vec\{P\}$.  This is fine, because we really aren't looking to calculate the exact location of the pinger, but simply the direction to it.
+
+Recall that a unit vector is a vector divided by its own magnitude.  The resulting vector is parallel to the original, but has a magnitude of $1$.  The unit vector $\hat\{P\}$ is the directional vector $(\hat\{i\},\hat\{j\},\hat\{k\})$ we're after. 
+
+$$
+\hat\{P\} = \frac\{\vec\{P\}\}\{|\vec\{P\}|\} = \frac\{(P_x,P_y,P_z)\}\{|\vec\{P\}|\} = (\hat\{i\},\hat\{j\},\hat\{k\}) \\
+|\hat\{P\}| = 1\\
+proj_\vec\{P\}\vec\{H_n\} = \vec\{H_n\} \cdot \hat\{P\} = |\vec\{H_n\}||\hat\{P\}|\cos(\theta) = |\vec\{H_n\}|\cos(\theta) = d_n \\
+$$
+
+In the trivial case where our hydrophone lies at position $H_x = (x,0,0)$ along the x-axis, we get the same result as our 2D derivation, as the x-coordinate $x$ is also the vector's magnitude:
+
+$$
+(x,0,0) \cdot \hat\{P\} = |x|\cos\{\theta\} = \sqrt\{x^2 + 0^2 + 0^2\}\cos\{\theta\} = x\cos\{\theta\} = d_x
+$$
+
+Therefore
+
+$$ 
+\cos\{\theta\} = d_x/x
+$$
+
+This trend continues for the other two vectors:
+
+$$
+(0,y,0) \cdot \hat\{P\} = |y|\cos\{\phi\} = y\cos\{\phi\} = d_y, \quad \cos\{\phi\} = d_y/y \\
+(0,0,z) \cdot \hat\{P\} = |y|\cos\{\psi\} = y\cos\{\psi\} = d_z, \quad \cos\{\psi\} = d_z/z \\
+$$
+
+So what we want to find is a bearing vector $\hat\{P\}=(\hat\{i\},\hat\{j\},\hat\{k\})$ that satisfies having all three of these specific angles $\psi$, $\phi$, and $\theta$ between itself and the three hydrophone vectors simultaneously.  To solve this problem, we need to consider the results of dot products simultaneously.
+
+Matrix multiplication between two vectors is identical to taking their dot product. 
+
+$$
+H_n \cdot \hat\{P\} = H_n \hat\{P\}^T = 
+\begin\{bmatrix\}
+H_\{nx\} & H_\{ny\} & H_\{nz\} 
+\end\{bmatrix\}
+
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+
+= H_\{nx\}\hat\{i\} + H_\{ny\}\hat\{j\} + H_\{nz\}\hat\{k\}
+
+=
+\begin\{bmatrix\}
+d_n
+\end\{bmatrix\}
+$$
+
+Matrix Multiplication between two-dimensional matrices is merely a systematic way of calculating dot products between all relevant vectors.  The product matrix elements each correspond to a dot product, and their position denotes which vectors were involved.  Row vector 3 doted with column vector 1 becomes element $(3,1)$.  Matrices are also involved in solving simultaneous equations.
+
+### Generalized Solution
+
+Thus we can organize systems of dot products and measurements as the result of a single matrix multiplication.
+
+$$
+H \hat\{P\}^T = D \\
+
+ 
+\begin\{bmatrix\}
+[ & \vec\{H_1\} & ] \\
+[ & \vec\{H_2\} & ] \\
+[ & \vec\{H_3\} & ] \\
+\end\{bmatrix\}
+\begin\{bmatrix\}
+\hat\{P_x\} \\
+\hat\{P_y\} \\
+\hat\{P_z\} \\
+\end\{bmatrix\}
+
+= 
+\begin\{bmatrix\}
+d_1 \\
+d_2 \\
+d_3
+\end\{bmatrix\}
+\\
+
+\begin\{bmatrix\}
+H_\{1x\} & H_\{1y\} & H_\{1z\} \\ 
+H_\{2x\} & H_\{2y\} & H_\{2z\} \\ 
+H_\{3x\} & H_\{3y\} & H_\{3z\} 
+\end\{bmatrix\}
+
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+
+= 
+\begin\{bmatrix\}
+d_1 \\
+d_2 \\
+d_3
+\end\{bmatrix\}
+$$
+
+To solve for our bearing $\hat\{P\}$, we simply solve the matrix equation.  Multiplying both sides by the inverse of the hydrophone location matrix $H$ provides the solution.  This is the fully generalized result for hydrophone measurements in the far-field.
+
+$$
+inv(H)H\hat\{P\}^T = inv(H)D \\
+
+\hat\{P\}^T = inv(H)D \\
+
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+=
+\begin\{bmatrix\}
+H_\{1x\} & H_\{1y\} & H_\{1z\} \\ 
+H_\{2x\} & H_\{2y\} & H_\{2z\} \\ 
+H_\{3x\} & H_\{3y\} & H_\{3z\} 
+\end\{bmatrix\}^\{-1\}
+
+\begin\{bmatrix\}
+d_1 \\
+d_2 \\
+d_3
+\end\{bmatrix\}
+$$
+
+
+We can see based on this structure that we need at least three hydrophones measurements ($d_1$, $d_2$, and $d_3$) to solve for the three unknown elements of unit vector $\hat\{P\}$.  Furthermore, the three position vectors of the hydrophones ($\vec\{H_1\}$, $\vec\{H_2\}$, and $\vec\{H_3\}$) must constitute an invertible, full-rank matrix.  In this case that simply means the three hydrophones cannot all lie on the same plane.  
+
+As a sanity-check, this formulation should re-produce the solution to the degenerate case demonstrated above where all hydrophones lie perfectly along the $x$, $y$, and $z$ axes.
+
+$$
+H_\{xyz\} \hat\{P\}^T = D_\{xyz\} \\
+
+\begin\{bmatrix\}
+[ & \vec\{H_x\} & ] \\
+[ & \vec\{H_y\} & ] \\
+[ & \vec\{H_z\} & ] \\
+\end\{bmatrix\}
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+
+
+=
+
+\begin\{bmatrix\}
+x & 0 & 0 \\ 
+0 & y & 0 \\
+0 & 0 & z 
+\end\{bmatrix\}
+
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+
+= 
+\begin\{bmatrix\}
+d_x \\
+d_y \\
+d_z
+\end\{bmatrix\}
+
+\\
+
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+=
+\begin\{bmatrix\}
+x & 0 & 0 \\ 
+0 & y & 0 \\
+0 & 0 & z 
+\end\{bmatrix\}^\{-1\}
+
+\begin\{bmatrix\}
+d_x \\
+d_y \\
+d_z
+\end\{bmatrix\}
+
+=
+
+\begin\{bmatrix\}
+\frac\{1\}\{x\} & 0 & 0 \\ 
+0 & \frac\{1\}\{y\} & 0 \\
+0 & 0 & \frac\{1\}\{z\} 
+\end\{bmatrix\}
+
+\begin\{bmatrix\}
+d_x \\
+d_y \\
+d_z
+\end\{bmatrix\}
+\\
+
+\begin\{bmatrix\}
+\hat\{i\} \\
+\hat\{j\} \\
+\hat\{k\} \\
+\end\{bmatrix\}
+=
+\begin\{bmatrix\}
+d_x/x \\
+d_y/y \\
+d_z/z
+\end\{bmatrix\}
+
+
+$$
+  

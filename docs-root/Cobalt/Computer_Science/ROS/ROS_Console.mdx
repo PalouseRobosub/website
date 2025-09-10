@@ -1,0 +1,19 @@
+# Using ROS Console
+
+ROS Console is useful for changing the logging level for one or more nodes.
+
+### Viewing the Current Logging Level
+
+To see the current logging level for a node:
+
+  rosconsole get /\<NODE\> /\<LOGGER\>
+  
+The LOGGER parameter allows the user to choose specific logger messages to increase the level of. normally it is sufficient to use ''ros.robosub'' as the logger unless you think there is a problem with ROS itself. In that case use ''ros''.
+
+### Setting the Logger Level
+
+  rosconsole set /\<NODE\> /\<LOGGER\>
+  
+### Get all of the Loggers for a Node
+
+  rosconsole list /\<NODE\>

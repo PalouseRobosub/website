@@ -1,0 +1,33 @@
+# Using ROS Bag
+
+ROS bag is a nice tool for recording any data that you need to be able to play back at a later time.
+
+### Recording
+
+The normal usage is:
+
+  rosbag record /\<TOPIC1\> ... /\<TOPIC(N)\>
+  
+If you want to output to a file with a timestamp and specific prefix:
+  
+  rosbag record -o /\<PREFIX\> /\<TOPIC1\> ... /\<TOPIC(N)\>
+  
+In general we use this format for recording bag files:
+  
+  rosbag record -a -o /\<PREFIX\>
+  
+### Playback
+
+The normal usage is:
+
+  rosbag play /\<BAG_FILE1\> ... /\<BAG_FILE(N)\>
+  
+To play back a specific topic from the bag file:
+
+  rosbag play --topics /\<TOPIC1\> ... /\<TOPIC(N)\> /\<BAG_FILE1\> ... /\<BAG_FILE(N)\>
+  
+### Info
+
+To see information about a bag file, rosbag info can help.
+
+  rosbag info /\<BAG_FILE1\> ... /\<BAG_FILE(N)\>
