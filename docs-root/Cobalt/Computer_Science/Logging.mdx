@@ -1,5 +1,5 @@
 # Logging
-We use the ROS logging API for having programs produce output. See [[http://wiki.ros.org/roscpp/Overview/Logging|The official documentation for more details]].
+We use the ROS logging API for having programs produce output. See [The official documentation for more details](http://wiki.ros.org/roscpp/Overview/Logging).
 
 There are 5 logging levels (ordered in increasing severity)
   * DEBUG
@@ -8,7 +8,7 @@ There are 5 logging levels (ordered in increasing severity)
   * ERROR
   * FATAL
 
-Here are some [[http://wiki.ros.org/Verbosity%20Levels| general guidelines]] for when to use each level. If you use the FATAL message, your node should use a call to exit(nonzero value) very soon (if not immediately) after publishing the message.
+Here are some [ general guidelines](http://wiki.ros.org/Verbosity%20Levels) for when to use each level. If you use the FATAL message, your node should use a call to exit(nonzero value) very soon (if not immediately) after publishing the message.
 # Setting the Log Level
 By default, only severity \>= INFO is logged and displayed. There are several ways of changing the log level of a particular node, or all nodes.
 
@@ -25,7 +25,7 @@ You can replace DEBUG with another log level.
 This is useful if you want to see debugging messages for all the nodes.
 
 ## Programatically
-Yes, you can make a node set its log level by itself! Check out this [[http://wiki.ros.org/roscpp/Overview/Logging#Setting_Verbosity_Levels | example]]. 
+Yes, you can make a node set its log level by itself! Check out this [ example](http://wiki.ros.org/roscpp/Overview/Logging#Setting_Verbosity_Levels ).
 
 
 

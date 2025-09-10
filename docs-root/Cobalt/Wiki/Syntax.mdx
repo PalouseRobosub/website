@@ -90,7 +90,7 @@ Notes:
  * Copy only the strings that needs to be modified
  */
 $lang['js']['nosmblinks'] = '';
-```
+
 
 ### Image Links
 
@@ -207,7 +207,7 @@ Dokuwiki supports ordered and unordered lists. To create a list item, indent you
     - Just use indention for deeper levels
   - That's it
 
-/\<code\>
+```
   * This is a list
   * The second item
     * You may have different levels
@@ -259,7 +259,7 @@ Typography: [[DokuWiki]] can convert simple text characters to their typographic
 -\> /\<- /\<-\> =\> /\<= /\<=\> \>\> /\</\< -- --- 640x480 (c) (tm) (r)
 "He thought 'It's a man's world'..."
 
-/\<code\>
+```
 -\> /\<- /\<-\> =\> /\<= /\<=\> \>\> /\</\< -- --- 640x480 (c) (tm) (r)
 "He thought 'It's a man's world'..."
 ```
@@ -272,31 +272,31 @@ There are three exceptions which do not come from that pattern file: multiplicat
 
 Some times you want to mark some text to show it's a reply or comment. You can use the following syntax:
 
-/\<code\>
+```markdown
 I think we should do it
 
-\> No we shouldn't
+> No we shouldn't
 
-\>\> Well, I say we should
+>> Well, I say we should
 
-\> Really?
+> Really?
 
-\>\> Yes!
+>> Yes!
 
-\>\>\> Then lets do it!
+>>> Then lets do it!
 ```
 
 I think we should do it
 
-\> No we shouldn't
+> No we shouldn't
 
-\>\> Well, I say we should
+>> Well, I say we should
 
-\> Really?
+> Really?
 
-\>\> Yes!
+>> Yes!
 
-\>\>\> Then lets do it!
+>>> Then lets do it!
 
 ## Tables
 
@@ -380,7 +380,7 @@ You can include code blocks into your documents by either indenting them by at l
 
   This is text is indented by two spaces.
 
-/\<code\>
+```
 This is preformatted code all spaces are preserved: like              /\<-this
 ```
 
@@ -392,7 +392,7 @@ Those blocks were created by this source:
 
     This is text is indented by two spaces.
 
-  /\<code\>
+  ```
   This is preformatted code all spaces are preserved: like              /\<-this
   ```
 
@@ -423,66 +423,68 @@ There are additional [[doku\>syntax_highlighting|advanced options]] available fo
 
 When you use the ''%%/\<code\>%%'' or ''%%/\<file\>%%'' syntax as above, you might want to make the shown code available for download as well. You can do this by specifying a file name after language code like this:
 
-/\<code\>
-/\<file php myexample.php\>
-/\<?php echo "hello world!"; ?\>
-/\</file\>
+```html
+<file php myexample.php>
+<?php echo "hello world!"; ?>
+</file>
+
+
+<file php myexample.php>
+<?php echo "hello world!"; ?>
+</file>
 ```
 
-/\<file php myexample.php\>
-/\<?php echo "hello world!"; ?\>
-/\</file\>
-
-If you don't want any highlighting but want a downloadable file, specify a dash (''-'') as the language code: ''%%/\<code - myfile.foo\>%%''.
+If you don't want any highlighting but want a downloadable file, specify a dash (''-'') as the language code: `''%%<code - myfile.foo>%%''.`
 
 
 ## Embedding HTML and PHP
 
-You can embed raw HTML or PHP code into your documents by using the ''%%/\<html\>%%'' or ''%%/\<php\>%%'' tags. (Use uppercase tags if you need to enclose block level elements.)
+You can embed raw HTML or PHP code into your documents by using the `''%%<html>%%'' or ''%%<php>%%''` tags. (Use uppercase tags if you need to enclose block level elements.)
 
 HTML example:
+```html
+<code>
+<html>
+This is some <span style="color:red;font-size:150%;">inline HTML</span>
+</html>
+<HTML>
+<p style="border:2px dashed red;">And this is some block HTML</p>
+</HTML>
 
-/\<code\>
-/\<html\>
-This is some /\<span style="color:red;font-size:150%;"\>inline HTML/\</span\>
-/\</html\>
-/\<HTML\>
-/\<p style="border:2px dashed red;"\>And this is some block HTML/\</p\>
-/\</HTML\>
+
+<html>
+This is some <span style="color:red;font-size:150%;">inline HTML</span>
+</html>
+<HTML>
+<p style="border:2px dashed red;">And this is some block HTML</p>
+</HTML>
 ```
-
-/\<html\>
-This is some /\<span style="color:red;font-size:150%;"\>inline HTML/\</span\>
-/\</html\>
-/\<HTML\>
-/\<p style="border:2px dashed red;"\>And this is some block HTML/\</p\>
-/\</HTML\>
 
 PHP example:
 
-/\<code\>
-/\<php\>
+```php
+<php>
 echo 'The PHP version: ';
 echo phpversion();
 echo ' (generated inline HTML)';
-/\</php\>
-/\<PHP\>
-echo '/\<table class="inline"\>/\<tr\>/\<td\>The same, but inside a block level element:/\</td\>';
-echo '/\<td\>'.phpversion().'/\</td\>';
-echo '/\</tr\>/\</table\>';
-/\</PHP\>
-```
+</php>
+<PHP>
+echo '<table class="inline"><tr><td>The same, but inside a block level element:</td>';
+echo '<td>'.phpversion().'</td>';
+echo '</tr></table>';
+</PHP>
 
-/\<php\>
+<php>
 echo 'The PHP version: ';
 echo phpversion();
 echo ' (inline HTML)';
-/\</php\>
-/\<PHP\>
-echo '/\<table class="inline"\>/\<tr\>/\<td\>The same, but inside a block level element:/\</td\>';
-echo '/\<td\>'.phpversion().'/\</td\>';
-echo '/\</tr\>/\</table\>';
-/\</PHP\>
+</php>
+<PHP>
+echo '<table class="inline"><tr><td>The same, but inside a block level element:</td>';
+echo '<td>'.phpversion().'</td>';
+echo '</tr></table>';
+</PHP>
+```
 
 **Please Note**: HTML and PHP embedding is disabled by default in the configuration. If disabled, the code is displayed instead of executed.
 

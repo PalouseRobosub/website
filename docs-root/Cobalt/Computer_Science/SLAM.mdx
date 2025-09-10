@@ -4,7 +4,7 @@
 ## Overview
 In robot navigation, a SLAM algorithm is used to construct a map of the robot's environment, while simultaneously locating the robot within that map. There are many different SLAM algorithms, but we are currently using a visual based system using the sub's right and left cameras. This allows us to link the system to Object Detection.
 
-The specific system we are using is [[https://github.com/raulmur/ORB_SLAM2|ORB-SLAM2]], an open source feature based visual slam system which we modified for the sub. The paper describing the system can be found [[https://arxiv.org/pdf/1610.06475.pdf|here]]. 
+The specific system we are using is [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2), an open source feature based visual slam system which we modified for the sub. The paper describing the system can be found [here](https://arxiv.org/pdf/1610.06475.pdf).
 
 The algorithm works by detecting features (such as edges and corners) in an image, and locates them in space using triangulation with other known map points.
 
@@ -52,9 +52,9 @@ It consists of three main modules: Tracking, Local Mapping, and Loop Closing.
 
 -Tracking localizes the camera by comparing features in a local map.  
 
--Detects features using the [[https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_fast/py_fast.html|FAST Algorithm]].
+-Detects features using the [FAST Algorithm](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_fast/py_fast.html).
 
--Describes features using [[https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_orb/py_orb.html|ORB Algorithm]].
+-Describes features using [ORB Algorithm](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_orb/py_orb.html).
 
 -Selects a new keyframe.
 

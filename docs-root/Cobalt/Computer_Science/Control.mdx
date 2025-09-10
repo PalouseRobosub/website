@@ -1,5 +1,5 @@
 # Control System
-The control system follows basic [[http://www.eurotherm.com/pid-control-made-easy|PID theory]], but has two additional parameters called hysteresis (H) and windup (W). The hysteresis essentially creates a deadband. If the error $E$ defined in ($\ref\{eq:error\}$) is below the hysteresis level, the error can be assumed as (set to) zero, and thus no corrective action is required. The windup term acts to limit the integral portion of the accumulated error. If the integral value is above the windup level, it will be truncated to the windup value. Therefore, the integral can never increase or decrease infinitely because it will always be capped by the windup.
+The control system follows basic [PID theory](http://www.eurotherm.com/pid-control-made-easy), but has two additional parameters called hysteresis (H) and windup (W). The hysteresis essentially creates a deadband. If the error $E$ defined in ($\ref\{eq:error\}$) is below the hysteresis level, the error can be assumed as (set to) zero, and thus no corrective action is required. The windup term acts to limit the integral portion of the accumulated error. If the integral value is above the windup level, it will be truncated to the windup value. Therefore, the integral can never increase or decrease infinitely because it will always be capped by the windup.
 
 Now that we have explained the P, I, D, W, and H parameters of the control system, we're going to discuss the basic functions of the control system. Below is a simple linear algebra equation that represents our submarine's controls.
 
@@ -134,7 +134,7 @@ $$
 
 Therefore, to solve for the control messages to send to the thruster, the inverted matrix $M^\{-1\}$ can be multiplied into the variable parameter $F$. The control packet $C$ can then be sent to the thruster controller to result in the desired movement and the cycle can be completed.
 
-Note that $M$ must be an invertible matrix. If $M$ has fewer than 6 thrusters, the solution is not solvable because the submarine does not have control of 6 axes (it has less than 6 motors, so it can therefore not have control of 6 axes). If $M$ has greater than 6 thrusters, then the system is over-actuated and a [[https://en.wikipedia.org/wiki/Singular_value_decomposition|SVD pseudo-inverse]] calculation can be done to determine $M^\{-1\}$.
+Note that $M$ must be an invertible matrix. If $M$ has fewer than 6 thrusters, the solution is not solvable because the submarine does not have control of 6 axes (it has less than 6 motors, so it can therefore not have control of 6 axes). If $M$ has greater than 6 thrusters, then the system is over-actuated and a [SVD pseudo-inverse](https://en.wikipedia.org/wiki/Singular_value_decomposition) calculation can be done to determine $M^\{-1\}$.
 
 Also note that the following simplification can be made to solve for $C_r$ and $C_t$ from ($\ref\{eq:c:simplification\}$) by setting $F_a$ or $M_a$ to zero in $F$
 

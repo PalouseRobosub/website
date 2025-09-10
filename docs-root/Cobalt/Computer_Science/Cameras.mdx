@@ -2,7 +2,7 @@
 
 ## Overview
 
-  * The cameras that we use for the sub are Point Grey Flea3 GigE Vision ethernet cameras. Specs and downloads are available here. [[http://www.ptgrey.com/flea3-14-mp-color-gige-vision-sony-icx267-camera|Flea3]]
+  * The cameras that we use for the sub are Point Grey Flea3 GigE Vision ethernet cameras. Specs and downloads are available here. [Flea3](http://www.ptgrey.com/flea3-14-mp-color-gige-vision-sony-icx267-camera)
   * The cameras come with an SDK which contains configuration software and programmable interfaces for the camera. You can access it on their website.
 
 ## Datasheets
@@ -39,7 +39,7 @@
   * PGR cameras have issues on linux with large packet types. In order to fix this the buffer needs to be increased.
 
 #### Linux Streaming Fix:
-Derived from here: [[https://www.ptgrey.com/KB/10016|Linux Streaming Fix]]
+Derived from here: [Linux Streaming Fix](https://www.ptgrey.com/KB/10016)
 
 CAUSE:
 When streaming images from a GigE Vision camera on Linux Ubuntu 8.04 systems, a high number of lost data packets may be observed. In FlyCapture SDK applications, dropped packets result in IMAGE_CONSISTENCY_ERRORS returned.
@@ -82,9 +82,9 @@ The cameras should begin publishing on the **/camera/[left|right|bottom]/image**
   roslaunch robosub cameras.launch left_serial:=12345678 right_serial:=12345679
 In the future, a downward facing camera is also planned to be added, though many of the steps will be similar.
 
-One more note, when using the Point Grey drivers, the cameras will publish a [[https://github.com/ros-drivers/pointgrey_camera_driver/blob/master/wfov_camera_msgs/msg/WFOVImage.msg|WFOVImage]] message so many standard ros systems may not be able to use the data without it being republished. A republisher has been implemented in the Robosub repository and can be run with the following command:
+One more note, when using the Point Grey drivers, the cameras will publish a [WFOVImage](https://github.com/ros-drivers/pointgrey_camera_driver/blob/master/wfov_camera_msgs/msg/WFOVImage.msg) message so many standard ros systems may not be able to use the data without it being republished. A republisher has been implemented in the Robosub repository and can be run with the following command:
   rosrun robosub camera_repub
-This will republish the [[https://github.com/ros-drivers/pointgrey_camera_driver/blob/master/wfov_camera_msgs/msg/WFOVImage.msg|WFOVImage message]] messages as [[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html|sensor_msgs/Image]] messages on the **/camera/[left|right|bottom]/undistorted** topic which aligns with the undistortion nodes so nodes are agnostic as to whether or not undistortion is being performed.
+This will republish the [WFOVImage message](https://github.com/ros-drivers/pointgrey_camera_driver/blob/master/wfov_camera_msgs/msg/WFOVImage.msg) messages as [sensor_msgs/Image](http://docs.ros.org/api/sensor_msgs/html/msg/Image.html) messages on the **/camera/[left|right|bottom]/undistorted** topic which aligns with the undistortion nodes so nodes are agnostic as to whether or not undistortion is being performed.
 
 
 \{\{bryant-koshu-mech-copy.jpg\}\}

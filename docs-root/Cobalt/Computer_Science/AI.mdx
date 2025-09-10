@@ -3,7 +3,7 @@ Main function of AI on the sub is to make decisions of what the sub should do ba
 
 ## Overview
 
-Current AI uses [[http://wiki.ros.org/smach | SMACH]] package that is in ROS. SMACH is a task-level architecture for rapidly creating complex robot behavior. At its core, SMACH is a ROS-independent Python library to build hierarchical state machines.
+Current AI uses [ SMACH](http://wiki.ros.org/smach ) package that is in ROS. SMACH is a task-level architecture for rapidly creating complex robot behavior. At its core, SMACH is a ROS-independent Python library to build hierarchical state machines.
 
 Advantages of SMACH are:
   - rapid development, ability to create complex state machines
@@ -20,7 +20,7 @@ Our current AI was re-written using SMACH. There are several utility files such 
   - blind_movement.py - contains move_forward state that moves forward with ***x*** speed for ***y*** number of seconds.
   - SubscribeState.py - a state that was made which accept also topic to which you want to subscribe. It is also modified to pass over any input/output keys. **In future this file will also contain SynchronousSubscribeState that subscribes to two topics and moves once it has two**
 
-There is a useful tool to see state machine and transitions of it called [[http://wiki.ros.org/smach_viewer|smach_viewer]]. To run it, run
+There is a useful tool to see state machine and transitions of it called [smach_viewer](http://wiki.ros.org/smach_viewer). To run it, run
 ```bash
 rosrun smach_viewer smach_viewer.py
 ```

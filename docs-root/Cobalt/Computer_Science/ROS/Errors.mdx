@@ -1,6 +1,9 @@
 ## Errors and Known Solutions
 If you get the following error:
-/\<code\>ImportError: "from catkin_pkg.package import parse_package" failed: No module named catkin_pkg.package```
+
+```
+ImportError: "from catkin_pkg.package import parse_package" failed: No module named catkin_pkg.package
+```
 
 Make sure that you have installed "catkin_pkg", it is up to date and on the PYTHONPATH:
 ```bash
@@ -8,7 +11,9 @@ $ pip install catkin_pkg
 ```
 ----
 Error: 
-/\<code\>ImportError: No module named rospkg```
+```
+ImportError: No module named rospkg
+```
 Fix:
 ```bash
 $ apt-get install python-rospkg
@@ -19,6 +24,8 @@ This is kinda a hack, haven't bothered to figure out how to properly install pyt
 ----
 
 If you get this error:
-/\<code\>ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies: ardrone_autonomy: Unsupported OS [mint] ```
+```
+ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies: ardrone_autonomy: Unsupported OS [mint]
+```
 
 when running any rosdep command, add the flag ''--os=ubuntu:trusty'' to the command.

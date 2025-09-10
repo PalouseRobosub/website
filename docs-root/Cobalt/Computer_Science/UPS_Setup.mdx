@@ -8,7 +8,7 @@ $ sudo aptitude install nut
 
 Add the following to /etc/nut/ups.conf:
 
-/\<code\>
+```
 [openups]
     driver = usbhid-ups
     port = auto
@@ -24,7 +24,7 @@ $ sudo upsdrvctl start
 
 Then, edit ''/etc/nut/nut.conf'' such that the last line reads
 
-/\<code\>
+```
 MODE=standalone
 ```
 
@@ -38,7 +38,7 @@ This should display information about the connected UPS. Check the ''device.mode
 
 ### Open UPS Default Settings By Battery
 
-To load these parameters, you will need to install the **[[http://www.mini-box.com/OpenUPS | Windows tool]]** provided by Mini-Box. When you run it, you should see something like this:
+To load these parameters, you will need to install the **[ Windows tool](http://www.mini-box.com/OpenUPS )** provided by Mini-Box. When you run it, you should see something like this:
 \{\{:cs:ups_setup:openups_settings.png?400|\}\}
 
 By switching to the settings submenu, you will be able to load the parameters through the **All parameters: File ===\> OpenUPS (settings.ini)**. Use the correct settings file from below for your battery.

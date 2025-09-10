@@ -14,7 +14,7 @@ In this case, tig would normally would get installed in your home directory, to 
   └── etc
       └── tigrc
 
-Therefore we want the ''%%tig%%'' binary and the ''%%tigrc%%'' configuration file, which we will put in the ''%%/usr/local/%%'' directory. While we theoretically could install the files anywhere on someone's computer, the [[https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard|Filesystem Hierarchy Standard]] establishes conventions for where files are supposed to be installed. 
+Therefore we want the ''%%tig%%'' binary and the ''%%tigrc%%'' configuration file, which we will put in the ''%%/usr/local/%%'' directory. While we theoretically could install the files anywhere on someone's computer, the [Filesystem Hierarchy Standard](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) establishes conventions for where files are supposed to be installed.
 
 Now that have the files we want to install, we can now actually start creating our debian package. First, create a directory that we will be putting everything. By convention, the folder name should be ''%%softwarename_version%%''. Therefore we will create our ''%%tig_2.2.2%%'' directory and within it create a directory structure as follows:
 
