@@ -78,7 +78,7 @@ Example:
 
 This will automatically mount and copy over ''%%BOOT.bin%%'' to an SD card for the HydroZynq. This script takes in the source file name of the main application as the first argument and the bit stream file as the second parameter. 
 
-*The current firmware utilizes **software/bit/adc_dma_revb.bit** as the bitstream file.*In order to efficiently debug through GDB and program on the fly, the [[https://store.digilentinc.com/jtag-hs3-programming-cable/|Digilent HS3]] can be used as a JTAG access point for GDB debug interfaces. To interact with the HydroZynq through JTAG, use the ''%%xmd%%'' command (provided by the Xilinx Vivado tool suite).
+*The current firmware utilizes **software/bit/adc_dma_revb.bit** as the bitstream file.*In order to efficiently debug through GDB and program on the fly, the [Digilent HS3](https://store.digilentinc.com/jtag-hs3-programming-cable/) can be used as a JTAG access point for GDB debug interfaces. To interact with the HydroZynq through JTAG, use the ''%%xmd%%'' command (provided by the Xilinx Vivado tool suite).
 
 After executing xmd from the command line, you will enter a shell-like environment. To connect to the ARM core for programming, enter:
   \> connect arm hw
@@ -149,10 +149,10 @@ In debug mode, the HydroZynq records for 2.1 seconds, dumps all 2.1 seconds of d
 
 ===== Hardware ===== 
 ^ Device ^ Part Number ^ Datasheet ^
-| Processor Carrier Board     | MicroZed   | [[http://zedboard.org/support/documentation/1519|Datasheet]] |
-| Main Processor              | XC7Z010    | [[https://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf|Datasheet]] |
-| Hydrophones                 | AS-1       | [[http://www.aquarianaudio.com/as-1-hydrophone.html|Datasheet]]|
-| Analog-to-Digital Converter | LTC2171-14 | [[http://cds.linear.com/docs/en/datasheet/21721014fb.pdf|Datasheet]]|
+| Processor Carrier Board     | MicroZed   | [Datasheet](http://zedboard.org/support/documentation/1519) |
+| Main Processor              | XC7Z010    | [Datasheet](https://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf) |
+| Hydrophones                 | AS-1       | [Datasheet](http://www.aquarianaudio.com/as-1-hydrophone.html)|
+| Analog-to-Digital Converter | LTC2171-14 | [Datasheet](http://cds.linear.com/docs/en/datasheet/21721014fb.pdf)|
 
 #### Hydrophone dimensions:
 \{\{:ee:hydrophones:as-1_hydrophone_dimensions.jpg\}\}

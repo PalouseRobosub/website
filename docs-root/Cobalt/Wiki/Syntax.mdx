@@ -35,11 +35,11 @@ DokuWiki supports multiple ways of creating links.
 
 ### External
 
-External links are recognized automagically: http:*www.google.com or simply www.google.com - You can set the link text as well: [[http:*www.google.com|This Link points to google]]. Email addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
+External links are recognized automagically: http:*www.google.com or simply www.google.com - You can set the link text as well: [This Link points to google](http:*www.google.com). Email addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
 
   DokuWiki supports multiple ways of creating links. External links are recognized
   automagically: http://www.google.com or simply www.google.com - You can set
-  link text as well: [[http://www.google.com|This Link points to google]]. Email
+  link text as well: [This Link points to google](http://www.google.com). Email
   addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
 
 ### Internal
@@ -83,7 +83,7 @@ Windows shares like [[\\server\share|this]] are recognized, too. Please note tha
 Notes:
 
   * For security reasons direct browsing of windows shares only works in Microsoft Internet Explorer per default (and only in the "local zone").
-  * For Mozilla and Firefox it can be enabled through different workaround mentioned in the [[http://kb.mozillazine.org/Links_to_local_pages_do_not_work|Mozilla Knowledge Base]]. However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in ''conf/lang/en/lang.php'' (more details at [[doku\>localization#changing_some_localized_texts_and_strings_in_your_installation|localization]]): /\<code - conf/lang/en/lang.php\>
+  * For Mozilla and Firefox it can be enabled through different workaround mentioned in the [Mozilla Knowledge Base](http://kb.mozillazine.org/Links_to_local_pages_do_not_work). However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in ''conf/lang/en/lang.php'' (more details at [[doku\>localization#changing_some_localized_texts_and_strings_in_your_installation|localization]]): /\<code - conf/lang/en/lang.php\>
 /\<?php
 /**
  * Customization of the english language file
@@ -96,9 +96,9 @@ $lang['js']['nosmblinks'] = '';
 
 You can also use an image to link to another internal or external page by combining the syntax for links and [[#images_and_other_files|images]] (see below) like this:
 
-  [[http://php.net|\{\{wiki:dokuwiki-128.png\}\}]]
+  [\{\{wiki:dokuwiki-128.png\}\}](http://php.net)
 
-[[http://php.net|\{\{wiki:dokuwiki-128.png\}\}]]
+[\{\{wiki:dokuwiki-128.png\}\}](http://php.net)
 
 Please note: The image formatting is the only formatting syntax accepted in link names.
 
@@ -402,7 +402,7 @@ Those blocks were created by this source:
 
 ### Syntax Highlighting
 
-[[wiki:DokuWiki]] can highlight sourcecode, which makes it easier to read. It uses the [[http://qbnz.com/highlighter/|GeSHi]] Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''/\<nowiki\>```java/\</nowiki\>'' or ''/\<nowiki\>/\<file java\>/\</nowiki\>''.
+[[wiki:DokuWiki]] can highlight sourcecode, which makes it easier to read. It uses the [GeSHi](http://qbnz.com/highlighter/) Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''/\<nowiki\>```java/\</nowiki\>'' or ''/\<nowiki\>/\<file java\>/\</nowiki\>''.
 
 ```java
 /**
@@ -489,7 +489,7 @@ echo '</tr></table>';
 **Please Note**: HTML and PHP embedding is disabled by default in the configuration. If disabled, the code is displayed instead of executed.
 
 ## RSS/ATOM Feed Aggregation
-[[DokuWiki]] can integrate data from external XML feeds. For parsing the XML feeds, [[http://simplepie.org/|SimplePie]] is used. All formats understood by SimplePie can be used in DokuWiki as well. You can influence the rendering by multiple additional space separated parameters:
+[[DokuWiki]] can integrate data from external XML feeds. For parsing the XML feeds, [SimplePie](http://simplepie.org/) is used. All formats understood by SimplePie can be used in DokuWiki as well. You can influence the rendering by multiple additional space separated parameters:
 
 ^ Parameter  ^ Description ^
 | any number | will be used as maximum number items to show, defaults to 8 |

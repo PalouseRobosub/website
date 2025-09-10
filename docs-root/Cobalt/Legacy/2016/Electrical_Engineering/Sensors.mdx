@@ -8,11 +8,11 @@ The submarine currently has 7 different types of sensors: accelerometer, gyrosco
 
 ### 3-Axis Sensors
 
-The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they report X, Y, and Z values. The coordinate system is the same as the one defined for movement. See the [[https://github.com/PalouseRobosub/robosub/wiki/Movement|Movement]] section for details. Positive X is to the left of the sub, positive Y is to the front, and positive Z is down. Because the sensors may not be mounted in the proper orientation, translation is needed. This shall happen in the lowest level (''sensor_microcontroller_interface.py''), so all other computer modules can assume the sensors are orientated correctly.
+The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they report X, Y, and Z values. The coordinate system is the same as the one defined for movement. See the [Movement](https://github.com/PalouseRobosub/robosub/wiki/Movement) section for details. Positive X is to the left of the sub, positive Y is to the front, and positive Z is down. Because the sensors may not be mounted in the proper orientation, translation is needed. This shall happen in the lowest level (''sensor_microcontroller_interface.py''), so all other computer modules can assume the sensors are orientated correctly.
 
 #### Accelerometer
 
-  * [[https://www.sparkfun.com/datasheets/Sensors/Accelerometer/ADXL345.pdf|datasheet]]
+  * [datasheet](https://www.sparkfun.com/datasheets/Sensors/Accelerometer/ADXL345.pdf)
   * Measures acceleration in the X, Y, and Z axes
   * This includes the force of acceleration due to gravity
   * if the sub is stationary and sitting upright, you should expect a (relatively) large value on the Z axis, and close to zero on the X and Y axes
@@ -23,7 +23,7 @@ The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they 
 
 #### Gyroscope
 
-  * [[https://www.sparkfun.com/datasheets/Sensors/Gyro/PS-ITG-3200-00-01.4.pdf|datasheet]]
+  * [datasheet](https://www.sparkfun.com/datasheets/Sensors/Gyro/PS-ITG-3200-00-01.4.pdf)
   * Measures angular velocity in the X, Y, and Z axes
   * rotation around the Z-axis is yaw, Y-axis is roll, X-axis is pitch
   * If the sub is sitting perfectly still, we should see values close to zero on all axes
@@ -31,7 +31,7 @@ The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they 
 
 #### Magnetometer
 
-  * [[http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Magneto/MAG3110.pdf|datasheet]]
+  * [datasheet](http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Magneto/MAG3110.pdf)
   * Measures magnetic field strength in the X, Y, and Z axes
   * This will **not** just give us an angle of degrees from north, post-processing is needed
   * The units are such that a value of ~10 on the sensor is equal to 1 µT

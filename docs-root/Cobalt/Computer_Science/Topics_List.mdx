@@ -26,26 +26,26 @@ Dynamic array of commands going to the thrusters. Order of the thrusters is depe
 
 
 ### /control
-Message: [[ https://github.com/PalouseRobosub/robosub/blob/master/msg/control.msg | robosub/control ]] \\
+Message: [ robosub/control ]( https://github.com/PalouseRobosub/robosub/blob/master/msg/control.msg ) \\
 Send messages to this topic to move the sub around, the control system subscribes to this topic.
 
 
 ### /joystick_driver
-Message: [[ https://github.com/PalouseRobosub/robosub/blob/master/msg/joystick.msg| robosub/joystick]]
+Message: [ robosub/joystick]( https://github.com/PalouseRobosub/robosub/blob/master/msg/joystick.msg)
 This is the raw joystick state, published by the joystick driver. Shows the current state of all axes and buttons on the joystick.
 
 ### /gamepad_driver
-Message: [[https://github.com/PalouseRobosub/robosub/blob/master/msg/gamepad.msg | robosub/gamepad]]
+Message: [ robosub/gamepad](https://github.com/PalouseRobosub/robosub/blob/master/msg/gamepad.msg )
 This is the raw gamepad state, published by the gamepad driver. Shows the current state of all axes and buttons on the gamepad.
 
 ## Vision
 
 ### /camera/(left|right|bottom)/image
-Message: [[https://github.com/ros-drivers/pointgrey_camera_driver/blob/master/wfov_camera_msgs/msg/WFOVImage.msg | wfov_camera_msgs/WFOVImage]] \\
+Message: [ wfov_camera_msgs/WFOVImage](https://github.com/ros-drivers/pointgrey_camera_driver/blob/master/wfov_camera_msgs/msg/WFOVImage.msg ) \\
 Images from our cameras.
 
 ### /vision
-Message: [[https://github.com/PalouseRobosub/rs_yolo/blob/master/msg/DetectionArray.msg | rs_yolo/DetectionArray]] \\
+Message: [ rs_yolo/DetectionArray](https://github.com/PalouseRobosub/rs_yolo/blob/master/msg/DetectionArray.msg ) \\
 Results of the deep vision processing system. It's a list detailing all the objects it sees.
 
 ## Hydrophones
@@ -79,5 +79,5 @@ Float64 approx_angle
 ```
 
 ### /hydrophones/bearing
-Message: [[http://docs.ros.org/api/geometry_msgs/html/msg/Vector3Stamped.html | geometry_msgs/Vector3Stamped]] \\
+Message: [ geometry_msgs/Vector3Stamped](http://docs.ros.org/api/geometry_msgs/html/msg/Vector3Stamped.html ) \\
 A 3-dimensional vector pointing at the pinger in $i,j,k$ notation.
