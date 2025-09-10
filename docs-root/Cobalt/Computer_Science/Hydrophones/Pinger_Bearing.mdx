@@ -1,10 +1,10 @@
-====== Pinger Bearing ======
+# Pinger Bearing
 This page describes the math used to calculate our bearing towards the pinger using our hydrophones. A solution is derived in 2 dimensions to show how it works, then the final result from that is extrapolated to 3 dimensions. The speed of sound of water is defined as $c_s$.
-===== Assumptions =====
-==== Planar Wave ====
+## Assumptions
+### Planar Wave
 Imagine dropping a rock in the middle of a pond. At first the ripples look very circular, but by the time they reach the shore they look like straight lines. We assume that the wave front of the ping is planar, which basically means that even though the wave front is curved, the curvature is small enough from the perspective of the hydrophones such that the wave front actually looks flat. This makes our calculations a lot easier.
 
-===== 2D Derivation =====
+## 2D Derivation
 We have 3 hydrophones, located at the following positions:
 
 $H_0$ is at location $(0,0)$ \\
@@ -81,7 +81,7 @@ d_x/x \\ d_y/y
 \end\{bmatrix\}
 $$
 
-===== 3D Result =====
+## 3D Result
 Extrapolating the 2D result into 3 dimensions, we have:
 
 $H_0$ is at location $(0,0,0)$ \\
@@ -113,11 +113,11 @@ d_x/x \\ d_y/y \\ d_z/z
 \end\{bmatrix\}
 $$
 
-===== Generalized Case =====
+## Generalized Case
 
 Below describes how to calculate the bearing in the event that the three hydrophones are not orthogonal to each other or do not lie along the $x$, $y$, or $z$ axes.  This solution still requires the far-field assumption be valid.  The derivation is covered first. The direct solution can be found further below.
 
-==== Generalized Derivation ====
+### Generalized Derivation
 
 The measurement of static vector fields by 3 or more sensors is a very common application.  Magnetometers, accelerometers, depth sensor arrays, and hydrophones on this submarine can all potentially be analyzed in this way.  A measurement typically manifests as the dot product between a vector describing the particular sensor, and the vector describing the phenomenon being measured.  
 
@@ -188,7 +188,7 @@ $$
 
 Matrix Multiplication between two-dimensional matrices is merely a systematic way of calculating dot products between all relevant vectors.  The product matrix elements each correspond to a dot product, and their position denotes which vectors were involved.  Row vector 3 doted with column vector 1 becomes element $(3,1)$.  Matrices are also involved in solving simultaneous equations.
 
-==== Generalized Solution ====
+### Generalized Solution
 
 Thus we can organize systems of dot products and measurements as the result of a single matrix multiplication.
 

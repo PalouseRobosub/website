@@ -1,15 +1,15 @@
 \{\{indexmenu_n\>51\}\}
 
-====== Primary System Design ======
+# Primary System Design
 **Project Lead**: Ryan Summers
 
-===== Overview =====
+## Overview
 The primary system design dissects the overall electrical requirements into three equally important tasks and then develops lower level projects to be completed:
   - Provide safe and sufficient power to the submarine
   - Provide correct and meaningful sensor feedback to the computer
   - Provide a control bridge for computer-controlled devices (such as pneumatics and thrusters)
 
-==== Power Design ====
+### Power Design
 The power system of the submarine can be divided further into two separate power systems:
   - Thruster Power
   - Bulkhead Power
@@ -27,7 +27,7 @@ All devices that are connected to the CPU through a USB connection will have opt
 Below is the current architecture of the power system in the submarine:
 \{\{:ee:power:power_diagram:power_diagram.jpg?800|\}\}
 
-==== Sensor Feedback and Control Bridging ====
+### Sensor Feedback and Control Bridging
 
 Another important feature of the electrical system is to provide a means for the computer software to control various pieces of electrical equipment. Currently, the electrical system allows control of pneumatics and thrusters. Pneumatics are controlled directly as a ROS node running on the microcontroller in an external pneumatics compartment. Pneumatics are connected to the computer through a USB-to-UART interface converter. Thrusters are controlled directly through a USB servo controller. A ROS node runs directly on the computer and communicates with the thruster through a serial interface. The thruster controller will be moved to an external housing at a later date.
 
@@ -35,12 +35,12 @@ The final purpose of the electrical system is to provide sensor feedback to the 
 
 \{\{:ee:system:electrical_communication.jpg?800|\}\} 
 
-==== Bulkhead Connections ====
+### Bulkhead Connections
 Below is a preliminary diagram showing all electrical bulkhead connections. This diagram is not finalized and should be assumed as only an initial draft. Please confirm with electrical team before using.
 
 \{\{:ee:system:bulkhead_connections.jpg?800|\}\}
 
-==== Internal Layout ====
+### Internal Layout
 Below is the current plans for internal component layout and wiring. All drawings are to scale.
 
 \{\{ :ee:system:internal-layout_1_.jpg?direct |\}\}

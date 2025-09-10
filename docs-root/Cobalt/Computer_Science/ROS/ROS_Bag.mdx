@@ -1,8 +1,8 @@
-====== Using ROS Bag ======
+# Using ROS Bag
 
 ROS bag is a nice tool for recording any data that you need to be able to play back at a later time.
 
-==== Recording ====
+### Recording
 
 The normal usage is:
 
@@ -16,7 +16,7 @@ In general we use this format for recording bag files:
   
   rosbag record -a -o /\<PREFIX\>
   
-==== Playback ====
+### Playback
 
 The normal usage is:
 
@@ -26,7 +26,7 @@ To play back a specific topic from the bag file:
 
   rosbag play --topics /\<TOPIC1\> ... /\<TOPIC(N)\> /\<BAG_FILE1\> ... /\<BAG_FILE(N)\>
   
-==== Info ====
+### Info
 
 To see information about a bag file, rosbag info can help.
 

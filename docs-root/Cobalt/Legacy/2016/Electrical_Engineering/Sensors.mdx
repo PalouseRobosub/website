@@ -1,16 +1,16 @@
-====== Sensor System ======
+# Sensor System
 
-===== Background =====
+## Background
 
 The submarine currently has 7 different types of sensors: accelerometer, gyroscope, magnetometer, depth sensor, battery voltage sensor, hydrophones, and the start switch.
 
-====== Raw Sensors ======
+# Raw Sensors
 
-==== 3-Axis Sensors ====
+### 3-Axis Sensors
 
 The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they report X, Y, and Z values. The coordinate system is the same as the one defined for movement. See the [[https://github.com/PalouseRobosub/robosub/wiki/Movement|Movement]] section for details. Positive X is to the left of the sub, positive Y is to the front, and positive Z is down. Because the sensors may not be mounted in the proper orientation, translation is needed. This shall happen in the lowest level (''sensor_microcontroller_interface.py''), so all other computer modules can assume the sensors are orientated correctly.
 
-=== Accelerometer ===
+#### Accelerometer
 
   * [[https://www.sparkfun.com/datasheets/Sensors/Accelerometer/ADXL345.pdf|datasheet]]
   * Measures acceleration in the X, Y, and Z axes
@@ -21,7 +21,7 @@ The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they 
   * The units are such that a value of ~256 on the sensor is equal to the force of gravity (1 g, or 9.81 m/s/\<sup\>2/\</sup\>).
   * Therefore, wit the sub sitting stationary we would expect a value of ~256 on the Z-axis of the sensor
 
-=== Gyroscope ===
+#### Gyroscope
 
   * [[https://www.sparkfun.com/datasheets/Sensors/Gyro/PS-ITG-3200-00-01.4.pdf|datasheet]]
   * Measures angular velocity in the X, Y, and Z axes
@@ -29,7 +29,7 @@ The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they 
   * If the sub is sitting perfectly still, we should see values close to zero on all axes
   * The units are such that a value of ~14.375 on the sensor is equal to a rotation speed of 1 degree/second
 
-=== Magnetometer ===
+#### Magnetometer
 
   * [[http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Magneto/MAG3110.pdf|datasheet]]
   * Measures magnetic field strength in the X, Y, and Z axes
@@ -37,11 +37,11 @@ The accelerometer, gyroscope, and magnetometer are 3-axis sensors, meaning they 
   * The units are such that a value of ~10 on the sensor is equal to 1 µT
   * According to the datasheet, we should expect a magnetic field strength due to the earth of approximately 50 µT. This would be equal to a value of about 500 on the sensor. (This has not been tested)
 
-==== ADC Based Sensors ====
+### ADC Based Sensors
 
 The depth sensor and the battery voltage sensors are ADC based. This means that an analog voltage is being presented to the microcontroller, and the microcontroller is making a digital approximation of that value. The resolution of the ADC is 10 bits, so values between 0-1023 are possible.
 
-=== Depth Sensor ===
+#### Depth Sensor
 
   * Measures the submarine's depth
   * Value is linearly related to the depth
@@ -51,7 +51,7 @@ Equation is:
 
 \> depth_feet = (sensor_value * 0.1728) - 10.341
 
-=== Battery Voltage Sensor ===
+#### Battery Voltage Sensor
 
   * Measures the battery's voltage
   * Value is linearly related to the voltage
@@ -61,20 +61,20 @@ Equation is:
 
 \> actual_voltage = sensor_value * (3.3/1024*7.5)
 
-==== GPIO Sensors ====
+### GPIO Sensors
 
 These sensors use the GPIO pins of the microcontroller. They can detect a high value, low, value, or a changing value. The only GPIO sensor on the submarine right now is the mission start switch.
 
-=== Mission Start Switch ===
+#### Mission Start Switch
 
   * The microcontroller tells the computer when it sees a rising edge on the start switch
   * In the field, it has been observed that the switch contacts bounce when we flip the switch, resulting the in the microcontroller seeing multiple rising edges and therefore telling the computer the switch has been flipped multiple times, even when the switch has only been flipped once. It appears to bounce ~3 times each time it is flipped.
 
-==== Hydrophones ====
+### Hydrophones
 
 The hydrophones are technically ADC sensors, but they deserve their own section because they are not accessed using the microcontroller. Instead, the audio jacks on the computer are used as high-speed ADCs. Custom software has been written to read the hydrophones and compute an approximate angle for where the hydrophone is.
 
-====== Processed Sensors ======
+# Processed Sensors
 
 ''insert description of data available to the submarine after raw sensors have been processed''
 

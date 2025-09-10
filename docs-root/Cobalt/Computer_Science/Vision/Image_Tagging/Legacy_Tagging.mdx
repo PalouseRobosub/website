@@ -1,11 +1,11 @@
 
-====== Legacy Image Tagging ======
+# Legacy Image Tagging
 
 
-===== Sloth =====
+## Sloth
 
 ----
-=== Setup ===
+#### Setup
 In order to tag images, we use a piece of software called Sloth. To install it from the robosub debian repository, run the following command:
 
   sudo aptitude install sloth
@@ -19,7 +19,7 @@ Now that you have sloth, you need to clone the ''%%vision_dev%%'' repository. To
   git clone https://github.com/PalouseRobosub/vision_dev.git
 
 ----
-=== Using Sloth ===
+#### Using Sloth
 To use sloth and start tagging images, you can run the following command.
 
   sloth -c /path/to/vision_dev/sloth/robosub_config.py /path/to/annotation/file
@@ -34,7 +34,7 @@ Should you find this tedious, there is a script in the sloth directory of the vi
 
 This removes the need to add the -c flag repeatedly. This script can also be symlinked to without issues.
 
-=== Sloth alias ===
+#### Sloth alias
 
 You can set up an alias in your bashrc. To do so run (replace "~/vision_dev" with path to your vision_dev repo):
    echo "alias sloth='~/vision_dev/sloth/./robosub_sloth.sh'" \>\> ~/.bashrc
@@ -42,7 +42,7 @@ You can set up an alias in your bashrc. To do so run (replace "~/vision_dev" wit
 
 ----
 
-=== Sloth Keybindings ===
+#### Sloth Keybindings
 
 The full list of keybindings used in sloth can be found in the [[https://github.com/PalouseRobosub/vision_dev/blob/master/sloth/robosub_config.py|robosub_config.py]] file near the bottom. A shorthand list is provided below
 
@@ -125,7 +125,7 @@ Die 6
 /\</WRAP\>
 
 ----
-=== Sloth Mouse Controls ===
+#### Sloth Mouse Controls
 
 While creating annotations, the following are useful mouse controls.
 
@@ -146,9 +146,9 @@ Select multiple annotations at once.
 /\</WRAP\>
 /\</WRAP\>
 
-===== Data Management =====
+## Data Management
 ----
-==== For Linux Users ====
+### For Linux Users
 
 Getting, validating, and returning labeling data is handled through the ''%%rslabel%%'' utility program. It currently only supports python 2.x versions. To install it, run
   sudo pip install rslabel
@@ -169,7 +169,7 @@ There are a number of commands to be used with ''%%rslabel%%'', including ''%%sh
 |''%%rslabel stats%%'' | This command will show scoreboard table: how many images labeled, how many labels added, how many images validated and how many labels validated. |
 
 ----
-==== For Windows Users ====
+### For Windows Users
 
 People who want to label on Windows you can use this tool to check, download and upload labels. To use this just extract the folder in zip anywhere and run ''%%WindowsSftp.exe%%'', remember that ''%%.dll%%'' file must be in the same folder as ''%%.exe%%'' \{\{ :cs:vision:image_tagging:robosub-windows-tools.zip |\}\}
 

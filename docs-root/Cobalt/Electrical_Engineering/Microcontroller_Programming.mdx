@@ -1,6 +1,6 @@
-====== Microcontroller Programming ======
+# Microcontroller Programming
 
-===== First Bringup =====
+## First Bringup
 This section relates to bringing a new microcontroller board online with the Arduino bootloader and fuses.
 
 To begin flashing the bootloader using the Atmel ICE tool, first download [[http://www.atmel.com/tools/ATMELSTUDIO.aspx|Atmel Studio]] (Windows only). Currently, the Atmel ICE is not supported on the command line in linux. Once Atmel Stduio is running, plug in the Atmel ICE and power the microcontroller through other means. The ICE can not supply power to the device. Select Tools-\>Device Programming
@@ -13,5 +13,5 @@ Next, set the fuses to the following values:
 
 Finally, program the memory of the microcontroller with the optiboot_flash bootloader from [[https://github.com/MCUdude/MightyCore|MightyCore]]. The microcontroller should now be able to interact with the Arduino environment.
 
-===== Programming =====
+## Programming
 Microcontroller programming is conducted through [[http://platformio.org/|PlatformIO]], a command-line arduino deployment tool.

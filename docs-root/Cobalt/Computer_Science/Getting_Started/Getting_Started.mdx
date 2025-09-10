@@ -1,26 +1,26 @@
-====== Getting Started ======
+# Getting Started
 
 The purpose of this page is to get new CS developers up and going for robosub. If you have any questions, feel free to ask them on the [[slack\>software|software slack channel]]!
 
-===== OS =====
+## OS
 The sub itself runs Ubuntu 20.04 (focal), as do most members. Any operating system which can run ROS2 foxy should work such as Linux Mint 20. Windows is currently not supported.
 
-==== Virtual Machine ====
+### Virtual Machine
 If you don't feel comfortable installing linux on your machine yet, you can get started with a virtual machine. To do so you can install virtualization software such as virtualBox.
 
-===== Languages =====
+## Languages
 We use C++ and Python3 for the software on the sub. Below are a few links for tutorials for these languages, these are just a few I quickly found to get you started, feel free to search around for other tutorials.
   * [[http://www.learncpp.com/| C++]]
   * [[https://www.codecademy.com/learn/python|Python]]
 
-===== Getting Prerequisite Software =====
+## Getting Prerequisite Software
 This will setup your computer with ROS package repository and other dependencies. If you experience any issues, please contact the [[slack\>it|IT slack channel]].
 Depending on your operating system, follow the instructions on one of these pages:
 
-==== Install ROS ====
+### Install ROS
 [[https://docs.ros.org/en/foxy/Installation.html|ROS2 Foxy]] (for Ubuntu 20.04 focal or Linux Mint 20)
 
-==== Additional Dependencies ====
+### Additional Dependencies
 Complete prerequisite software setup as follows:
 
 Add ROS2 setup script to bash configuration file and reload it.
@@ -34,7 +34,7 @@ Install additional apt packages needed by our code.
 $ sudo apt update
 $ sudo apt install git python3-rosdep2 python3-colcon-common-extensions ros-foxy-gazebo-ros ros-foxy-gazebo-plugins socat
 /\</code\>
-==== SSH Key Setup (optional) ====
+### SSH Key Setup (optional)
 SSH keys allow you to upload code to gitlab without entering a password. This makes development more convenient but less secure since someone else could use your key if they get access to your computer. Follow these steps if you want to setup ssh keys on your computer. You only need to do this once on each computer. To check if you already have keys made for your computer, run:
 
 /\<code bash\>
@@ -58,7 +58,7 @@ If everything is set up correctly, you should expect to see a message like:
   Welcome to GitLab, @user!
   Connection to gitlab.com closed.
 
-==== Getting our Code ====
+### Getting our Code
 Finally, we need to setup our ROS workspace with the robosub code.
 
 Create a directory for robosub code and move into it.
@@ -107,6 +107,6 @@ $ source ~/.bashrc
 /\</code\>
 
 From now on you should be able to compile code using ''rsmake'' from any directory.
-===== Now What? =====
+## Now What?
 If you were able to successfully compile the software at the end, congrats! Next steps are to learn how to use [[cs:git:start|git]] and review c++ and python3. After this, head over to the [[https://gitlab.com/PalouseRobosub/Software/robosub/-/issues|gitlab issues page]] and see if a task looks interesting!
 

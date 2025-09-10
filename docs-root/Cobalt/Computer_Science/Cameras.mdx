@@ -1,22 +1,22 @@
-====== Cameras ======
+# Cameras
 
-===== Overview =====
+## Overview
 
   * The cameras that we use for the sub are Point Grey Flea3 GigE Vision ethernet cameras. Specs and downloads are available here. [[http://www.ptgrey.com/flea3-14-mp-color-gige-vision-sony-icx267-camera|Flea3]]
   * The cameras come with an SDK which contains configuration software and programmable interfaces for the camera. You can access it on their website.
 
-===== Datasheets =====
+## Datasheets
 \{\{ :cs:cameras:basic_specs-flea3-gige.pdf |\}\} \\
 \{\{ :cs:cameras:fl3-ge-imaging-performance.pdf |\}\} \\
 \{\{ :cs:cameras:fl3-ge_gettingstarted.pdf |\}\} \\
 \{\{ :cs:cameras:flea3-ge-technical-reference.pdf |\}\}
 
 
-===== First Time Setup =====
+## First Time Setup
 
   * Since the cameras are ethernet cameras the only thing you need for setup is an ethernet connection and a 12V power supply. The cameras take a few seconds to boot up and usually give themselves a default IP that is not on the network. You can use the flycap software to detect the cameras and add them to the network.
 
-===== Configuration =====
+## Configuration
 
   * Before you edit any camera settings, be sure to read the ENTIRE guide on the flycap configuration software as well as the IEEE-1394 camera standard. These documents give great insight into the design, terminology, and typical settings of the cameras.
   * Note, that the Flea3 cameras are somewhat tricky to configure correctly. Using factory settings, the cameras will most likely cause image inconsistency errors due to packet loss. Since most ethernet packet sizes are not suitable for streaming, it is almost necessary to increase packet size to jumbo (9000 bytes) in order to get the smoothest streaming possible.
@@ -24,21 +24,21 @@
   * The packet delay should also be changed to account for the packet size increase. It should be the lowest delay that does not cause consistency errors depending on the setup. This can be tested by configuring the delay and running the cameras for about 5 minutes. If the cameras report no loss then those settings are optimal.
   * Be aware that the jumbo packet size cannot usually be maxed out. (On my system I could only get to ~7000 byte packets before the stream would freeze) In order to get optimal settings you have to play with the packet size and delay until you get the highest estimated bandwidth without errors.
 
-===Serial Numbers===
+#### Serial Numbers
   * Left: 
   * Right: 14406634
 
-===== Camera Settings =====
+## Camera Settings
 
   * The cameras can use multiple encodings depending on bandwidth and desired end types. For low bandwidth setups, Raw8 is the best encoding. You can configure post processing to convert the Raw8 into RGB8. Rigorous will return the best results. For medium bandwidth YUV422 returns great results, and for high bandwidth RGB8 is best as it requires no additional conversion once it reaches the computer.
   * Since the cameras use orthographical fisheye lenses, the best image would be a square centered on the image circle. Since the Flea3 only supports resolutions up to 1032p, the best image is 1032x1032 centered. (I guessed around 162px right)
   * Since conditions can change at the competition, it seems it is best to allow the cameras to auto adjust exposure, gain, and whitebalance. Although this makes the vision input somewhat unpredictable, you can stamp each frame with this information in the top left hand corner. The flycap SDK can save it once it reaches the computer if you want to analyze the footage later and figure out what settings the camera has at that point in time.
 
-===== Problems / Fixes =====
+## Problems / Fixes
 
   * PGR cameras have issues on linux with large packet types. In order to fix this the buffer needs to be increased.
 
-===Linux Streaming Fix:===
+#### Linux Streaming Fix:
 Derived from here: [[https://www.ptgrey.com/KB/10016|Linux Streaming Fix]]
 
 CAUSE:
@@ -64,7 +64,7 @@ Once changes are persisted, they can be reloaded at any time by running the foll
 
   sudo sysctl -p
 
-==== Running With ROS ====
+### Running With ROS
 
 Point Grey supplies drivers for our Gig E cameras. You will need to have installed them:
 

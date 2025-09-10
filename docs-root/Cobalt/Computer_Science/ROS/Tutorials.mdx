@@ -1,10 +1,10 @@
-===== ROS Tutorials =====
+## ROS Tutorials
 The [[ros\>ROS/Tutorials|official ROS tutorials]] are very comprehensive, however I found the way they present ROS to a beginner results in a very steep learning curve. Here is our own set of tutorials, which are a work in progress. I may reference tutorials from other sites if I find them useful.
 
-==== Pre-requisites ====
+### Pre-requisites
 Basic linux command-line knowledge (specifically BASH) is assumed. If you are completely unfamiliar with the command line, check out this[[https://www.codecademy.com/learn/learn-the-command-line|codecademy tutorial]], or [[https://www.youtube.com/playlist?list=PLII6oL6B7q78PKy6_R6JTkkYjVXZBZcVq | this series of videos]].
 
-==== High Level Concepts ====
+### High Level Concepts
 ROS is many things, it is primarily a communication framework, but it also has a huge set of useful tools, including viewing data, navigating the filesystem, and starting up processes.
 
 Each process is called a **node**. Nodes are designed to do a specific task. We can create complex functionality (such as controlling a robot) by building multiple nodes and having them talk together. 
@@ -13,14 +13,14 @@ There are several ways for nodes to talk to each other, the most common one is a
 
 Nodes are typically grouped together into a **package**. All of our software is in a single package called "robosub". When you install ROS, several other packages are installed that provide some useful functionality, such as rqt_plot.
 
-==== Command Line Tools ====
+### Command Line Tools
 ROS provides many useful command-line tools. Your BASH environment gets access to these when you have the following line in your ~/.bashrc file:
 /\<code bash\>
 source /opt/ros/indigo/setup.bash
 /\</code\>
 Most ROS commands support tab autocompletion, so take advantage of it! 
 
-=== Navigating the filesystem ===
+#### Navigating the filesystem
 ROS has a few different commands that are useful for moving and looking around. They are typically in the form:
 /\<code bash\>
 $ /\<command\> /\<package_name\> /\<...\>
@@ -29,14 +29,14 @@ Most are based on the typical navigation functions:
   * roscd
   * rosls
 
-=== Starting nodes ===
-== Starting a single node ==
+#### Starting nodes
+##### Starting a single node
 While you can manually find the executable (or python script) and run it manually, ROS provides a tool for quickly finding and starting a node, the ''rosrun'' command:
 /\<code bash\>
 $ rosrun /\<package_name\> /\<node_name\>
 /\</code\>
 
-== Starting multiple nodes ==
+##### Starting multiple nodes
 The ''roslaunch'' command allows you to launch multiple nodes at the same time. The nodes are specified in a special file called a launch file.
 /\<code bash\>
 $ rosrun /\<package_name\> /\<launchfile_name\>
@@ -45,7 +45,7 @@ More information about launch files can be found [[|here]]
 
 
 
-=== Viewing active nodes and topics ===
+#### Viewing active nodes and topics
 The ''rosnode'' command shows information about nodes. You can view all currently running nodes by running
 /\<code bash\>
 $ rosnode list
@@ -57,6 +57,6 @@ $ rostopic list
 /\</code\>
 
 
-=== How to Write a ROS Node ===
+#### How to Write a ROS Node
 Check out these tutorials for whatever language you're using: [[ros\>ROS/Tutorials/WritingPublisherSubscriber(c%2B%2B) | C++ ]]
 [[ros\>ROS/Tutorials/WritingPublisherSubscriber(python) | Python ]]

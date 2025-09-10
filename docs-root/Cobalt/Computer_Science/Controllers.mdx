@@ -1,34 +1,34 @@
-====== Controllers ======
+# Controllers
 This page is for describing how to use the manual controllers we have for the sub.
 
-====== Joystick ======
+# Joystick
 This is composed of two programs, joystick_driver and joystick_control. The joystick_driver reads the joystick and publishes the joystick's state to a topic, while joystick_control subscribes to this topic and publishes control messages.
 
-==== Running ====
+### Running
 The joystick can be run using the following command:
   roslaunch robosub joystick.launch
 
-==== Controls ====
+### Controls
 Forward/back and left/right cause the sub to move forward/back, left/right as expected. Twisting the joystick controls the sub's yaw. The hat affects pitch and roll, while pulling the trigger resets the sub to a neutral orientation. The throttle is used for controlling the depth of the sub, with the min and max depths are controlled by settings in the parameter server.
 
-====== Gamepad ======
+# Gamepad
 This is composed of two programs, gamepad_driver and gamepad_control. The gamepad_driver reads the gamepad and publishes the gamepad's state to a topic, while gamepad_control subscribes to this topic and publishes control messages.
 
-==== Running ====
+### Running
 The gamepad can be run using the following command:
   roslaunch robosub gamepad.launch
 
-==== Controls ====
+### Controls
 Forward/back and left/right on the left stick cause the sub to move forward/back, left/right. Left/right on the left stick controls the sub's yaw. The d-pad affects pitch and roll, while pressing the 'A' or 'X' button resets the sub to a neutral orientation. The triggers are used for controlling the depth of the sub. Unlike the Joystick, there are no min/max depth settings. The right trigger dives while the left trigger rises. The relative depth change is computed with the difference between the two triggers so there is no harm in pulling both triggers at the same time.
 
-====== Keyboard ======
+# Keyboard
 
 The keyboard controller has two methods for controlling the sub. The first is through qweasdzxc control. q/e control the yaw of the sub. wasd control linear movements in the x-y plane. z/c control the dive.
 
-==== Running ====
+### Running
 The keyboard can be run using the following command:
 /\<code bash\>
   ros2 run robosub keyboard_control
 /\</code\>
-==== Controls ====
+### Controls
 The second control method is the arrow keys and some other keys. The Arrow keys control the linear movement of the sub in the x-y plane. Using the arrow keys with the Ctrl key pressed control the pitch and yaw rotations. Pg-Up/Pg-Dn control the dive of the sub.

@@ -1,6 +1,6 @@
-====== Object Detection ======
+# Object Detection
 
-====== Introduction ======
+# Introduction
 
 An object detection algorithm is one that takes in an image, and outputs bounding boxes surrounding the objects of interest in the image. An example is shown below, a dog, bicycle, and a car.
 
@@ -10,31 +10,31 @@ Before you can use an object detection algorithm, you must first predefine what 
 
 After the algorithm has been trained on the example data, you can then use it to find objects in new images that it hasn't seen before! The process of using the object detection algorithm to find objects is also known as "inference".
 
-====== Tools ======
+# Tools
 We currently use the [[https://github.com/tensorflow/models/tree/master/research/object_detection|Tensorflow object detection API]] (henceforth abbreviated as TFODA) for both training and inference. Previously we used the [[https://pjreddie.com/darknet/|Darknet framework]], however we found it rather difficult to use because the code is messy and uses rather old versions of libraries. The tensorflow object detection API is developed by more people, easier to use, and kept more up to date.
 
-====== Setup ======
+# Setup
 /\<WRAP important\>
 These instructions are for manual installation on your own computer, we really need to automate the installation of everything. Also, ideally we should be training on Kamiak, not our own computers.
 /\</WRAP\>
 Before you can start training, you first need to install tensorflow and the Tensorflow Object Detection API.
-===== Tensorflow =====
+## Tensorflow
 Tensorflow can run either on your CPU, or on an Nvidia GPU (unfortunately AMD support isn't ready at this time). If you have an Nvidia GPU, it's highly recommended to use it, it is orders of magnitude faster. Instructions are adapted from [[https://www.tensorflow.org/install/install_linux | here]]. To test your installation, open up python and run:
   import tensorflow as tf
   hello = tf.constant('Hello, TensorFlow!')
   sess = tf.Session()
   print(sess.run(hello))
 
-==== CPU Installation ====
+### CPU Installation
 If you're running on CPU only, you simply need to run:J
   pip install --user tensorflow
 
-==== GPU Installation ====
+### GPU Installation
 If you're running on an Nvidia GPU, you'll need to install Nvidia's CUDA and CuDNN libraries. Currently, Tensorflow requires CUDA 9.0 and CuDNN 7.0, it's important you install the right versions. To install tensorflow for gpu, run:
 
   pip install --user tensorflow-gpu
 
-=== CUDA Installation ===
+#### CUDA Installation
 You can download CUDA 9.0 for Ubuntu 16.04 from [[https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=debnetwork | here]]. To install, run:
   sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
   sudo apt-key adv --fetch-keys \
@@ -42,10 +42,10 @@ You can download CUDA 9.0 for Ubuntu 16.04 from [[https://developer.nvidia.com/c
   sudo aptitude update
   sudo aptitude install cuda
  
-=== CuDNN Installation ===
+#### CuDNN Installation
 To download CuDNN you'll need to create an Nvidia account. Download (and create an account) [[https://developer.nvidia.com/rdp/cudnn-download | here]]. You'll want to download CuDNN 7.0.x for CUDA 9.0, both the developer and runtime libraries. Install both of them.
 
-===== Object Detection API =====
+## Object Detection API
 Instructions were adapted from [[https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md | here]]
 
 Install dependencies:
@@ -66,7 +66,7 @@ Test it:
   python ~/.local/tensorflow_object_detection_api/research/object_detection/builders/model_builder_test.py
 
 
-====== Generating Training Data ======
+# Generating Training Data
 To label our images, we use sloth. For more details, see (link). Sloth creates a json file that describes the labels for each image. The TFODA requires the example images and their labels to be packaged into a specific file format called a TFrecord. 
 We have a [[https://github.com/PalouseRobosub/vision_dev/blob/master/sloth_to_tfrecord.py|python script]] for converting the sloth json format in TFrecord files in our vision_dev repository. To create a TFrecord file, you need both the json file containing the labels, and the images the json file refers to. Usage is shown below:
   ./sloth_to_tf_record.py /\<input json file\> /\<output directory\>
@@ -78,10 +78,10 @@ label_map.pbtext is used internally by TFODA to map outputs to names, you should
 
 After the data is labeled we can start training!
 
-====== Train Network ======
+# Train Network
 Instruction were adapted from [[https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md | here]].
 
-===== Workspace Setup =====
+## Workspace Setup
 Setup your workspace with the following directory structure:
   object_detection_workspace/
   ├── data
@@ -92,13 +92,13 @@ Setup your workspace with the following directory structure:
 
 data/ will hold your training data (label_map.pbtext, train.record, and test.record). output/ and its subdirectories hold the outputs of the training and evaluation programs. models/ will store the various network architectures you're experimenting with (you might just have one model).
 
-===== Getting a Model =====
+## Getting a Model
 Instructions were adapted from [[https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md | here]].
 One of the advantages of using TFODA is that it is really easy to try different network architectures (models) and seeing their speed vs. accuracy tradeoffs. Example config files can be found [[https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs : here]]. You'll need to modify these config files a bit for your own use. In addition, most of the models have network weights that have been pretrained on some dataset. Starting from these check-points is usually much faster than training from scratch. You can locate them [[https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md | here]].
 
 Place the model config file and the pretrained  model in the models/ directory of your workspace.
 
-===== Start Training =====
+## Start Training
 The following commands assume your current working directory is the root of the workspace you created earlier. 
 
 To start training, run:
@@ -118,7 +118,7 @@ The eval.py script will notice every time the train.py script saves a new checkp
 To visualize the training process, start up tensorboard:
   tensorboard --logdir=outputs
 Tensorboard is a little web server, you can access it at localhost:6006 in your browser.
-===== Exporting a trained model for inference =====
+## Exporting a trained model for inference
 To export checkpoint trained data for ''%%robosub_object_detection%%'' format you need to follow [[https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/exporting_models.md|these]] instructions. Or run this:
   python object_detection/export_inference_graph.py \
       --input_type image_tensor \

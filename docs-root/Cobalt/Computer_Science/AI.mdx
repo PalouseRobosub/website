@@ -1,7 +1,7 @@
-====== AI ======
+# AI
 Main function of AI on the sub is to make decisions of what the sub should do based on given data from topics like sensors, vision, data, etc. It is using hierarchical state machine, which allows it to cover majority of cases it will face. 
 
-===== Overview =====
+## Overview
 
 Current AI uses [[http://wiki.ros.org/smach | SMACH]] package that is in ROS. SMACH is a task-level architecture for rapidly creating complex robot behavior. At its core, SMACH is a ROS-independent Python library to build hierarchical state machines.
 
@@ -9,7 +9,7 @@ Advantages of SMACH are:
   - rapid development, ability to create complex state machines
   - ability to quickly change state machines without big code changes
   - explicitly define outcomes of every state thus covering most or all possible situations
-===== Current AI =====
+## Current AI
 
 Our current AI was re-written using SMACH. There are several utility files such as:
   - gate_util.py - all states that are used by gate AI, they are generic.
@@ -26,7 +26,7 @@ rosrun smach_viewer smach_viewer.py
 \</code\>
 An example of what our AI looks like in smach_viewer is this screenshot below
 `\{\{ :cs:ai:gate_ai.png?nolink |\}\}
-===== Things to know when developing AI =====
+## Things to know when developing AI
   * When inheriting from **SubscribeState** instead of **SmachState**, you need to use **self.exit("outcome")** instead of **return "outcome"**
   * Every python script that is going to run any state machine **must have** in its main function these lines of code below.
 \<code python\>
@@ -44,7 +44,7 @@ rosparam load [param_file_name].yaml
   * Our vision detection requires undistortion to be running. 
 
 
-===== Example Flow Chart =====
+## Example Flow Chart
 \<flow\>
 graph LR;
     A(SM_ROOT)--\>|execute|B[START_SWITCH];

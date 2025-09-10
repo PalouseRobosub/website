@@ -1,9 +1,9 @@
-====== Vision ======
+# Vision
 
 /\<WRAP alert\>
 This page is **stale** and needs to be reviewed. It may be deleted or radically changed in the near future.
 /\</WRAP\>
-===== Core Functionality =====
+## Core Functionality
 
   * The vision system on the sub is performed by multiple vision nodes. Each currently contains a number of different processors, explained later, which perform a task on the latest images captured from the [[cs:cameras:start|cameras]]. These images are synchronized with each other in time.
   * There is one vision node spawned for each task required to be performed using the [[https://github.com/PalouseRobosub/robosub/blob/master/launch/vision.launch|vision.launch]] file. For more information on using this launch file, see [[cs:vision:start#Running the Vision System in ROS|Running the Vision System in ROS]] below.
@@ -12,18 +12,18 @@ This page is **stale** and needs to be reviewed. It may be deleted or radically 
     * [[cs:vision:start#StereoProcessor|StereoProcessor]]
     * [[cs:vision:start#FeatureProcessor|FeatureProcessor]]
 
-===== Processors =====
+## Processors
 ----
 
-==== ColorProcessor ====
+### ColorProcessor
 
-=== Purpose ===
+#### Purpose
 Performs color masking according to the parameter file for the node.
 
-=== Structure ===
+#### Structure
 The ColorProcessor contains a FilterSet. This FilterSet will sequentially apply each Filter it contains which are each a single OpenCV operation on an image.
 
-=== Parameters ===
+#### Parameters
 The parameters for the ColorProcessor part of a vision node should be formatted as follows:
   filters:
       - [filter name]: \{[filter parameters]\}
@@ -32,28 +32,28 @@ Where the [filter name] is known by the ColorProcessor allowing it to create the
 
 ----
 
-==== StereoProcessor ====
+### StereoProcessor
 
-=== Purpose ===
+#### Purpose
 Utilizes the two forward facing cameras to determine the distance an object is away from the cameras. This requires the cameras to be [[cs:camera_calibration:start|calibrated]].
 
-=== Structure ===
+#### Structure
 This processor is currently under construction and is not finalized. This section will be changed in the future.
 
-=== Parameters ===
+#### Parameters
 The StereoProcessor currently does not use any parameters. This may change in the future, however.
 
 ----
 
-==== FeatureProcessor ====
+### FeatureProcessor
 
-=== Purpose ===
+#### Purpose
 More accurately identifies contours in the image as being a particular object.
 
-=== Structure ===
+#### Structure
 The FeatureProcessor contains a single ObstacleDetector which is an abstract class that the detectors for each obstacle in the course inherit from. Each detector must also contain a static init function which takes an ObstacleDetector pointer and initializes it to a new instance of that detector.
 
-=== Parameters ===
+#### Parameters
 The parameters used by the FeatureProcessor of each vision node are formatted as follows:
   features:
       detector: [detector name]
@@ -62,12 +62,12 @@ There should be only one of these blocks in each parameter file where [detector 
 
 ----
 
-===== Cameras =====
+## Cameras
 
 See the [[cs:cameras:start|Cameras]] page for more information on the details and use of the cameras.
 
 
-===== Running the Vision System in ROS =====
+## Running the Vision System in ROS
 
 After making sure that the [[cs:cameras:start|cameras]] are running if needed, use the following command to start the vision system.
 
@@ -90,7 +90,7 @@ If you would like to see the images that the system is using, you can run the fo
   rosparam set /[vision node name]/processing/doImShow true
 You will then see many windows open each with a unique image.
 
-===== UML =====
+## UML
 
 \{\{ :cs:vision:visionuml.png?direct&1000 | Vision UML\}\}
 

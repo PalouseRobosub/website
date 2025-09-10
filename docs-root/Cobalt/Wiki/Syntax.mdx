@@ -1,8 +1,8 @@
-====== Formatting Syntax ======
+# Formatting Syntax
 
 [[doku\>DokuWiki]] supports some simple markup language, which tries to make the datafiles to be as readable as possible. This page contains all possible syntax you may use when editing the pages. Simply have a look at the source of this page by pressing "Edit this page". If you want to try something, just use the [[playground:playground|playground]] page. The simpler markup is easily accessible via [[doku\>toolbar|quickbuttons]], too.
 
-===== Basic Text Formatting =====
+## Basic Text Formatting
 
 DokuWiki supports **bold**, //italic//, __underlined__ and ''monospaced'' texts. Of course you can **__//''combine''//__** all these.
 
@@ -29,11 +29,11 @@ or followed by\\ a whitespace \\this happens without it.
 
 You should use forced newlines only if really needed.
 
-===== Links =====
+## Links
 
 DokuWiki supports multiple ways of creating links.
 
-==== External ====
+### External
 
 External links are recognized automagically: http://www.google.com or simply www.google.com - You can set the link text as well: [[http://www.google.com|This Link points to google]]. Email addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
 
@@ -42,7 +42,7 @@ External links are recognized automagically: http://www.google.com or simply www
   link text as well: [[http://www.google.com|This Link points to google]]. Email
   addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
 
-==== Internal ====
+### Internal
 
 Internal links are created by using square brackets. You can either just give a [[pagename]] or use an additional [[pagename|link text]].
 
@@ -67,14 +67,14 @@ Notes:
   * DokuWiki does not use [[wp\>CamelCase]] to automatically create links by default, but this behavior can be enabled in the [[doku\>config]] file. Hint: If DokuWiki is a link, then it's enabled.
   * When a section's heading is changed, its bookmark changes, too. So don't rely on section linking too much.
 
-==== Interwiki ====
+### Interwiki
 
 DokuWiki supports [[doku\>Interwiki]] links. These are quick links to other Wikis. For example this is a link to Wikipedia's page about Wikis: [[wp\>Wiki]].
 
   DokuWiki supports [[doku\>Interwiki]] links. These are quick links to other Wikis.
   For example this is a link to Wikipedia's page about Wikis: [[wp\>Wiki]].
 
-==== Windows Shares ====
+### Windows Shares
 
 Windows shares like [[\\server\share|this]] are recognized, too. Please note that these only make sense in a homogeneous user group like a corporate [[wp\>Intranet]].
 
@@ -92,7 +92,7 @@ Notes:
 $lang['js']['nosmblinks'] = '';
 /\</code\>
 
-==== Image Links ====
+### Image Links
 
 You can also use an image to link to another internal or external page by combining the syntax for links and [[#images_and_other_files|images]] (see below) like this:
 
@@ -104,19 +104,19 @@ Please note: The image formatting is the only formatting syntax accepted in link
 
 The whole [[#images_and_other_files|image]] and [[#links|link]] syntax is supported (including image resizing, internal and external images and URLs and interwiki links).
 
-===== Footnotes =====
+## Footnotes
 
 You can add footnotes ((This is a footnote)) by using double parentheses.
 
   You can add footnotes ((This is a footnote)) by using double parentheses.
 
-===== Sectioning =====
+## Sectioning
 
 You can use up to five different levels of headlines to structure your content. If you have more than three headlines, a table of contents is generated automatically -- this can be disabled by including the string ''/\<nowiki\>~~NOTOC~~/\</nowiki\>'' in the document.
 
-==== Headline Level 3 ====
-=== Headline Level 4 ===
-== Headline Level 5 ==
+### Headline Level 3
+#### Headline Level 4
+##### Headline Level 5
 
   ==== Headline Level 3 ====
   === Headline Level 4 ===
@@ -126,7 +126,7 @@ By using four or more dashes, you can make a horizontal line:
 
 ----
 
-===== Media Files =====
+## Media Files
 
 You can include external and internal [[doku\>images|images, videos and audio files]] with curly brackets. Optionally you can specify the size of them.
 
@@ -164,7 +164,7 @@ Of course, you can add a title (displayed as a tooltip by most browsers), too.
 
 For linking an image to another page see [[#Image Links]] above.
 
-==== Supported Media Formats ====
+### Supported Media Formats
 
 DokuWiki can embed the following media formats directly.
 
@@ -181,7 +181,7 @@ By adding ''?linkonly'' you provide a link to the media without displaying it in
 
 \{\{wiki:dokuwiki-128.png?linkonly\}\} This is just a link to the image.
 
-==== Fallback Formats ====
+### Fallback Formats
 
 Unfortunately not all browsers understand all video and audio formats. To mitigate the problem, you can upload your file in different formats for maximum browser compatibility.
 
@@ -193,7 +193,7 @@ When you upload a ''video.webm'' and ''video.ogv'' next to the referenced ''vide
 
 Additionally DokuWiki supports a "poster" image which will be shown before the video has started. That image needs to have the same filename as the video and be either a jpg or png file. In the example above a ''video.jpg'' file would work.
 
-===== Lists =====
+## Lists
 
 Dokuwiki supports ordered and unordered lists. To create a list item, indent your text by two spaces and use a ''*'' for unordered lists or a ''-'' for ordered ones.
 
@@ -221,13 +221,13 @@ Dokuwiki supports ordered and unordered lists. To create a list item, indent you
 
 Also take a look at the [[doku\>faq:lists|FAQ on list items]].
 
-===== Text Conversions =====
+## Text Conversions
 
 DokuWiki can convert certain pre-defined characters or strings into images or other text or HTML.
 
 The text to image conversion is mainly done for smileys. And the text to HTML conversion is used for typography replacements, but can be configured to use other HTML as well.
 
-==== Text to Image Conversions ====
+### Text to Image Conversions
 
 DokuWiki converts commonly used [[wp\>emoticon]]s to their graphical equivalents. Those [[doku\>Smileys]] and other images can be configured and extended. Here is an overview of Smileys included in DokuWiki:
 
@@ -252,7 +252,7 @@ DokuWiki converts commonly used [[wp\>emoticon]]s to their graphical equivalents
   * FIXME %%  FIXME %%
   * DELETEME %% DELETEME %%
 
-==== Text to HTML Conversions ====
+### Text to HTML Conversions
 
 Typography: [[DokuWiki]] can convert simple text characters to their typographically correct entities. Here is an example of recognized characters.
 
@@ -268,7 +268,7 @@ The same can be done to produce any kind of HTML, it just needs to be added to t
 
 There are three exceptions which do not come from that pattern file: multiplication entity (640x480), 'single' and "double quotes". They can be turned off through a [[doku\>config:typography|config option]].
 
-===== Quoting =====
+## Quoting
 
 Some times you want to mark some text to show it's a reply or comment. You can use the following syntax:
 
@@ -298,7 +298,7 @@ I think we should do it
 
 \>\>\> Then lets do it!
 
-===== Tables =====
+## Tables
 
 DokuWiki supports a simple syntax to create tables.
 
@@ -360,7 +360,7 @@ This is how it looks in the source:
 
 Note: Vertical alignment is not supported.
 
-===== No Formatting =====
+## No Formatting
 
 If you need to display text exactly like it is typed (without any formatting), enclose the area either with ''%%/\<nowiki\>%%'' tags or even simpler, with double percent signs ''/\<nowiki\>%%/\</nowiki\>''.
 
@@ -374,7 +374,7 @@ The same is true for %%//__this__ text// with a smiley ;-)%%.
   /\</nowiki\>
   The same is true for %%//__this__ text// with a smiley ;-)%%.
 
-===== Code Blocks =====
+## Code Blocks
 
 You can include code blocks into your documents by either indenting them by at least two spaces (like used for the previous examples) or by using the tags ''%%/\<code\>%%'' or ''%%/\<file\>%%''.
 
@@ -400,7 +400,7 @@ Those blocks were created by this source:
   This is pretty much the same, but you could use it to show that you quoted a file.
   /\</file\>
 
-==== Syntax Highlighting ====
+### Syntax Highlighting
 
 [[wiki:DokuWiki]] can highlight sourcecode, which makes it easier to read. It uses the [[http://qbnz.com/highlighter/|GeSHi]] Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''/\<nowiki\>/\<code java\>/\</nowiki\>'' or ''/\<nowiki\>/\<file java\>/\</nowiki\>''.
 
@@ -420,7 +420,7 @@ The following language strings are currently recognized: //4cs 6502acme 6502kick
 
 There are additional [[doku\>syntax_highlighting|advanced options]] available for syntax highlighting, such as highlighting lines or adding line numbers.
 
-==== Downloadable Code Blocks ====
+### Downloadable Code Blocks
 
 When you use the ''%%/\<code\>%%'' or ''%%/\<file\>%%'' syntax as above, you might want to make the shown code available for download as well. You can do this by specifying a file name after language code like this:
 
@@ -437,7 +437,7 @@ When you use the ''%%/\<code\>%%'' or ''%%/\<file\>%%'' syntax as above, you mig
 If you don't want any highlighting but want a downloadable file, specify a dash (''-'') as the language code: ''%%/\<code - myfile.foo\>%%''.
 
 
-===== Embedding HTML and PHP =====
+## Embedding HTML and PHP
 
 You can embed raw HTML or PHP code into your documents by using the ''%%/\<html\>%%'' or ''%%/\<php\>%%'' tags. (Use uppercase tags if you need to enclose block level elements.)
 
@@ -487,7 +487,7 @@ echo '/\</tr\>/\</table\>';
 
 **Please Note**: HTML and PHP embedding is disabled by default in the configuration. If disabled, the code is displayed instead of executed.
 
-===== RSS/ATOM Feed Aggregation =====
+## RSS/ATOM Feed Aggregation
 [[DokuWiki]] can integrate data from external XML feeds. For parsing the XML feeds, [[http://simplepie.org/|SimplePie]] is used. All formats understood by SimplePie can be used in DokuWiki as well. You can influence the rendering by multiple additional space separated parameters:
 
 ^ Parameter  ^ Description ^
@@ -510,7 +510,7 @@ By default the feed will be sorted by date, newest items first. You can sort it 
 \{\{rss\>http://slashdot.org/index.rss 5 author date 1h \}\}
 
 
-===== Control Macros =====
+## Control Macros
 
 Some syntax influences how DokuWiki renders a page without creating any output it self. The following control macros are availble:
 
@@ -518,7 +518,7 @@ Some syntax influences how DokuWiki renders a page without creating any output i
 | %%~~NOTOC~~%%   | If this macro is found on the page, no table of contents will be created |
 | %%~~NOCACHE~~%% | DokuWiki caches all output by default. Sometimes this might not be wanted (eg. when the %%/\<php\>%% syntax above is used), adding this macro will force DokuWiki to rerender a page on every call |
 
-===== Syntax Plugins =====
+## Syntax Plugins
 
 DokuWiki's syntax can be extended by [[doku\>plugins|Plugins]]. How the installed plugins are used is described on their appropriate description pages. The following syntax plugins are available in this particular DokuWiki installation:
 

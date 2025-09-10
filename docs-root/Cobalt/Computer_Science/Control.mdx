@@ -1,4 +1,4 @@
-====== Control System ======
+# Control System
 The control system follows basic [[http://www.eurotherm.com/pid-control-made-easy|PID theory]], but has two additional parameters called hysteresis (H) and windup (W). The hysteresis essentially creates a deadband. If the error $E$ defined in ($\ref\{eq:error\}$) is below the hysteresis level, the error can be assumed as (set to) zero, and thus no corrective action is required. The windup term acts to limit the integral portion of the accumulated error. If the integral value is above the windup level, it will be truncated to the windup value. Therefore, the integral can never increase or decrease infinitely because it will always be capped by the windup.
 
 Now that we have explained the P, I, D, W, and H parameters of the control system, we're going to discuss the basic functions of the control system. Below is a simple linear algebra equation that represents our submarine's controls.
@@ -11,7 +11,7 @@ $$
 
 In ($\ref\{eq:control\}$), $M$ is the maximum available force each thruster can apply on the submarine and $C$ is the thruster control signal (Note that this parameter is normalized and within the bounds [-1,1]). By multiplying the total available force of a thruster by the command signal, we can represent the force on the submarine by the thruster as $F$.
 
-===== Thruster Force =====
+## Thruster Force
 
 Let's first take a closer look at $M$ in ($\ref\{eq:control\}$). All of our thrusters are identical, which means the total force that they can output is the same. However, the position and orientation of each thruster changes how much force it can output along the X, Y, Z, and rotational axes.
 
@@ -46,7 +46,7 @@ $$
 
 where moments $M_x$ are calculated by crossing the position with the orientation.
 
-===== Control Command =====
+## Control Command
 
 The parameter $C$ in ($\ref\{eq:control\}$) is fairly straightforward. This parameter contains a single value bounded by [-1,1] to scale each thruster force by. Therefore, C can be represented as
 
@@ -69,7 +69,7 @@ $$
 
 where $C_t$ is the translational control signal and $C_r$ is the rotational control signal.
 
-===== Total Force =====
+## Total Force
 
 $F$ in ($\ref\{eq:control\}$) is the necessary force to apply to the submarine to cause a transition from the current state to a desired state. By substituting ($\ref\{eq:control:M\}$) and ($\ref\{eq:control:C\}$) into ($\ref\{eq:control\}$), it can be seen that the dimensions of F are also known
 
@@ -96,7 +96,7 @@ $$
 
 Therefore, $F$ is also a vector with 6 elements in it. Each element of $F$ is the summation of each of the rows of $M$ multiplied by the weights in $C$. Because the mass and inertial moments of the submarine are also known, $F$ can also be calculated utilizing the current and desired state.
 
-===== Solving the Equation =====
+## Solving the Equation
 Now that all of the parameters of ($\ref\{eq:control\}$) have been defined, we can use it to find our control. Notice that there are two knowns within the system, both $M$ and $F$. $M$ can be found by measuring the position and orientation of each thruster. $F$ results from the desired position of the sub. To determine $F$, P, I, D, W, H, and Error need to be known. Let
 
 $$
@@ -156,5 +156,5 @@ C_r = M^\{-1\}
 \end\{equation\}
 $$
 
-====== Control System Notes======
+# Control System Notes
 1. When tuning pitch and roll PID params, tune them just to keep the sub stable when moving forward/strafing. This is because we only currently care about keeping the sub level while moving, don't really care as much about overshoot when moving between different pitch/roll angles.

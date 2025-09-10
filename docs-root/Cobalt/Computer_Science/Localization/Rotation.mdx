@@ -1,4 +1,4 @@
-====== 3D Rotation ======
+# 3D Rotation
 \<WRAP center round important 60%/\>
 Note: This section is currently under revision.
 \<WRAP/\>
@@ -7,14 +7,14 @@ Note: This section is currently under revision.
 
 It must be stated that rotational systems are all mathematically consistent and equally valid.  The method discussed here is simply easier for use of humans.
 
-===== 3x3 Rotation =====
+## 3x3 Rotation
 This system describes an arbitrary rotation in 3D space with roll, pitch, and yaw, labeled $\psi, \phi,$ and $\theta$.
 
 Yaw $\theta$ describes rotation about z-axis. Pitch $\phi$ describes rotation about the y-axis. Roll $\psi$ describes rotation about the x-axis.  All rotations described here are right-handed.
 
 These three values can be used to generate a 3x3 orthonormal matrix, with a determinant of 1, that rotates any $\begin\{bmatrix\} x,y,z \end\{bmatrix\}$ vector.
 
-==== Roll ====
+### Roll
 To Roll a vector about the x-axis, left-multiply it by the rotation vector $R_\psi$.
 
 $$
@@ -26,7 +26,7 @@ R_\psi =
 \end\{bmatrix\}
 $$
 
-==== Pitch ====
+### Pitch
 To Pitch a vector about the y-axis, left-multiply it by the rotation vector $R_\phi$.
 
 $$
@@ -38,7 +38,7 @@ cos(\phi) & 0 & sin(\phi) \\
 \end\{bmatrix\}
 $$
 
-==== Yaw ====
+### Yaw
 To Pitch a vector about the y-axis, left-multiply it by the rotation vector $R_\phi$.
 
 $$
@@ -50,7 +50,7 @@ sin(\theta) & cos(\theta) & 0 \\
 \end\{bmatrix\}
 $$
 
-==== Complete Rotation ====
+### Complete Rotation
 A full 3D rotation includes a roll, pitch, and yaw.  With these three rotations, we can describe any arbitrary orientation.
 
 Order of operation is important.  The complete $R$ matrix describes the vehicle first yawing around its own z-axis, then pitching along its own y-axis, and then finally rolling about its own x-axis.  As an example, the rotation $R([180,10,30])$ would have the submarine pointed to the left $30^o$, then pitched slightly upwards by $10^o$, and then rolling onto its back at $180^o$. 
@@ -104,7 +104,7 @@ $$
 \theta^* = \arctan(-R_\{12\},R_\{22\})
 $$
 
-===== Inverse Rotation =====
+## Inverse Rotation
 To reverse the rotation of an $ \begin\{bmatrix\} x,y,z \end\{bmatrix\} $ matrix, you multiply it by the inverse of the rotation matrix $R^\{-1\}$.  The inverse of an orthagonal matrix is equal to its transpose.
 
 $$
@@ -181,7 +181,7 @@ The Equivalent yaw/pitch/roll combination for a Rotation Matrix's transpose will
 
 
 
-==== Equivalent Rotations ====
+### Equivalent Rotations
 It is often necessary to find an equivalent rotation from a series or rotations, or as the difference between two rotations.
 
 We often want to calculate where our vector is at after rotating first by $R_1$, then by $R_2$, and finally by $R_3$.  If you recall from above, these complete Rotation matrices will behave exactly as the specific roll, pitch, and yaw matrices.  That is to say, the rotations they perform are all relative to the fixed global $x,y,z$ axes.  Which means that the rotation performed last, $R_3$, must be allowed to act on the vector first.
@@ -212,10 +212,10 @@ $$
 To find the rotation //between// two rotations, it is helpful to ask the question "What rotation would I need to achieve $R_2$ if $R_1$ was at the origin?" The answer is, of course, just $R_2$. We find our relative motion by first un-rotating $R_2$ by $R_1$
 
 
-===== Special Properties =====
+## Special Properties
 Rotation matrices have some very exploitable properties.  It stands to reason that there is an underlying structure, as we are using 9 elements to represent only 3 unique values.
 
-=== Othanormal ===
+#### Othanormal
 A Rotation matrix's Transpose is equal to its inverse.
 
 
@@ -226,7 +226,7 @@ $$
 
 $$
 
-===== Code =====
+## Code
 
 To produce a 3x3 rotation matrix from roll $\psi$, pitch $\phi$, and yaw $\theta$ use the following matlab code or it's C++ equivalent:
 

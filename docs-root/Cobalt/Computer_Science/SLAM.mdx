@@ -1,7 +1,7 @@
-====== SLAM ======
-====== Simultaneous Localization and Mapping ======
+# SLAM
+# Simultaneous Localization and Mapping
 
-===== Overview =====
+## Overview
 In robot navigation, a SLAM algorithm is used to construct a map of the robot's environment, while simultaneously locating the robot within that map. There are many different SLAM algorithms, but we are currently using a visual based system using the sub's right and left cameras. This allows us to link the system to Object Detection.
 
 The specific system we are using is [[https://github.com/raulmur/ORB_SLAM2|ORB-SLAM2]], an open source feature based visual slam system which we modified for the sub. The paper describing the system can be found [[https://arxiv.org/pdf/1610.06475.pdf|here]]. 
@@ -25,7 +25,7 @@ A viewer that plots the detected map points.
 
 
 
-===== Structure =====
+## Structure
 The SLAM algorithm is complex, but it links to the rest of the sub's system through a single node at ~/ros/src/robosub_orb_slam/src/ros_stereo.cc. The node:
 
 Subscribes to:
@@ -35,20 +35,20 @@ Subscribes to:
 Publishes to:
   * /SLAMpoints - the 3d location of the map points in space, and the 2d location of the map points on each image frame.
 
-===== How to Run =====
+## How to Run
 
 /\<code bash\>
 $ roslaunch robosub_orb_slam slam.launch use_viewer:=True
 /\</code\>
 
-===== How it Works =====
+## How it Works
 
 \{\{:cs:slam:orb2.png\}\}
 
 ORB-SLAM2 is a feature based algorithm that takes keyframes from video output and extracts keypoints or features (such as corners), and uses them to establish location of the sub and its surroundings.
 
 It consists of three main modules: Tracking, Local Mapping, and Loop Closing.
-==== Tracking ====
+### Tracking
 
 -Tracking localizes the camera by comparing features in a local map.  
 
@@ -62,7 +62,7 @@ It consists of three main modules: Tracking, Local Mapping, and Loop Closing.
 
 
 
-==== Local Mapping ====
+### Local Mapping
 
 -Keyframes are added to co-visibility graph Spanning Tree.
 
@@ -71,7 +71,7 @@ It consists of three main modules: Tracking, Local Mapping, and Loop Closing.
 -Validity of map point is checked by seeing if it is found in other keyframes where it is predicted to be. Must be seen by at least 3 other keyframes.
 
 
-==== Loop Closing ====
+### Loop Closing
 
 -Loop closing is when the sub recognizes that it has returned to a previous location and adjust map points to accommodate.
 
@@ -80,7 +80,7 @@ It consists of three main modules: Tracking, Local Mapping, and Loop Closing.
 -If loop candidate is found preform similarity transform.
 
 -Fuse map points and preform bundle adjustment.
-==== Map ====
+### Map
 
 Each map point stores:
     *Its 3D position in the world coordinate system.
@@ -88,5 +88,5 @@ Each map point stores:
     *ORB descriptor.
 
     *The maximum dmax and minimum dmin distances at which the point can be observed, according to the scale invariance limits of the ORB features.
-==== Place Recognition ====
+### Place Recognition
 

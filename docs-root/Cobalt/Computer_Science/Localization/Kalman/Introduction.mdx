@@ -1,4 +1,4 @@
-====== Kalman Filter Introduction ======
+# Kalman Filter Introduction
 \<WRAP center round important 60%\>
 Note: This section is currently under revision.
 \</WRAP\>
@@ -10,7 +10,7 @@ The true algorithm for the Kalman filter is covered in the Kalman Filter section
 Note: all images below have been created with simple Matlab Scripts. If seeing the code helps clarify what's going on, the .m files can all be found under internal location cs:localization:kalman.
 
 
-===== Section 1 - Linear Least Squares Estimation =====
+## Section 1 - Linear Least Squares Estimation
 
 The Kalman Filter relies on a simple underlying concept – the linear least squares estimation. Given multiple noisy measurements of some state (speed, depth, acceleration, voltage, etc) the **LLSE** is an estimate that optimizes for the minimum of the sum of the squares of the errors.
 
@@ -74,7 +74,7 @@ $$
 
 Remarkably, this equation will give us an $X$ vector that satisfies the LLSE optimization.
 
-====Example:====
+### Example:
 
 If we want to fit a line to two points, both data points must satisfy the line equation $y = mx + b$.
 
@@ -170,7 +170,7 @@ $$
 
 We've just //estimated// our //state// based off of //noisy// measurements in an optimal fashion.  At it's core, line-fitting like this is all that the Kalman Filter is doing.  These next sections we will continuously build upon this basic function until we have something resembling the Kalman Filter.
 
-===== Section 2 - Performance of Multiple Noisy Sensors =====
+## Section 2 - Performance of Multiple Noisy Sensors
 
 We can guess intuitively that the noisier our sensors, the worse our estimation.  Likewise, the more sensors (measurements) we obtain, the better our estimation.  Bayesian statistics tells us that all information, no matter how noisy, is still //good// information.  Indeed the entire point of this field of mathematics is to get very accurate estimations from a combination of far-less accurate measurements.  But exactly //how much// better do our estimates get?
 
@@ -215,7 +215,7 @@ If we create a script that generates 4 measurements by taking our true depth and
 Now we know how confident we can be in our estimates given multiple, identical sensors.
 
 
-===== Section 3 - Weighted Least Squares =====
+## Section 3 - Weighted Least Squares
 
 The underlying assumption of the Linear Least Squares Estimation is that all measurements hold equal weight.  That is to say, all are equally noisy and should be trusted equally.  This can work well for fusing the results of duplicate sensors, but becomes a poor assumption when combining different sensors.
 
@@ -305,7 +305,7 @@ Thus, if you try to predict your location 1 second in the future, $x[k+1] = x[k]
 
 And if you think that equation for variance looks remarkably like the Law of Cosines in Trigonometry - //Congratulations//. You get a cookie.
 
-===== Section 4 - Modeling a System =====
+## Section 4 - Modeling a System
 
 Taking a break from probability and estimation, we need to consider how to model a system in time. Think of it like modeling the position of a shell fired from a cannon. Physics 101 stuff.
 
@@ -366,7 +366,7 @@ This model doesn't iterate the future, but rather calculates measurements $Y$ of
 
 In our previous examples with depth sensors, C was a simple vector of $1s$ because our only state was depth, and it was being measured directly.  As with the Transition matrix, the Emission matrix can rapidly become complex as the type of sensors, states, and measurements being considered expand. However, creating the Emission Matrix will be covered under a different Localization Topic.  Here, all we care about is creating a systematic format for our system dynamics and our sensor measurements.
 
-==== Example ====
+### Example
 
 Let's use our State Space Model to make an example with our Depth Sensors.
 
@@ -407,7 +407,7 @@ We see that at each point in time, we take many measurements, and estimate a pos
 
 Next, we’ll see how we can do //better//.
 
-===== Section 5a Previous State as a Measurement - Intuition =====
+## Section 5a Previous State as a Measurement - Intuition
 
 Now that we know how to model our physical systems, and take measurements at individual points in time, we can start to get to the root of the Kalman Filter.
 
@@ -549,7 +549,7 @@ $$
 
 Now we have $R_k$ as a function of $W$, and $W$ as a function of $R_\{k-1\}$.  This might seem circular, but in fact it's //iterative//. The accuracy of the estimation of our current state $X_k$ is a function of the accuracy of the estimation of our previous state $X_\{k-1\}$.
 
-==== Example ====
+### Example
 Putting everything together now, let's model a system and track it with our new iterative WLLSE algorithm.
 
 Starting Parameters:
@@ -663,7 +663,7 @@ Now we can start to see the full power of the Kalman filter taking shape. The be
 
 It doesn't converge to an error of $0$, of course. The Process Noise $Q$ guarantees that we can't perfectly predict the future, which sets a lower bound on how well we can guess forward in time.  But using nothing more than the same 4 depth sensors, we've significantly increased the accuracy of our information.
 
-===== End =====
+## End
 
 That's all there is to it. The true algorithm for the Kalman Filter upon first glance, will seem a bit different that what we've done here.  It utilizes separate prediction and measurement steps, and then compromises between them based off of a factor $K$ called the Kalman Gain. However, looking more closely, you'll notice that both our algorithm here, and the true Kalman Filter algorithm require the same input data, and have very similar mathematical patterns.  
 

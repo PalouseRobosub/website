@@ -1,8 +1,8 @@
-====== Hydrophones ======
+# Hydrophones
 We use our hydrophones to locate the pinger in the pool, which can be utilized for localization purposes.
 
 
-===== Introduction =====
+## Introduction
 //Note: The purpose of this page is to describe how the arrival times are acquired on a number of hydrophone channels. Documentation describing how that information is turned into a pinger bearing is found [[cs:hydrophones:pinger_bearing:start|here]].//
  
 
@@ -14,7 +14,7 @@ Further simplifications can be applied to the problem as well. By ensuring that 
 
 To calculate a cross correlation, set time delays of [-12.5, 12.5] microseconds on the signal and calculate the overlapping area for each time delay. Calculating overlap is done by multiplying the value of the origin hydrophone at a time step by the value of the shifted hydrophone function at the same time step and summing up all multiplied values. When both are positive or negative, a point constructively adds to the correlation. When the signs don't match on the points, the correlation decreases. When both signals are identical, the correlation is maximal.
 
-==== Summary ====
+### Summary
 Now that the theoretical aspects are out of the way, the foundation of the problem starts to take shape. 
 
   - Acquire signals on all four hydrophones (one reference and 3 along each X, Y, and Z axis)
@@ -25,14 +25,14 @@ The main difficulty exists in sampling the signals. It is important that samples
 
 
 
-===== System Design =====
+## System Design
 
 
 \{\{ :ee:hydrophones:hydrophones-system-architecture.jpg\}\}
 
 The hydrophones have a piezo sensors that outputs small voltages as sound hits them. To be able to read them, the hydrophone signals are filtered with a 1st order bandpass and then are gained by approximately 40-60dB. After the signals are amplified, they are then passed to the ADC for conversion. The ADC samples the hydrophone signals at 5MHz simultaneously and outputs the converted information over a custom, parallel interface. This interface is differential and utilizes DDR (Dual data rate). In order to read the ADC values, the Zynq SoC is used. The Zynq has a dual core ARM processor embedded in FPGA fabric. A custom Verilog module was created for reading the parallel interface output by the ADC. The data is then sent over the AXI4-Stream protocol to allow it to be transferred into the processor's RAM through the HP-AXI interface (AXI is a common communication protocol for custom hardware modules written in Verilog). In order to accommodate the high data rate of the analog measurements, the AXI stream is connected to a DMA engine. The DMA puts the data into the CPU RAM and tells the processor about it. At this point, the data has been successfully transferred into the computer and the cross correlation can be performed. The below sections delve into specifics of each of the different design areas.
 
-==== Analog Design ====
+### Analog Design
 \{\{ :ee:hydrophones:analog-hydrozynq.jpg |\}\}
 
 The analog signal goes through a five-stage amplification and filtering process. First, the signal is sent through two gain stages, each of which apply an adjustable gain to the signal. After the signal is gained into a reasonable voltage range, it is passed through a low-pass filter and then a high-pass filter to result in a bandpass filter of the signal.
@@ -40,7 +40,7 @@ The analog signal goes through a five-stage amplification and filtering process.
 Once the signal has been filtered and gained, it is preprocessed for the ADC. In order to acquire more accurate measurements, the ADC requires signals to be [[https://en.wikipedia.org/wiki/Differential_signaling|differential]]. The analog signals are therefore put through a single-ended to [[https://en.wikipedia.org/wiki/Differential_signaling|differential]] converter and biased around a DC voltage supplied by the ADC. Immediately before the signals enter the ADC, there is a low-pass anti-aliasing filtering (Low-pass differential RC).
 
 
-==== FPGA Design ====
+### FPGA Design
 \{\{ :ee:hydrophones:fpga-hydrozynq.jpg |\}\}
 
 The FPGA has a number of parts to it, but its ultimate goal is to take samples sent from the ADC and transfer them into the processor's memory. Immediately, the [[https://en.wikipedia.org/wiki/Differential_signaling|differential signals]] are passed to the FPGA IO buffers to convert them to single-ended. After the single-ended conversion, a custom Verilog block was written that takes in the ADC's clock and data signals to properly digitize the data. It then provides this data on an [[https://www.xilinx.com/support/documentation/ip_documentation/ug761_axi_reference_guide.pdf|AXI-Stream]] interface. Because ADC reader block is driven off an external clock and the rest of the FPGA is clocked internally, care must be taken to cross the clock boundaries to prevent metastability. The Xilinx FIFO generator was used, as it generates an asynchronous read-write FIFO that can be used for synchronizing data with the internal FPGA clock.
@@ -50,7 +50,7 @@ After synchronization, the AXI stream is connected to a Stream-To-Multi-Master D
 There are a few other features implemented in the FPGA fabric, including the XSystemMonitor, which monitors the FPGA temperature, and a SPI module implemented that is used to program the ADC internal registers and verify its functionality. In Rev C of the HydroZynq, the manually adjustable potentiometers have been replaced with SPI-programmable potentiometers, which allows the analog gain of the signal to be controlled digitally.
 
 
-==== Software Design ====
+### Software Design
 //Note: For simplicity, the HydroZynq is programmed bare-metal. There is no operating system on the board!//
 
 The software design is straightforward, but the most complex of the other systems. Communication with other computers is implemented using UDP sockets provided by the [[http://www.nongnu.org/lwip/2_0_x/index.html|lwIP (lightweight IP) library]]. When the CPU first boots, it loads the program off the SD card into memory. It then programs the FPGA bit stream and begins program execution after initializing most of the hardware peripherals, such as the Xilinx Gigabit-Ethernet peripheral. The application is then responsible for initializing soft peripherals that were instantiated in the FPGA fabric (such as the ADC reader, the system monitor, and the SPI engine). It configures the ADC chip and binds/connects to a variety of UDP ports for communication.
@@ -58,11 +58,11 @@ The software design is straightforward, but the most complex of the other system
 The software first attempts to sync onto the ping. Because the ping happens every two seconds, once the first ping has been found, the system can consistently find every other ping afterwards. To acquire initial synchronization, the code samples the hydrophones for 2.1 seconds and scans the data for the earliest start of a ping (by performing a threshold detection). Then, it calculates at what exact time the ping started and schedules sampling to begin at the next ping.
 
 After sync is acquired, the software samples for approximately 250ms during the ping period. It then verifies that the ping is present and truncates around the start of the ping to minimize the amount of data that needs to be cross-correlated. The software marks the timestamp of the ping and schedules a time that the next ping should occur at. Finally, the data is then cross-correlated to calculate the time of arrival delays for each ping. The software then transmits a variety of debug information (including all sample data, correlation calculations, and time of arrival deltas) over ethernet. The cycle continuously repeats until a ping is not detected in the 250ms sample period. If this occurs, the application will try to regain sync by continuously sampling for 2.1 seconds.
-===== Getting Started =====
+## Getting Started
 This section is designed to help a developer get started updating and programming the HydroZynq.
 
 
-==== Code ====
+### Code
 All software and firmware is available in [[https://gitlab.com/PalouseRobosub/Electrical/hydro-zynq|the Gitlab repository]]. There are two primary directories, ''%%hardware/%%'' and ''%%software/%%''. The ''%%hardware/%%'' folder contains all the Verilog and TCL files for interacting with Vivado. TCL scripts have been generated to rebuild the block design in [[https://www.xilinx.com/products/design-tools/vivado.html|Vivado]], and a ''%%README.txt%%'' file in ''%%proj/%%'' describes how to use them. Additionally, the IO constraints file is provided for the current hardware.
 
 The software folder contains all C source code used in programming the HydroZynq. An ELF file can be created by using the ''%%mk%%'' script supplied with the source file name. 
@@ -72,7 +72,7 @@ Example:
 
 All files located in ''%%src/%%'' will be compiled against the application specified to generate the binary.
 
-==== Programming & Debugging ====
+### Programming & Debugging
 In order to generate a boot-able ''%%BOOT.bin%%'' file (binary image that is used for booting off the SD card), utilize the ''%%doit%%'' script in the ''%%software/%%'' directory. 
 
 Example:
@@ -102,10 +102,10 @@ Once XMD has been started, a remote GDB server is automatically instantiated. To
   [hydrozynq-repo-path]/software/debug.sh
   
   
-==== Communication ====
+### Communication
 The HydroZynq communicates through UDP. A number of user scripts have been created in the ''%%scripts/%%'' folder for ease of use with UDP. For example, the stdout of the application is sent to Cobalt's UDP port 3004 (e.g. 192.168.0.2:3004). A simple python application ([hydrozynq-repo-path]/scripts.debug_stream.py) can be used to view the standard output of the application (such as dbprintf() statements).
 
-=== Port Descriptions ===
+#### Port Descriptions
 ^ Port Number ^ Destination ^ Description ^
 | 3000        | HydroZynq   | Command port                            |
 | 3001        | Cobalt      | Sample data stream port                 |
@@ -157,5 +157,5 @@ In debug mode, the HydroZynq records for 2.1 seconds, dumps all 2.1 seconds of d
 | Hydrophones                 | AS-1       | [[http://www.aquarianaudio.com/as-1-hydrophone.html|Datasheet]]|
 | Analog-to-Digital Converter | LTC2171-14 | [[http://cds.linear.com/docs/en/datasheet/21721014fb.pdf|Datasheet]]|
 
-=== Hydrophone dimensions: ===
+#### Hydrophone dimensions:
 \{\{:ee:hydrophones:as-1_hydrophone_dimensions.jpg\}\}
