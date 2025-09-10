@@ -29,9 +29,12 @@ const Page = async () => {
       <div className={styles.titleWrapper}>
         <h1 className={styles.title}>Palouse RoboSub</h1>
       </div>
-	  <div className={styles.graySection}>
-	  <br/>
-		<p style={{ textAlign: "center" }}>WSU&apos;s Palouse RoboSub club develops underwater submarines designed to participate in the intercollegiate RoboSub national competitions. Located in the basement of Dana Hall, Palouse RoboSub combines Electrical, Mechanical, and Computer Engineering to create complex AUVs and ROVs.</p>
+	    <div className={styles.graySection}>
+		    <p style={{ textAlign: "center" }}>
+          WSU&apos;s Palouse RoboSub club develops underwater submarines designed to participate in the intercollegiate
+          RoboSub national competitions. Located in the basement of Dana Hall, Palouse RoboSub combines Electrical,
+          Mechanical, and Computer Engineering to create complex AUVs and ROVs.
+        </p>
         <h2 style={{ fontSize: "40px" }}>Support Palouse RoboSub!</h2>
         <div className={styles.flexRow}>
           <div>If you are a student please consider <Link href="/join">joining</Link>!</div>
@@ -44,7 +47,6 @@ const Page = async () => {
         <div className={styles.flexRow}>
           <div>
             We regularly document our activities to share our progress and help the public understand our work.
-
             <Link href="/blog" className={styles.link}>Check the blog out here <ArrowRight/></Link>
           </div>
           <div>

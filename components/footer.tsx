@@ -12,7 +12,7 @@ const Footer = () => {
           <Image src="/vcea.png" alt="Voiland College of Engineering and Architecture" width={300} height={75} />
         </a>
       </div>
-      <div className={styles.flexRow}>
+      <div className={styles.links}>
         <div className={styles.flexCol} style={{ marginRight: "10px" }}>
           <div className={styles.flexRow}>
             <Image src="/linkedin.svg" alt="LinkedIn" height={24} width={24} />

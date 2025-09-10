@@ -77,3 +77,28 @@
     background-color: #EBEBEB;
     border-radius: 4px;
 }
+
+@media (max-width: 768px) {
+    .mainPhoto {
+        width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        height: auto;
+    }
+    .title {
+        font-size: 36px;
+        text-wrap: wrap;
+        width: 100%;
+    }
+    .graySection {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .flexRow {
+        flex-direction: column;
+    }
+    .section {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
