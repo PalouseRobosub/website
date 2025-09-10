@@ -230,7 +230,7 @@ $$
 
 To produce a 3x3 rotation matrix from roll $\psi$, pitch $\phi$, and yaw $\theta$ use the following matlab code or it's C++ equivalent:
 
-\<code matlab\>
+```matlab
 
 function [R] = r3D(omega) % omega = [roll; pitch; yaw]
 
@@ -245,11 +245,11 @@ R = [cosd(omega(3)) -sind(omega(3)) 0;...
     0 sind(omega(1)) cosd(omega(1))];
     
 end
-\</code\>
+```
 
 To find an equivalent roll $\psi$, pitch $\phi$, and yaw $\theta$ //given// a 3x3 rotation matrix $R$ use the following code:
 
-\<code matlab\>
+```matlab
 
 function [omega] = ir3D(R)
 
@@ -265,5 +265,5 @@ function [omega] = ir3D(R)
 
    omega = [psi;phi;theta]; %omega = [roll;pitch;yaw]
 end
-\</code\>
+```
 

@@ -14,21 +14,21 @@ Real-world testing is often performed at Gibb pool, which allows for full system
 
 ### Compile All Tests
 To compile all tests, execute the following command from any directory:
-/\<code bash\>
+```bash
 $ rsmake tests
-/\</code\>
+```
 
 ### Run All Tests
 To run all tests, execute the following command from any directory:
-/\<code bash\>
+```bash
 $ rsmake run_tests
-/\</code\>
+```
 
 ### Run One Test
 To run a single test, execute the following command from any directory:
-/\<code bash\>
+```bash
 $ rostest robosub /\<test_name\>
-/\</code\>
+```
 By default, rostest creates a new master for all publishers and subscribers. If you wish to view messages being passed between nodes, simply add ''%%--%%reuse-master'' to the above command.
 
 ## Tested Components

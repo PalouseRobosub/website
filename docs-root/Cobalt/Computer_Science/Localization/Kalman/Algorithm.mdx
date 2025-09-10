@@ -76,7 +76,7 @@ Unfortunately the code looks more complicated than what's above, because I throu
 #### Model / Sensor Parameters
 Here we initialize all the matrices we'll need for our model. $A$ Transition Matrix, $B$ Input Matrix, $X$ State Vector, $u$ input vector, and Process noise $Q$, as well as general parameters like our time step $dt$ and physical parameters of our vehicle like mass and rotational inertia.  The Emission Matrix $C$ is also generated here, with corresponding sensor noises $\sigma$. 
 
-\<code matlab\>
+```matlab
 %% Model parameters 
 clear all
 close all
@@ -144,12 +144,12 @@ P(:,:,1) = 9999*eye(6);    %covariance matrix of state estimation
 X(3,1) = 100;   %random initial orientation
 
 
-\</code\>
+```
 
 ##### = Initializing Graphic Objects
 This was just necessary to produce those nice .gif files. Ignore this unless you have some weird interest in matlab graphing syntax.
 
-\<code matlab\>
+```matlab
 %% Initialize graphics
 close all
 f1 = figure(1);
@@ -184,18 +184,18 @@ colorbar
 
 frame(1) = getframe(f1);
 tic;
-\</code\>
+```
 
 
 #### Model / Kalman Update Loop
 
 Here's the meat of what you're looking for - third codeblock down, the Kalman Update section
-\<code matlab\>
+```matlab
 %% Model / Filter update loop
 for k = 1:T/dt    
-\</code\>
+```
 ##### Control System Update
-\<code matlab\>
+```matlab
 %% Control System
     %calculate error
     err(1,k+1) = sqrt(sum((goal-X_est([1,2],k)).^2));
@@ -215,10 +215,10 @@ for k = 1:T/dt
     u_r = f_goal(2) * [1;-1];
     %Combine thrusts to acomplish goals - limit each goal to 50% thrust to truncate demand.
     u(:,k) = sign(u_t).*min(abs(u_t),thrust/2) + sign(u_r).*min(abs(u_r),thrust/2); 
-\</code\>
+```
 
 ##### Model Update
-\<code matlab\>
+```matlab
     %% Model Submarine/thrusters (Reality normally does this job)
     %calculate new state from last state
     X(:,k+1) = A*X(:,k) + B*(rr(X(3,k))*motor*u(:,k) + Q*randn(3,1));
@@ -230,10 +230,10 @@ for k = 1:T/dt
     
     %calculate new sensor measurements from new state
     Y(:,k+1) = C*X(:,k+1) + sigma.*randn(3,1);
-\</code\>
+```
 
 ##### Kalman Update Loop
-\<code matlab\>
+```matlab
     %% Run Kalman Filter
     %Estimate new state from last state estimate
     X_est(:,k+1) = A*X_est(:,k) + B*(rr(X_est(3,k))*motor*u(:,k));
@@ -256,10 +256,10 @@ for k = 1:T/dt
     while(abs(X_est(5,k+1))\>180)
         X_est(3,k+1) = X_est(3,k+1) - sign(X_est(3,k+1))*360;
     end
-\</code\>
+```
 
 ##### Graphic Update
-\<code matlab\>
+```matlab
  %% Graphic update
     %figure(1)
     tT.String = ['Position at Time = ',num2str(k*dt+dt),'sec'];
@@ -293,24 +293,24 @@ for k = 1:T/dt
     tic;
     
     frame(ceil(k/2)+1) = getframe(f1);
-\</code\>
+```
 
 That's the entirety of the update loop. It will stop when Time ''T/dt'' runs out or it hits an arbitrary stop condition
 
-\<code matlab\>
+```matlab
  %% Stop condition - close to target 
     if(sum(abs(goal-X_est(1:2,k+1))) \< .3)
         break;
     end
     
 end  %ends for k=1:T/dt loop
-\</code\>
+```
 
 #### Graphics cleanup
 
 Why are you reading this?  It's uninteresting.
 
-\<code matlab\>
+```matlab
 %% clean up chart, close out and create gif
 delete(utext);
 for n=1:10
@@ -323,4 +323,4 @@ end
 movie2gif(frame, 'kalman_sim_halfs.gif', 'DelayTime', dt,'Loopcount',inf)
 
 %%%End Program%%%
-\</code\>
+```

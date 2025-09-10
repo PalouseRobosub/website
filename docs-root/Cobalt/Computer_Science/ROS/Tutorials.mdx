@@ -15,16 +15,16 @@ Nodes are typically grouped together into a **package**. All of our software is 
 
 ### Command Line Tools
 ROS provides many useful command-line tools. Your BASH environment gets access to these when you have the following line in your ~/.bashrc file:
-/\<code bash\>
+```bash
 source /opt/ros/indigo/setup.bash
-/\</code\>
+```
 Most ROS commands support tab autocompletion, so take advantage of it! 
 
 #### Navigating the filesystem
 ROS has a few different commands that are useful for moving and looking around. They are typically in the form:
-/\<code bash\>
+```bash
 $ /\<command\> /\<package_name\> /\<...\>
-/\</code\>
+```
 Most are based on the typical navigation functions:
   * roscd
   * rosls
@@ -32,29 +32,29 @@ Most are based on the typical navigation functions:
 #### Starting nodes
 ##### Starting a single node
 While you can manually find the executable (or python script) and run it manually, ROS provides a tool for quickly finding and starting a node, the ''rosrun'' command:
-/\<code bash\>
+```bash
 $ rosrun /\<package_name\> /\<node_name\>
-/\</code\>
+```
 
 ##### Starting multiple nodes
 The ''roslaunch'' command allows you to launch multiple nodes at the same time. The nodes are specified in a special file called a launch file.
-/\<code bash\>
+```bash
 $ rosrun /\<package_name\> /\<launchfile_name\>
-/\</code\>
+```
 More information about launch files can be found [[|here]]
 
 
 
 #### Viewing active nodes and topics
 The ''rosnode'' command shows information about nodes. You can view all currently running nodes by running
-/\<code bash\>
+```bash
 $ rosnode list
-/\</code\>
+```
 
 Likewise, the ''rostopic'' command shows information about topics. You can view all currently active topics by running
-/\<code bash\>
+```bash
 $ rostopic list
-/\</code\>
+```
 
 
 #### How to Write a ROS Node

@@ -3,8 +3,7 @@ We use our hydrophones to locate the pinger in the pool, which can be utilized f
 
 
 ## Introduction
-//Note: The purpose of this page is to describe how the arrival times are acquired on a number of hydrophone channels. Documentation describing how that information is turned into a pinger bearing is found [[cs:hydrophones:pinger_bearing:start|here]].//
- 
+*Note: The purpose of this page is to describe how the arrival times are acquired on a number of hydrophone channels. Documentation describing how that information is turned into a pinger bearing is found [[cs:hydrophones:pinger_bearing:start|here]].*
 
 The arrival time calculations tend to be complicated by noise, which means that it is not possible to trivially detect rising edges. The ping can be thought of as an identical signal arriving at slightly different times on each of the hydrophones. In order to accurately calculate the time differences between each signal, a [[https://en.wikipedia.org/wiki/Cross-correlation|cross correlation]] is used. A cross correlation essentially slides one signal over the top of another, and at the point where the signals maximally overlap, the amount of shifting needed is equal to the time delay of the signal. Below is an example of a cross correlation with a sine wave. In the demo, you can see that at X offset = 0, the correlation result is maximum. Therefore, the time delay of the two signals is zero (as they are duplicates of eachother).
 
@@ -51,8 +50,7 @@ There are a few other features implemented in the FPGA fabric, including the XSy
 
 
 ### Software Design
-//Note: For simplicity, the HydroZynq is programmed bare-metal. There is no operating system on the board!//
-
+*Note: For simplicity, the HydroZynq is programmed bare-metal. There is no operating system on the board!*
 The software design is straightforward, but the most complex of the other systems. Communication with other computers is implemented using UDP sockets provided by the [[http://www.nongnu.org/lwip/2_0_x/index.html|lwIP (lightweight IP) library]]. When the CPU first boots, it loads the program off the SD card into memory. It then programs the FPGA bit stream and begins program execution after initializing most of the hardware peripherals, such as the Xilinx Gigabit-Ethernet peripheral. The application is then responsible for initializing soft peripherals that were instantiated in the FPGA fabric (such as the ADC reader, the system monitor, and the SPI engine). It configures the ADC chip and binds/connects to a variety of UDP ports for communication.
 
 The software first attempts to sync onto the ping. Because the ping happens every two seconds, once the first ping has been found, the system can consistently find every other ping afterwards. To acquire initial synchronization, the code samples the hydrophones for 2.1 seconds and scans the data for the earliest start of a ping (by performing a threshold detection). Then, it calculates at what exact time the ping started and schedules sampling to begin at the next ping.
@@ -80,8 +78,7 @@ Example:
 
 This will automatically mount and copy over ''%%BOOT.bin%%'' to an SD card for the HydroZynq. This script takes in the source file name of the main application as the first argument and the bit stream file as the second parameter. 
 
-//The current firmware utilizes **software/bit/adc_dma_revb.bit** as the bitstream file.//
-In order to efficiently debug through GDB and program on the fly, the [[https://store.digilentinc.com/jtag-hs3-programming-cable/|Digilent HS3]] can be used as a JTAG access point for GDB debug interfaces. To interact with the HydroZynq through JTAG, use the ''%%xmd%%'' command (provided by the Xilinx Vivado tool suite).
+*The current firmware utilizes **software/bit/adc_dma_revb.bit** as the bitstream file.*In order to efficiently debug through GDB and program on the fly, the [[https://store.digilentinc.com/jtag-hs3-programming-cable/|Digilent HS3]] can be used as a JTAG access point for GDB debug interfaces. To interact with the HydroZynq through JTAG, use the ''%%xmd%%'' command (provided by the Xilinx Vivado tool suite).
 
 After executing xmd from the command line, you will enter a shell-like environment. To connect to the ARM core for programming, enter:
   \> connect arm hw

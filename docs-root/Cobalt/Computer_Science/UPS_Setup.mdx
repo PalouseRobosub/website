@@ -2,9 +2,9 @@
 
 ## Installing NUT for the OpenUPS
 
-/\<code bash\>
+```bash
 $ sudo aptitude install nut
-/\</code\>
+```
 
 Add the following to /etc/nut/ups.conf:
 
@@ -13,26 +13,26 @@ Add the following to /etc/nut/ups.conf:
     driver = usbhid-ups
     port = auto
     desc = "OpenUPS"
-/\</code\>
+```
 And comment out the line ''maxretry = 3''.
 
 Try if it works:
 
-/\<code bash\>
+```bash
 $ sudo upsdrvctl start
-/\</code\>
+```
 
 Then, edit ''/etc/nut/nut.conf'' such that the last line reads
 
 /\<code\>
 MODE=standalone
-/\</code\>
+```
 
 Finally reboot and run
 
-/\<code bash\>
+```bash
 $ sudo upsc openups@localhost
-/\</code\>
+```
 
 This should display information about the connected UPS. Check the ''device.model'' parameter and make sure that it is OPEN-UPS
 

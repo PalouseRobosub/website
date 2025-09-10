@@ -3,17 +3,17 @@ Firmware on the submarine is defined as programs and binary images that are load
 
 In the firmware directory of the robosub repository, different project folders exist. Each one of these projects is a microcontroller project corresponding to a specific microcontroller. Each project has different (Arduino) libraries associated with it. These can be added, updated, manipulated, and removed using the command
 
-/\<code bash\>
+```bash
 platformio lib
-/\</code\>
+```
 
 Most projects rely on external libraries to function. Once all libraries are in place and the project is ready for binary creation, it can be compiled using the command
 
-/\<code bash\>
+```bash
 platformio run
-/\</code\>
+```
 
 This will only compile the necessary source files into a binary image. To load the image onto the micrcontroller, use the command
-/\<code bash\>
+```bash
 platformio run --target upload
-/\</code\>
+```

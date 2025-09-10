@@ -90,7 +90,7 @@ Notes:
  * Copy only the strings that needs to be modified
  */
 $lang['js']['nosmblinks'] = '';
-/\</code\>
+```
 
 ### Image Links
 
@@ -217,7 +217,7 @@ Dokuwiki supports ordered and unordered lists. To create a list item, indent you
   - Another item
     - Just use indention for deeper levels
   - That's it
-/\</code\>
+```
 
 Also take a look at the [[doku\>faq:lists|FAQ on list items]].
 
@@ -262,7 +262,7 @@ Typography: [[DokuWiki]] can convert simple text characters to their typographic
 /\<code\>
 -\> /\<- /\<-\> =\> /\<= /\<=\> \>\> /\</\< -- --- 640x480 (c) (tm) (r)
 "He thought 'It's a man's world'..."
-/\</code\>
+```
 
 The same can be done to produce any kind of HTML, it just needs to be added to the [[doku\>entities|pattern file]].
 
@@ -284,7 +284,7 @@ I think we should do it
 \>\> Yes!
 
 \>\>\> Then lets do it!
-/\</code\>
+```
 
 I think we should do it
 
@@ -382,7 +382,7 @@ You can include code blocks into your documents by either indenting them by at l
 
 /\<code\>
 This is preformatted code all spaces are preserved: like              /\<-this
-/\</code\>
+```
 
 /\<file\>
 This is pretty much the same, but you could use it to show that you quoted a file.
@@ -394,7 +394,7 @@ Those blocks were created by this source:
 
   /\<code\>
   This is preformatted code all spaces are preserved: like              /\<-this
-  /\</code\>
+  ```
 
   /\<file\>
   This is pretty much the same, but you could use it to show that you quoted a file.
@@ -402,9 +402,9 @@ Those blocks were created by this source:
 
 ### Syntax Highlighting
 
-[[wiki:DokuWiki]] can highlight sourcecode, which makes it easier to read. It uses the [[http://qbnz.com/highlighter/|GeSHi]] Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''/\<nowiki\>/\<code java\>/\</nowiki\>'' or ''/\<nowiki\>/\<file java\>/\</nowiki\>''.
+[[wiki:DokuWiki]] can highlight sourcecode, which makes it easier to read. It uses the [[http://qbnz.com/highlighter/|GeSHi]] Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''/\<nowiki\>```java/\</nowiki\>'' or ''/\<nowiki\>/\<file java\>/\</nowiki\>''.
 
-/\<code java\>
+```java
 /**
  * The HelloWorldApp class implements an application that
  * simply displays "Hello World!" to the standard output.
@@ -414,10 +414,9 @@ class HelloWorldApp \{
         System.out.println("Hello World!"); //Display the string.
     \}
 \}
-/\</code\>
+```
 
-The following language strings are currently recognized: //4cs 6502acme 6502kickass 6502tasm 68000devpac abap actionscript3 actionscript ada aimms algol68 apache applescript apt_sources arm asm asp asymptote autoconf autohotkey autoit avisynth awk bascomavr bash basic4gl batch bf biblatex bibtex blitzbasic bnf boo caddcl cadlisp ceylon cfdg cfm chaiscript chapel cil c_loadrunner clojure c_mac cmake cobol coffeescript c cpp cpp-qt cpp-winapi csharp css cuesheet c_winapi dart dcl dcpu16 dcs delphi diff div dos dot d ecmascript eiffel email epc e erlang euphoria ezt f1 falcon fo fortran freebasic freeswitch fsharp gambas gdb genero genie gettext glsl gml gnuplot go groovy gwbasic haskell haxe hicest hq9plus html html4strict html5 icon idl ini inno intercal io ispfpanel java5 java javascript jcl j jquery julia kixtart klonec klonecpp kotlin latex lb ldif lisp llvm locobasic logtalk lolcode lotusformulas lotusscript lscript lsl2 lua m68k magiksf make mapbasic mathematica matlab mercury metapost mirc mk-61 mmix modula2 modula3 mpasm mxml mysql nagios netrexx newlisp nginx nimrod nsis oberon2 objc objeck ocaml-brief ocaml octave oobas oorexx oracle11 oracle8 oxygene oz parasail parigp pascal pcre perl6 perl per pf phix php-brief php pic16 pike pixelbender pli plsql postgresql postscript povray powerbuilder powershell proftpd progress prolog properties providex purebasic pycon pys60 python qbasic qml q racket rails rbs rebol reg rexx robots rpmspec rsplus ruby rust sas sass scala scheme scilab scl sdlbasic smalltalk smarty spark sparql sql standardml stonescript swift systemverilog tclegg tcl teraterm texgraph text thinbasic tsql twig typoscript unicon upc urbi uscript vala vbnet vb vbscript vedit verilog vhdl vim visualfoxpro visualprolog whitespace whois winbatch xbasic xml xojo xorg_conf xpp yaml z80 zxbasic//
-
+The following language strings are currently recognized: *4cs 6502acme 6502kickass 6502tasm 68000devpac abap actionscript3 actionscript ada aimms algol68 apache applescript apt_sources arm asm asp asymptote autoconf autohotkey autoit avisynth awk bascomavr bash basic4gl batch bf biblatex bibtex blitzbasic bnf boo caddcl cadlisp ceylon cfdg cfm chaiscript chapel cil c_loadrunner clojure c_mac cmake cobol coffeescript c cpp cpp-qt cpp-winapi csharp css cuesheet c_winapi dart dcl dcpu16 dcs delphi diff div dos dot d ecmascript eiffel email epc e erlang euphoria ezt f1 falcon fo fortran freebasic freeswitch fsharp gambas gdb genero genie gettext glsl gml gnuplot go groovy gwbasic haskell haxe hicest hq9plus html html4strict html5 icon idl ini inno intercal io ispfpanel java5 java javascript jcl j jquery julia kixtart klonec klonecpp kotlin latex lb ldif lisp llvm locobasic logtalk lolcode lotusformulas lotusscript lscript lsl2 lua m68k magiksf make mapbasic mathematica matlab mercury metapost mirc mk-61 mmix modula2 modula3 mpasm mxml mysql nagios netrexx newlisp nginx nimrod nsis oberon2 objc objeck ocaml-brief ocaml octave oobas oorexx oracle11 oracle8 oxygene oz parasail parigp pascal pcre perl6 perl per pf phix php-brief php pic16 pike pixelbender pli plsql postgresql postscript povray powerbuilder powershell proftpd progress prolog properties providex purebasic pycon pys60 python qbasic qml q racket rails rbs rebol reg rexx robots rpmspec rsplus ruby rust sas sass scala scheme scilab scl sdlbasic smalltalk smarty spark sparql sql standardml stonescript swift systemverilog tclegg tcl teraterm texgraph text thinbasic tsql twig typoscript unicon upc urbi uscript vala vbnet vb vbscript vedit verilog vhdl vim visualfoxpro visualprolog whitespace whois winbatch xbasic xml xojo xorg_conf xpp yaml z80 zxbasic*
 There are additional [[doku\>syntax_highlighting|advanced options]] available for syntax highlighting, such as highlighting lines or adding line numbers.
 
 ### Downloadable Code Blocks
@@ -428,7 +427,7 @@ When you use the ''%%/\<code\>%%'' or ''%%/\<file\>%%'' syntax as above, you mig
 /\<file php myexample.php\>
 /\<?php echo "hello world!"; ?\>
 /\</file\>
-/\</code\>
+```
 
 /\<file php myexample.php\>
 /\<?php echo "hello world!"; ?\>
@@ -450,7 +449,7 @@ This is some /\<span style="color:red;font-size:150%;"\>inline HTML/\</span\>
 /\<HTML\>
 /\<p style="border:2px dashed red;"\>And this is some block HTML/\</p\>
 /\</HTML\>
-/\</code\>
+```
 
 /\<html\>
 This is some /\<span style="color:red;font-size:150%;"\>inline HTML/\</span\>
@@ -472,7 +471,7 @@ echo '/\<table class="inline"\>/\<tr\>/\<td\>The same, but inside a block level 
 echo '/\<td\>'.phpversion().'/\</td\>';
 echo '/\</tr\>/\</table\>';
 /\</PHP\>
-/\</code\>
+```
 
 /\<php\>
 echo 'The PHP version: ';
