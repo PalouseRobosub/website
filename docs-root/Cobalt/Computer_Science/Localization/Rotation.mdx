@@ -162,7 +162,7 @@ z
 
 $$
 
-It is worth stating explicitly that $R^\{-1\} \neq R(-\psi,-\phi,-\theta)$. If you yaw, then pitch, then roll into an orientation, you //cannot// anti-yaw, then anti-pitch, then anti-roll from that orientation to get back to the origin.  You'd have to anti-roll, then anti-pitch, then anti-yaw.  It must be rotated completely in reverse.  It must be multiplied by its //transpose// $R^\{\mathrm \{T\}\}$.
+It is worth stating explicitly that $R^\{-1\} \neq R(-\psi,-\phi,-\theta)$. If you yaw, then pitch, then roll into an orientation, you *cannot* anti-yaw, then anti-pitch, then anti-roll from that orientation to get back to the origin.  You'd have to anti-roll, then anti-pitch, then anti-yaw.  It must be rotated completely in reverse.  It must be multiplied by its *transpose* $R^\{\mathrm \{T\}\}$.
 
 $$
 U \neq (R_\{-\theta\} R_\{-\phi\} R_\{-\psi\})(R_\theta R_\phi R_\psi) U \\
@@ -200,7 +200,7 @@ Be sure to remember this, or you'll get headaches down the line.
 
 Now we have a different question.  Say we are at orientation $R_1$ and we want to rotate to another arbitrary rotation $R_2$.  For instance, we are at orientation $R_1(20,-40,7)$ and we tell our control system we want to go to the absolute orientation $R_1(70,10,-40)$.  What rotation will move us between these two orientations?
 
-Using what we know from above, about the order of operation, we can make an equation.  Recall that $R_\{err\}$ will rotate us from where we are currently, at $R_1$. Thus we must apply it //before// $R_1$:
+Using what we know from above, about the order of operation, we can make an equation.  Recall that $R_\{err\}$ will rotate us from where we are currently, at $R_1$. Thus we must apply it *before* $R_1$:
 
 $$
 R_1R_\{err\}U = R_2U \\
@@ -209,7 +209,7 @@ R_\{err\} = R_1^\{\mathrm \{T\}\}R_2 \\
 $$
 
 
-To find the rotation //between// two rotations, it is helpful to ask the question "What rotation would I need to achieve $R_2$ if $R_1$ was at the origin?" The answer is, of course, just $R_2$. We find our relative motion by first un-rotating $R_2$ by $R_1$
+To find the rotation *between* two rotations, it is helpful to ask the question "What rotation would I need to achieve $R_2$ if $R_1$ was at the origin?" The answer is, of course, just $R_2$. We find our relative motion by first un-rotating $R_2$ by $R_1$
 
 
 ## Special Properties
@@ -247,7 +247,7 @@ R = [cosd(omega(3)) -sind(omega(3)) 0;...
 end
 ```
 
-To find an equivalent roll $\psi$, pitch $\phi$, and yaw $\theta$ //given// a 3x3 rotation matrix $R$ use the following code:
+To find an equivalent roll $\psi$, pitch $\phi$, and yaw $\theta$ *given* a 3x3 rotation matrix $R$ use the following code:
 
 ```matlab
 

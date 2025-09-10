@@ -4,10 +4,10 @@
 
 ## Basic Text Formatting
 
-DokuWiki supports **bold**, //italic//, __underlined__ and ''monospaced'' texts. Of course you can **__//''combine''//__** all these.
+DokuWiki supports **bold**, *italic*, __underlined__ and ''monospaced'' texts. Of course you can **__*''combine''*__** all these.
 
-  DokuWiki supports **bold**, //italic//, __underlined__ and ''monospaced'' texts.
-  Of course you can **__//''combine''//__** all these.
+  DokuWiki supports **bold**, *italic*, __underlined__ and ''monospaced'' texts.
+  Of course you can **__*''combine''*__** all these.
 
 You can use /\<sub\>subscript/\</sub\> and /\<sup\>superscript/\</sup\>, too.
 
@@ -35,7 +35,7 @@ DokuWiki supports multiple ways of creating links.
 
 ### External
 
-External links are recognized automagically: http://www.google.com or simply www.google.com - You can set the link text as well: [[http://www.google.com|This Link points to google]]. Email addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
+External links are recognized automagically: http:*www.google.com or simply www.google.com - You can set the link text as well: [[http:*www.google.com|This Link points to google]]. Email addresses like this one: /\<andi@splitbrain.org\> are recognized, too.
 
   DokuWiki supports multiple ways of creating links. External links are recognized
   automagically: http://www.google.com or simply www.google.com - You can set
@@ -367,12 +367,12 @@ If you need to display text exactly like it is typed (without any formatting), e
 /\<nowiki\>
 This is some text which contains addresses like this: http://www.splitbrain.org and **formatting**, but nothing is done with it.
 /\</nowiki\>
-The same is true for %%//__this__ text// with a smiley ;-)%%.
+The same is true for %%*__this__ text* with a smiley ;-)%%.
 
   /\<nowiki\>
   This is some text which contains addresses like this: http://www.splitbrain.org and **formatting**, but nothing is done with it.
   /\</nowiki\>
-  The same is true for %%//__this__ text// with a smiley ;-)%%.
+  The same is true for %%*__this__ text* with a smiley ;-)%%.
 
 ## Code Blocks
 
@@ -498,7 +498,7 @@ echo '/\</tr\>/\</table\>';
 | nosort     | do not sort the items in the feed |
 | //n//[dhm] | refresh period, where d=days, h=hours, m=minutes. (e.g. 12h = 12 hours). |
 
-The refresh period defaults to 4 hours. Any value below 10 minutes will be treated as 10 minutes. [[wiki:DokuWiki]] will generally try to supply a cached version of a page, obviously this is inappropriate when the page contains dynamic external content. The parameter tells [[wiki:DokuWiki]] to re-render the page if it is more than //refresh period// since the page was last rendered.
+The refresh period defaults to 4 hours. Any value below 10 minutes will be treated as 10 minutes. [[wiki:DokuWiki]] will generally try to supply a cached version of a page, obviously this is inappropriate when the page contains dynamic external content. The parameter tells [[wiki:DokuWiki]] to re-render the page if it is more than *refresh period* since the page was last rendered.
 
 By default the feed will be sorted by date, newest items first. You can sort it by oldest first using the ''reverse'' parameter, or display the feed as is with ''nosort''.
 

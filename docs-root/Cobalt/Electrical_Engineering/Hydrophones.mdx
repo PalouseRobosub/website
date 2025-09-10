@@ -139,10 +139,10 @@ The supported keys are as follows:
 | threshold  | unsigned int | Sets the HydroZynq ping ADC threshold value. |
 | debug      | unsigned int | If data is 0, HydroZynq debug mode is disabled. Otherwise, debug mode is enabled. |
 | frequency  | unsigned int | Specifies target pinger frequency. May be 25000, 30000, 35000, or 40000. Units are Hz. **This must be set or the zynq will not look for pings.** |
-| post_ping_duration_us | unsigned int | The number of microseconds after ping threshold to truncate the signal to. //Default: 50 us//|
-| pre_ping_duration_us | unsigned int | The number of microseconds before ping threshold to truncate the signal to. //Default: 100 us//|
-| filter     | unsigned int | If data is 0, IIR filtering is disabled. Otherwise, filter is enabled. //Default: disabled.// |
-| min_fft_samples | unsigned int | The minimum number of samples to be used in Fourier transforms. In situations where fewer than this number of samples are available (e.g. ping detected close to end of sample set such that only a small number of samples are left before the end of the data array), a fourier transform will not be performed and the zynq will have to resync with the ping. Performing Fourier transforms on small numbers of samples will likely cause inaccurate frequencies to be reported. //Default: 2048// |
+| post_ping_duration_us | unsigned int | The number of microseconds after ping threshold to truncate the signal to. *Default: 50 us*|
+| pre_ping_duration_us | unsigned int | The number of microseconds before ping threshold to truncate the signal to. *Default: 100 us*|
+| filter     | unsigned int | If data is 0, IIR filtering is disabled. Otherwise, filter is enabled. *Default: disabled.* |
+| min_fft_samples | unsigned int | The minimum number of samples to be used in Fourier transforms. In situations where fewer than this number of samples are available (e.g. ping detected close to end of sample set such that only a small number of samples are left before the end of the data array), a fourier transform will not be performed and the zynq will have to resync with the ping. Performing Fourier transforms on small numbers of samples will likely cause inaccurate frequencies to be reported. *Default: 2048* |
 | print      | N/A          | Prints out all current zynq parameter values. |
 
 In debug mode, the HydroZynq records for 2.1 seconds, dumps all 2.1 seconds of data to the data stream port, and repeats. No correlations are performed and no result is sent.

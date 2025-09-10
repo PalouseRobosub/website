@@ -148,11 +148,11 @@ So in the system ABX = Y, (AB)X=Y is true, but it is generally thought of as A(B
 
 But consider rotations. If we want to take our system and string together two rotations, R1 and R2, how would we go about it?
 
-R2//R1//P = rP ? We just perform the R2 rotation on the result of R1*P, right?
+R2*R1*P = rP ? We just perform the R2 rotation on the result of R1*P, right?
 
 In fact no. As nice as this would be, let's think this through.
 
-Consider what would occur in the R2//R1//X system. Imagine that R1 is a 45 degree yaw, 0 degree pitch, 0 degree roll rotation. And assume that R2 is a 0 degree yaw, 90 degree pitch, 0 degree roll rotation. Lets assume that the two points we're rotating are represented by the vectors P1 = [1 0 0]' and P2 = [0 1 0]'
+Consider what would occur in the R2*R1*X system. Imagine that R1 is a 45 degree yaw, 0 degree pitch, 0 degree roll rotation. And assume that R2 is a 0 degree yaw, 90 degree pitch, 0 degree roll rotation. Lets assume that the two points we're rotating are represented by the vectors P1 = [1 0 0]' and P2 = [0 1 0]'
 
 Go ahead and put your right arm out in front of you, and your left arm to the side, and execute the two rotations. You should end with your right arm pointed up, and your left arm pointing back-left. But does this happen mathematically?
 

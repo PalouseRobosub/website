@@ -17,7 +17,7 @@ Our current AI was re-written using SMACH. There are several utility files such 
   - basic_states.py - contains all of the states for roulette and dice AI.
   - control_wrapper.py - wrapper made to ease communication with control system, making it easy to send basic commands such as dive, yaw, pitch, roll, move forward.
   - start_switch.py - every high-level state machine **must** have start_switch as their first state. It is a state that waits for ros message to be sent over topic /start_switch to be true at least 3 times.
-  - blind_movement.py - contains move_forward state that moves forward with //**x**// speed for //**y**// number of seconds.
+  - blind_movement.py - contains move_forward state that moves forward with ***x*** speed for ***y*** number of seconds.
   - SubscribeState.py - a state that was made which accept also topic to which you want to subscribe. It is also modified to pass over any input/output keys. **In future this file will also contain SynchronousSubscribeState that subscribes to two topics and moves once it has two**
 
 There is a useful tool to see state machine and transitions of it called [[http://wiki.ros.org/smach_viewer|smach_viewer]]. To run it, run
