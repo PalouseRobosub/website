@@ -89,7 +89,7 @@ means attention to detail and knowledge of required props is necessary. It is al
 to make sure all components have closing tags. Here are some examples.
 
 With Children:
-```mdxjs
+```mdx
 <OfficerBio imageSrc="/officer-images/will.jpg">
 
 ## Will Smith
@@ -100,7 +100,7 @@ With Children:
 ```
 
 Without Children:
-```mdxjs
+```mdx
 <Divider width="80%"/>
 ```
 
