@@ -2,26 +2,12 @@ import Image from "next/image";
 import styles from "@/styles/home.module.css"
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { readdirSync } from "fs";
-import { join } from "path";
-import { PostMeta } from "./blog/types";
+import {indexBlogPosts} from "@/lib/blog";
 
 const Page = async () => {
 
-  const files = readdirSync(join(process.cwd(), "/blog-posts"))
-
-  const posts = await Promise.all(files.map(async (file) => {
-    const { meta } = await import(`@/blog-posts/${file}`) as { meta: PostMeta }
-
-    return {...meta, slug: file.split(".")[0]}
-  }))
-
-  const sortedPosts = posts.sort((a, b) => {
-    const dateA = new Date(a.published).getTime()
-    const dateB = new Date(b.published).getTime()
-
-    return dateB - dateA
-  })
+  // get blog posts
+  const posts = await indexBlogPosts()
 
   return (
     <main className={styles.main}>
@@ -50,18 +36,19 @@ const Page = async () => {
             <Link href="/blog" className={styles.link}>Check the blog out here <ArrowRight/></Link>
           </div>
           <div>
+            {/* show 3 newest blog posts */}
             <h4 style={{ margin: "0" }}>Recent Posts</h4>
             <div className={styles.post}>
-              <Link href={`/blog/${sortedPosts[0].slug}`}>{sortedPosts[0].title}</Link>
-              <div>{sortedPosts[0].published}</div>
+              <Link href={`/blog/${posts[0].slug}`}>{posts[0].title}</Link>
+              <div>{posts[0].published}</div>
             </div>
             <div className={styles.post}>
-              <Link href={`/blog/${sortedPosts[1].slug}`}>{sortedPosts[1].title}</Link>
-              <div>{sortedPosts[1].published}</div>
+              <Link href={`/blog/${posts[1].slug}`}>{posts[1].title}</Link>
+              <div>{posts[1].published}</div>
             </div>
 			{/*<div className={styles.post}>
-              <Link href={`/blog/${sortedPosts[2].slug}`}>{sortedPosts[2].title}</Link>
-              <div>{sortedPosts[0].published}</div>
+              <Link href={`/blog/${posts[2].slug}`}>{posts[2].title}</Link>
+              <div>{posts[0].published}</div>
             </div>*/}
           </div>
         </div>

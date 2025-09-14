@@ -1,3 +1,4 @@
+/* prism.js syntax highlight stylesheet */
 @import "prismjs/themes/prism-tomorrow.css";
 
 * {
@@ -44,6 +45,7 @@ h2 {
     position: relative;
 }
 
+/* header accent mark */
 h2::before {
     content: "";
     height: 6px;
@@ -57,6 +59,7 @@ h3 {
     position: relative;
 }
 
+/* header accent mark */
 h3::before {
     content: "";
     height: 4px;
@@ -72,6 +75,7 @@ a {
     text-decoration: none;
 }
 
+/* underline animation for links */
 a::before {
     content: "";
     position: absolute;
@@ -112,6 +116,7 @@ tr:nth-child(even) {
     background-color: #ffffff;
 }
 
+/* override default monospace font in code blocks */
 code, pre {
     font-family: "JetBrains Mono" !important;
 }

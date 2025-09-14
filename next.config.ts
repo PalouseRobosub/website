@@ -3,23 +3,33 @@ import createMDX from "@next/mdx"
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-        pathname: "**"
-      }
-    ],
+    // disable automatic image optimization, REQUIRED for static export
     unoptimized: true
   },
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+
+  // add mdx to list of valid page extensions
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+
+  // builds generate static files
   output: "export",
 };
 
 const withMDX = createMDX({
-  extension: /\.(md|mdx)$/,
+  extension: /\.(mdx)$/,
   options: {
+    /*
+    * remark-gfm enables github flavored markdown parsing
+    *
+    * remark-prism enables language-aware syntax highlighting in code blocks using prismjs
+    */
     remarkPlugins: ["remark-gfm", "remark-prism"],
+    /*
+    * rehype-slug automatically adds id attributes to headings
+    *
+    * rehype-autolink-headings automatically generates links to headings, which are currently
+    *   overwritten by my css. this will be fixed in the future
+    *
+    */
     rehypePlugins: ["rehype-slug", "rehype-autolink-headings"]
   }
 })

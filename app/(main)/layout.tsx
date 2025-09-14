@@ -4,6 +4,7 @@ import "./main.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
+// preload fonts
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: "variable"
@@ -15,6 +16,8 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains"
 })
 
+
+// html head data
 export const metadata: Metadata = {
   title: "Palouse RoboSub",
   description: "The official Palouse RoboSub team website, run by WSU",
