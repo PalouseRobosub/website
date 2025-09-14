@@ -10,7 +10,7 @@ static assets using GitHub Actions and hosted by GitHub Pages.
   - [Markdown Syntax](#markdown-syntax)
   - [React Components](#react-components)
 - [Routing and Structure](#routing-and-structure)
-- [Images](#images)
+- [Assets](#assets)
 - [Hosting, Build, and Deployment](#hosting-build-and-deployment)
 - [Editing Rules & Guidelines](#editing-rules--guidelines)
 - [Blog](#blog)
@@ -142,17 +142,46 @@ I will implement this sometime in the future.
 Further information on routing and structure can be found in the
 [Next.js Docs](https://nextjs.org/docs/app/getting-started/project-structure).
 
-## Images
+## Assets
 
-TODO
+Assets (images, pdfs, etc.) should be placed in the `public/` folder. Assets for the Blog, Docs, and
+Gallery should be placed in their respective folders.
+
+### Optimization
+
+All images should be in SVG or WebP format if possible, in order to maintain low
+file size and fast load times. PDFs should be well compressed.
 
 ## Hosting, Build, and Deployment
 
-TODO
+Next.js is currently configured to build the site into static assets. The build process happens
+using GitHub Actions. The artifact from the Actions workflow is then uploaded to GitHub pages.
+DNS configuration is handled by WSU, so updates to it must be made by opening a help ticket with
+WSU IT.
+
+The Actions workflow is configured using [.github/workflows/nextjs.yml](./.github/workflows/nextjs.yml).
+please do not attempt to make changes to it without confirming with [@cole-wilson](https://github.com/cole-wilson) or
+[@asorge29](https://github.com/asorge29).
 
 ## Editing Rules & Guidelines
 
-TODO
+### Edting Content
+
+To make changes to the website's content, fork the repository, make a pull request,
+and request a review from [@cole-wilson](https://github.com/cole-wilson) or 
+[@asorge29](https://github.com/asorge29).
+
+### Requests and Issues
+
+If you need changes to be made to the functionality of the website, find a bug, or
+need new custom React components for use on markdown pages,
+[open an issue](https://github.com/PalouseRobosub/website/issues), and we will get
+right on it.
+
+### Code Contribution
+
+If you have an idea for a large-scale change to the website, talk to an officer and
+fill out an approval form.
 
 ## Blog
 
