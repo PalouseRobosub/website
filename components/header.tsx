@@ -28,7 +28,7 @@ const Header = () => {
           <Link href="/blog" className={styles.link}>Blog</Link>
 		      <Link href="/gallery" className={styles.link}>Gallery</Link>
           <Link href="/join" className={styles.joinButton}>JOIN US</Link>
-          <Link href="/donate" className={styles.donateButton}>DONATE</Link>
+          <Link href="https://foundation.wsu.edu/give/?fund=ffdf2195-2497-4361-b697-44e5024bf0b0" className={styles.donateButton}>DONATE</Link>
         </div>
       </div>
       <div className={styles.menu} style={{ maxHeight: `${menuOpen ? "300px" : "0px"}` }}>
@@ -38,7 +38,7 @@ const Header = () => {
         <Link href="/blog" className={styles.link}>Blog</Link>
 		    <Link href="/gallery" className={styles.link}>Gallery</Link>
         <Link href="/join" className={styles.joinButton}>JOIN US</Link>
-        <Link href="/donate" className={styles.donateButton}>DONATE</Link>
+          <Link href="https://foundation.wsu.edu/give/?fund=ffdf2195-2497-4361-b697-44e5024bf0b0" className={styles.donateButton}>DONATE</Link>
       </div>
     </header>
   )
