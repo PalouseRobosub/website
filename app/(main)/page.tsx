@@ -28,6 +28,12 @@ const Page = async () => {
           <div>If you are a company or organization please consider <Link href="/sponsors">sponsoring us</Link>!</div>
         </div>
       </div>
+      <p style={{ fontSize: "40px", textAlign: "center", margin: "20px" }}>Sponsored By</p>
+      <div className={styles.sponsorBanner}>
+        <img className={styles.sponsorLogo} src="/sponsor-logos/osh-park.png" alt="OSH Park" />
+        <img className={styles.sponsorLogo} src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
+        <img className={styles.sponsorLogo} src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
+      </div>
       <div className={styles.section}>
         <h2 style={{ fontSize: "40px" }}>Check out our blog!</h2>
         <div className={styles.flexRow}>

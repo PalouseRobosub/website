@@ -47,6 +47,20 @@
     padding-bottom: 30px;
 }
 
+.sponsorBanner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10vw;
+}
+
+.sponsorLogo {
+    height: 100px;
+    width: auto;
+    filter: grayscale(1);
+}
+
 .section {
     width: 100%;
     padding: 0 20%;

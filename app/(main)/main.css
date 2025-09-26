@@ -121,6 +121,14 @@ code, pre {
     font-family: "JetBrains Mono" !important;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    max-height: 50vh;
+    display: block;
+    margin: 0 auto;
+}
+
 @media (max-width: 768px) {
     main {
         padding: 0 5%;
