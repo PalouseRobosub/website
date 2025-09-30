@@ -30,10 +30,19 @@ const Page = async () => {
       </div>
       <p style={{ fontSize: "40px", textAlign: "center", margin: "20px" }}>Sponsored By</p>
       <div className={styles.sponsorBanner}>
-        <img className={styles.sponsorLogo} src="/sponsor-logos/osh-park.png" alt="OSH Park" />
-        <img className={styles.sponsorLogo} src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
-        <img className={styles.sponsorLogo} src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
+        <div className={styles.sponsorTrack}>
+          <img className={styles.sponsorLogo} src="/sponsor-logos/osh-park.png" alt="OSH Park" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/solidworks.png" alt="Solidworks" />
+          {/* duplicate for seamless loop */}
+          <img className={styles.sponsorLogo} src="/sponsor-logos/osh-park.png" alt="OSH Park" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/solidworks.png" alt="Solidworks" />
+        </div>
       </div>
+
       <div className={styles.section}>
         <h2 style={{ fontSize: "40px" }}>Check out our blog!</h2>
         <div className={styles.flexRow}>
