@@ -16,6 +16,10 @@
     gap: 4px;
 }
 
+.flexRow img {
+    margin: 0;
+}
+
 .flexCol {
     display: flex;
     flex-direction: column;

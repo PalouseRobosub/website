@@ -57,7 +57,8 @@
 
 .sponsorTrack {
     display: inline-flex;
-    animation: scroll 20s linear infinite;
+    animation: scroll 15s linear infinite;
+    width: max-content;
 }
 
 .sponsorBanner:hover .sponsorTrack {
@@ -136,5 +137,6 @@
     }
     .sponsorLogo {
         height: 40px;
+        margin: 0 20px;
     }
 }
