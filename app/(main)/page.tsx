@@ -34,12 +34,22 @@ const Page = async () => {
           <img className={styles.sponsorLogo} src="/sponsor-logos/osh-park.png" alt="OSH Park" />
           <img className={styles.sponsorLogo} src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
           <img className={styles.sponsorLogo} src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
-          <img className={styles.sponsorLogo} src="/sponsor-logos/solidworks.png" alt="Solidworks" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/solidworks.png" alt="SOLIDWORKS" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/vectornav.png" alt="VECTORNAV" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/joescan.jpg" alt="JoeScan" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/waterlinked.png" alt="WaterLinked" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/lattepanda.jpg" alt="LattePanda" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/tektronix.png" alt="Tektronix" />
           {/* duplicate for seamless loop */}
           <img className={styles.sponsorLogo} src="/sponsor-logos/osh-park.png" alt="OSH Park" />
           <img className={styles.sponsorLogo} src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
           <img className={styles.sponsorLogo} src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
-          <img className={styles.sponsorLogo} src="/sponsor-logos/solidworks.png" alt="Solidworks" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/solidworks.png" alt="SOLIDWORKS" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/vectornav.png" alt="VECTORNAV" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/joescan.jpg" alt="JoeScan" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/waterlinked.png" alt="WaterLinked" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/lattepanda.jpg" alt="LattePanda" />
+          <img className={styles.sponsorLogo} src="/sponsor-logos/tektronix.png" alt="Tektronix" />
         </div>
       </div>
 
