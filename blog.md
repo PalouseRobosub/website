@@ -1,3 +1,0 @@
-# Palouse RoboSub Blog
-
-TODO

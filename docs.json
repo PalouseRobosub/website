@@ -1,0 +1,16 @@
+{
+  "subs": [
+    {
+      "name": "Guppy",
+      "yearsActive": "2026",
+      "logo": "",
+      "docsPath": "docs-root/guppy"
+    },
+    {
+      "name": "Colbalt",
+      "yearsActive": "2021",
+      "logo": "",
+      "docsPath": "docs-root/cobalt"
+    }
+  ]
+}

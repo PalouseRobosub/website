@@ -1,7 +1,6 @@
 import { readdirSync } from "fs"
 import path from "path"
 
-
 export function generateStaticParams() {
   const docsContents = readdirSync(path.join(process.cwd(), "docs-root"), { recursive: true, withFileTypes: true, encoding: "utf-8" })
   const docsFiles = docsContents.filter(i => i.isFile())

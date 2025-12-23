@@ -1,1 +1,88 @@
-# Palouse RoboSub Technical Documentation 
+# General
+
+## Overview
+This project implements an **Autonomous Underwater Vehicle (AUV)** designed for research, exploration, and environmental monitoring.
+The system integrates navigation, control, and sensor subsystems to operate with minimal human intervention.
+
+---
+
+## Features
+- ✅ Autonomous navigation
+- ✅ Obstacle avoidance
+- ✅ Depth and pressure sensing
+- ✅ Real-time telemetry
+- ✅ Modular hardware and software design
+
+---
+
+## Hardware Components
+- **Frame**: Lightweight, pressure-resistant chassis
+- **Propulsion**: 4 thrusters (2 lateral, 2 vertical)
+- **Power Supply**: Lithium-ion battery pack (24V, 20Ah)
+- **Sensors**:
+- IMU (Inertial Measurement Unit)
+- Depth/Pressure sensor
+- Sonar for obstacle detection
+- Camera for visual feedback
+
+---
+
+## Software Stack
+- **Programming Languages**: Python, C++
+- **Middleware**: ROS 2 (Robot Operating System)
+- **Navigation**: SLAM (Simultaneous Localization and Mapping)
+- **Control**: PID-based thruster control
+- **Communication**: Acoustic modem + Wi-Fi (surface use)
+
+---
+
+## Installation
+```bash
+# Clone repository
+git clone https://github.com/example/auv.git
+cd auv
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Build ROS workspace
+colcon build
+```
+
+---
+
+## Usage
+
+```bash
+# Launch simulation (Gazebo)
+ros2 launch auv_bringup simulation.launch.py
+
+# Run autonomous mission
+ros2 run auv_navigation mission_node
+```
+
+---
+
+## Example Mission
+
+```yaml
+mission:
+  - waypoint: \{lat: 47.6062, lon: -122.3321, depth: 10\}
+  - waypoint: \{lat: 47.6063, lon: -122.3325, depth: 15\}
+  - action: "take_photo"
+  - return_to_base: true
+```
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a new feature branch
+3. Submit a pull request
+
+---
+
+## License
+
+MIT License © 2025 AUV Project Team

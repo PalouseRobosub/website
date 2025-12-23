@@ -18,6 +18,7 @@ const components: MDXComponents = {
     // leave all other input elements unaffected
     return <input {...props} />;
   },
+  code: (props) => <code {...props}></code>
 };
 
 export function useMDXComponents(): MDXComponents {

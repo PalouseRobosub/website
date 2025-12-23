@@ -1,6 +1,15 @@
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarHeader,
+} from "@/components/ui/sidebar"
+import {Octokit} from "@octokit/rest";
 import { readdirSync } from "fs";
 import path from "path";
-import DocsClientSidebar from "./docs-client-sidebar";
+import docsSetup from "../docs.json"
+import SubSwitcher from "@/components/sub-switcher";
 
 export interface Page {
   name: string,
@@ -15,34 +24,49 @@ export interface Dir {
   children: (Dir|Page)[]
 }
 
-const DocsSidebar = () => {
+export default async function DocsSidebar() {
+  const octokit = new Octokit({auth: process.env.GITHUB_PAT});
+
+  const {data} = await octokit.rest.repos.getContent({
+    owner: "PalouseRobosub",
+    repo: "guppy",
+    path: ""
+  })
+  console.log(data)
+
   const indexDir = (dir: string): Dir => {
     const entries = readdirSync(dir, { encoding: "utf-8", withFileTypes: true })
-    
+
     return {
       name: path.basename(dir),
       path: dir,
       type: "dir",
       children: entries.map(entry => {
-            const fullPath = path.join(dir, entry.name);
-            if (entry.isDirectory()) {
-              return indexDir(fullPath);
-            } else {
-              return {
-                name: entry.name,
-                path: fullPath,
-                type: "page"
-              };
-            }
-          })
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          return indexDir(fullPath);
+        } else {
+          return {
+            name: entry.name,
+            path: fullPath,
+            type: "page"
+          };
+        }
+      })
     }
   }
-  
+
   const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
-  
+  console.log(docsContents)
+
   return (
-    <DocsClientSidebar docsContents={docsContents} />
+    <Sidebar variant="inset" collapsible="icon">
+      <SubSwitcher docsSetup={docsSetup} />
+      <SidebarContent>
+        <SidebarGroup />
+        <SidebarGroup />
+      </SidebarContent>
+      <SidebarFooter />
+    </Sidebar>
   )
 }
-
-export default DocsSidebar;
