@@ -4,7 +4,27 @@
       "name": "Guppy",
       "yearsActive": "2026",
       "logo": "",
-      "docsPath": "docs-root/guppy"
+      "sections": [
+        {
+          "name": "Mechanical",
+          "type": "internal",
+          "path": "@/docs-root/guppy"
+        },
+        {
+          "name": "Electrical",
+          "type": "external",
+          "owner": "",
+          "repo": "",
+          "path": ""
+        },
+        {
+          "name": "ROS",
+          "type": "ros_ws",
+          "owner": "PalouseRobosub",
+          "repo": "guppy",
+          "path": "/src"
+        }
+      ]
     },
     {
       "name": "Colbalt",

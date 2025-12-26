@@ -1,15 +1,9 @@
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-} from "@/components/ui/sidebar"
 import {Octokit} from "@octokit/rest";
 import { readdirSync } from "fs";
 import path from "path";
-import docsSetup from "../docs.json"
-import SubSwitcher from "@/components/sub-switcher";
+import DocsClientSidebar from "@/components/docs-client-sidebar";
+import docsSetup from "@/docs.json";
+import {asyncWalk} from "estree-walker";
 
 export interface Page {
   name: string,
@@ -32,7 +26,39 @@ export default async function DocsSidebar() {
     repo: "guppy",
     path: ""
   })
-  console.log(data)
+  // console.log(data)
+
+  const indexDocs = async () => {
+
+    const subPromises = docsSetup.subs.map(async (sub) => {
+      if (!sub.sections?.length) return [];
+
+
+      const sectionPromises = sub.sections.map(async (section) => {
+        switch (section.type) {
+          case "ros_ws":
+
+            const { data } = await octokit.rest.repos.getContent({
+              owner: section.owner,
+              repo: section.repo,
+              path: section.path,
+            });
+            return data;
+
+          default:
+            return {};
+        }
+      });
+
+      return Promise.all(sectionPromises);
+    });
+
+    return Promise.all(subPromises);
+  };
+
+
+  const docsIndex = await indexDocs();
+  console.log(docsIndex);
 
   const indexDir = (dir: string): Dir => {
     const entries = readdirSync(dir, { encoding: "utf-8", withFileTypes: true })
@@ -57,16 +83,9 @@ export default async function DocsSidebar() {
   }
 
   const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
-  console.log(docsContents)
+  // console.log(docsContents)
 
   return (
-    <Sidebar variant="inset" collapsible="icon">
-      <SubSwitcher docsSetup={docsSetup} />
-      <SidebarContent>
-        <SidebarGroup />
-        <SidebarGroup />
-      </SidebarContent>
-      <SidebarFooter />
-    </Sidebar>
+    <DocsClientSidebar docsIndex={docsIndex} />
   )
 }
