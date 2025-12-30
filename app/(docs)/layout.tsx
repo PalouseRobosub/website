@@ -4,7 +4,7 @@ import DocsSidebar from "@/components/docs-sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <SidebarProvider className="w-screen" defaultOpen
+    <SidebarProvider className="w-screen h-screen overflow-hidden" defaultOpen
       style={
        {
          "--sidebar-width": "calc(var(--spacing) * 72)",
@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       }
     >
       <DocsSidebar />
-        <SidebarInset>
+        <SidebarInset className="max-w-full max-h-full">
           <DocsHeader />
           {children}
         </SidebarInset>

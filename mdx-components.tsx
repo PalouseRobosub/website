@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 
 const components: MDXComponents = {
   // wrap the default export of an MDX file in <main>
-  wrapper: ({ children }) => <main>{children}</main>,
+  wrapper: ({ children }) => <div className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">{children}</div>,
   // override input elements from MDX files
   input: (props) => {
     if (props.type === "checkbox" && props.disabled) {
