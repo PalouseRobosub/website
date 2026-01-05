@@ -3,7 +3,6 @@ import { readdirSync } from "fs";
 import path from "path";
 import DocsClientSidebar from "@/components/docs-client-sidebar";
 import docsSetup from "@/docs.json";
-import {asyncWalk} from "estree-walker";
 
 export interface Page {
   name: string,
@@ -21,44 +20,12 @@ export interface Dir {
 export default async function DocsSidebar() {
   const octokit = new Octokit({auth: process.env.GITHUB_PAT});
 
-  const {data} = await octokit.rest.repos.getContent({
-    owner: "PalouseRobosub",
-    repo: "guppy",
-    path: ""
-  })
+  // const {data} = await octokit.rest.repos.getContent({
+  //   owner: "PalouseRobosub",
+  //   repo: "guppy",
+  //   path: ""
+  // })
   // console.log(data)
-
-  const indexDocs = async () => {
-
-    const subPromises = docsSetup.subs.map(async (sub) => {
-      if (!sub.sections?.length) return [];
-
-
-      const sectionPromises = sub.sections.map(async (section) => {
-        switch (section.type) {
-          case "ros_ws":
-
-            const { data } = await octokit.rest.repos.getContent({
-              owner: section.owner,
-              repo: section.repo,
-              path: section.path,
-            });
-            return data;
-
-          default:
-            return {};
-        }
-      });
-
-      return Promise.all(sectionPromises);
-    });
-
-    return Promise.all(subPromises);
-  };
-
-
-  const docsIndex = await indexDocs();
-  console.log(docsIndex);
 
   const indexDir = (dir: string): Dir => {
     const entries = readdirSync(dir, { encoding: "utf-8", withFileTypes: true })
@@ -82,7 +49,43 @@ export default async function DocsSidebar() {
     }
   }
 
-  const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
+  const indexDocs = async () => {
+
+    const subPromises = docsSetup.subs.map(async (sub) => {
+      if (!sub.sections?.length) return [];
+
+      const sectionPromises = sub.sections.map(async (section) => {
+        switch (section.type) {
+
+          case "ros_ws":
+            if (!section.owner || !section.repo) return
+            const { data } = await octokit.rest.repos.getContent({
+              owner: section.owner,
+              repo: section.repo,
+              path: section.path,
+            });
+            return data;
+
+          case "internal":
+            const { children } = indexDir(path.join(process.cwd(), section.path));
+            return children;
+
+          default:
+            return {};
+        }
+      });
+
+      return Promise.all(sectionPromises);
+    });
+
+    return Promise.all(subPromises);
+  };
+
+
+  const docsIndex = await indexDocs();
+  console.log(docsIndex);
+
+  // const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
   // console.log(docsContents)
 
   return (

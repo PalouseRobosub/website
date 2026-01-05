@@ -8,7 +8,7 @@
         {
           "name": "Mechanical",
           "type": "internal",
-          "path": "@/docs-root/guppy"
+          "path": "docs-root/guppy/mechanical"
         },
         {
           "name": "Electrical",

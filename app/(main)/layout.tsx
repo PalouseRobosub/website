@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, JetBrains_Mono } from 'next/font/google'
 import "./main.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 
 // preload fonts
 const montserrat = Montserrat({
@@ -29,12 +27,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.className} ${jetBrainsMono.variable}`}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    {children}
   );
 }

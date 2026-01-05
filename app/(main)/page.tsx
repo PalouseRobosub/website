@@ -1,13 +1,13 @@
 import Image from "next/image";
-import styles from "@/styles/home.module.css"
+//import styles from "@/styles/home.module.css"
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import {indexBlogPosts} from "@/lib/blog";
+// import {indexBlogPosts} from "@/lib/blog";
 
 const Page = async () => {
 
   // get blog posts
-  const posts = await indexBlogPosts()
+  // const posts = await indexBlogPosts()
 
   return (
     <main className={styles.main}>
@@ -52,15 +52,15 @@ const Page = async () => {
           </div>
           <div>
             {/* show 3 newest blog posts */}
-            <h4 style={{ margin: "0" }}>Recent Posts</h4>
-            <div className={styles.post}>
-              <Link href={`/blog/${posts[0].slug}`}>{posts[0].title}</Link>
-              <div>{posts[0].published}</div>
-            </div>
-            <div className={styles.post}>
-              <Link href={`/blog/${posts[1].slug}`}>{posts[1].title}</Link>
-              <div>{posts[1].published}</div>
-            </div>
+            {/*<h4 style={{ margin: "0" }}>Recent Posts</h4>*/}
+            {/*<div className={styles.post}>*/}
+            {/*  <Link href={`/blog/${posts[0].slug}`}>{posts[0].title}</Link>*/}
+            {/*  <div>{posts[0].published}</div>*/}
+            {/*</div>*/}
+            {/*<div className={styles.post}>*/}
+            {/*  <Link href={`/blog/${posts[1].slug}`}>{posts[1].title}</Link>*/}
+            {/*  <div>{posts[1].published}</div>*/}
+            {/*</div>*/}
 			{/*<div className={styles.post}>
               <Link href={`/blog/${posts[2].slug}`}>{posts[2].title}</Link>
               <div>{posts[0].published}</div>

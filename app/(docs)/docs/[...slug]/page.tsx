@@ -9,6 +9,8 @@ export function generateStaticParams() {
     slug: file.parentPath.split("docs-root/")[1].split("/").concat(file.name.replace(".mdx", ""))
   }))
 
+  console.log(staticParams)
+
   return staticParams
 }
 

@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {ChevronsUpDown} from "lucide-react";
 import Link from "next/link";
-import {act, useState} from "react";
+import {useState} from "react";
 
 const DocsClientSidebar = ({ docsIndex }) => {
 
@@ -85,7 +85,8 @@ const DocsClientSidebar = ({ docsIndex }) => {
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
                         <a href={item.git_url}>
-                          <span>{item.name}</span>
+                          {item.type == "page" && <span>{item.name.replace(".mdx", "").replaceAll("_", " ")}</span>}
+                          {item.sha && <span>{item.name}</span>}
                         </a>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
