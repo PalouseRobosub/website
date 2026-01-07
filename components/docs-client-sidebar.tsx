@@ -18,11 +18,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {ChevronsUpDown} from "lucide-react";
 import Link from "next/link";
-import {useState} from "react";
+import {JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState} from "react";
 
-const DocsClientSidebar = ({ docsIndex }) => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+const DocsClientSidebar = ({docsIndex}) => {
 
-  const { isMobile } = useSidebar()
+  const {isMobile} = useSidebar()
   const [activeSub, setActiveSub] = useState(docsSetup.subs[0]);
 
   return (
@@ -33,14 +35,15 @@ const DocsClientSidebar = ({ docsIndex }) => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton size="lg">
-                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <div
+                    className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                     {/*<activeSub.logo className="size-4" />*/}
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{activeSub.name}</span>
                     <span className="truncate text-xs">{activeSub.yearsActive}</span>
                   </div>
-                  <ChevronsUpDown className="ml-auto" />
+                  <ChevronsUpDown className="ml-auto"/>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -80,7 +83,7 @@ const DocsClientSidebar = ({ docsIndex }) => {
             <SidebarGroupLabel>{section.name}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {docsIndex[docsSetup.subs.indexOf(activeSub)][index].length && docsIndex[docsSetup.subs.indexOf(activeSub)][index].map((item) => {
+                {docsIndex[docsSetup.subs.indexOf(activeSub)][index].length && docsIndex[docsSetup.subs.indexOf(activeSub)][index].map((item: { name: string; git_url: string | undefined; type: string; sha: number; }) => {
                   return (
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
