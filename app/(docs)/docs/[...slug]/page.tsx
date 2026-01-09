@@ -2,6 +2,8 @@ import { readdirSync } from "fs"
 import path from "path"
 import docsSetup from "@/docs.json";
 import { Octokit } from "@octokit/rest";
+import {MDXRemote} from "next-mdx-remote-client/rsc";
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 
 export async function generateStaticParams() {
@@ -36,7 +38,7 @@ export async function generateStaticParams() {
           if (!Array.isArray(data)) return []
 
           return data.map((item) => ({
-            slug: [sub.name, section.name, item.name],
+            slug: [sub.name.toLowerCase(), section.name.toLowerCase(), item.name.toLowerCase()],
           }))
         }
 
@@ -44,13 +46,15 @@ export async function generateStaticParams() {
       })
     )
   )
-
+  // console.log(params.flat())
   return params.flat()
 }
 
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params
+  const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
+
   let activeSub = undefined
   for (const sub of docsSetup.subs) {
     if (sub.name.toLowerCase() == slug[0]) {
@@ -59,7 +63,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   }
   let activeSection = undefined
   for (const section of activeSub.sections) {
-    if (section.name == slug[1]) {
+    if (section.name.toLowerCase() == slug[1]) {
       activeSection = section
     }
   }
@@ -69,7 +73,29 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       const { default: Post } = await import(`@/docs-root/${slug.join("/")}.mdx`)
       return <Post />
     case "ros_ws":
-
-      break
+      const { data } = await octokit.rest.repos.getContent({
+        owner: activeSection.owner,
+        repo: activeSection.repo,
+        path: activeSection.path + "/" + slug[2],
+      });
+      let readme = undefined
+      for (const item of data) {
+        if (item.name.toLowerCase() == "readme.md") {
+          readme = item
+        }
+      }
+      if (readme && readme.download_url) {
+        const res = await fetch(readme.download_url)
+        console.log(readme.download_url)
+        const mdx = await res.text()
+        console.log(mdx)
+        return (
+          <ScrollArea className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">
+            <MDXRemote source={mdx} />
+          </ScrollArea>
+        )
+      } else {
+        return <div>No README found</div>
+      }
   }
 }

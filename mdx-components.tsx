@@ -3,7 +3,7 @@ import {ScrollArea} from "@/components/ui/scroll-area";
 
 const components: MDXComponents = {
   // wrap the default export of an MDX file in <main>
-  wrapper: ({ children }) => <ScrollArea className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">{children}</ScrollArea>,
+    wrapper: ({ children }) => <ScrollArea className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">{children}</ScrollArea>,
   // override input elements from MDX files
   input: (props) => {
     if (props.type === "checkbox" && props.disabled) {

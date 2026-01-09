@@ -83,7 +83,7 @@ export default async function DocsSidebar() {
 
 
   const docsIndex = await indexDocs();
-  console.log(docsIndex);
+  // console.log(docsIndex);
 
   // const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
   // console.log(docsContents)
