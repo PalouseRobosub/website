@@ -4,6 +4,7 @@ import docsSetup from "@/docs.json";
 import { Octokit } from "@octokit/rest";
 import {MDXRemote} from "next-mdx-remote-client/rsc";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {notFound} from "next/dist/client/components/not-found";
 
 
 export async function generateStaticParams() {
@@ -62,23 +63,25 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
     }
   }
   let activeSection = undefined
+  if (!activeSub) return notFound()
   for (const section of activeSub.sections) {
     if (section.name.toLowerCase() == slug[1]) {
       activeSection = section
     }
   }
-
+  if (!activeSection) return notFound()
   switch (activeSection.type) {
     case "internal":
       const { default: Post } = await import(`@/docs-root/${slug.join("/")}.mdx`)
       return <Post />
     case "ros_ws":
       const { data } = await octokit.rest.repos.getContent({
-        owner: activeSection.owner,
-        repo: activeSection.repo,
+        owner: activeSection.owner as string,
+        repo: activeSection.repo as string,
         path: activeSection.path + "/" + slug[2],
       });
       let readme = undefined
+      if (!Array.isArray(data)) return notFound()
       for (const item of data) {
         if (item.name.toLowerCase() == "readme.md") {
           readme = item
