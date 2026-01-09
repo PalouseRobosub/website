@@ -84,10 +84,20 @@ const DocsClientSidebar = ({docsIndex}) => {
             <SidebarGroupContent>
               <SidebarMenu>
                 {docsIndex[docsSetup.subs.indexOf(activeSub)][index].length && docsIndex[docsSetup.subs.indexOf(activeSub)][index].map((item: { name: string; git_url: string | undefined; type: string; sha: number; }) => {
+                  let url
+                  switch (section.type) {
+                    case "internal":
+                      url = "/docs/" + activeSub.name.toLowerCase() + "/" + section.name.toLowerCase() + "/" + item.name.replace(".mdx", "")
+                      break
+
+                    case "ros_ws":
+                      url = "/docs/" + activeSub.name.toLowerCase() + "/" + section.name.toLowerCase() + "/" + item.name
+                      break
+                  }
                   return (
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
-                        <a href={item.git_url}>
+                        <a href={url}>
                           {item.type == "page" && <span>{item.name.replace(".mdx", "").replaceAll("_", " ")}</span>}
                           {item.sha && <span>{item.name}</span>}
                         </a>

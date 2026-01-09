@@ -30,7 +30,8 @@
       "name": "Colbalt",
       "yearsActive": "2021",
       "logo": "",
-      "docsPath": "docs-root/cobalt"
+      "docsPath": "docs-root/cobalt",
+      "sections": []
     }
   ]
 }
