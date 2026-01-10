@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "prismjs/themes/prism-tomorrow.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));

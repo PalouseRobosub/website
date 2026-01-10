@@ -2,10 +2,13 @@ import { readdirSync } from "fs"
 import path from "path"
 import docsSetup from "@/docs.json";
 import { Octokit } from "@octokit/rest";
-import {MDXRemote} from "next-mdx-remote-client/rsc";
+import {MDXRemote, MDXRemoteOptions} from "next-mdx-remote-client/rsc";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {notFound} from "next/dist/client/components/not-found";
-
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeShiki from "@shikijs/rehype";
 
 export async function generateStaticParams() {
   const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
@@ -56,6 +59,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   const { slug } = await params
   const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
 
+  const options: MDXRemoteOptions = {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, [rehypeShiki, {theme: "github-dark"}]]
+    },
+  }
+
   let activeSub = undefined
   for (const sub of docsSetup.subs) {
     if (sub.name.toLowerCase() == slug[0]) {
@@ -89,12 +99,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       }
       if (readme && readme.download_url) {
         const res = await fetch(readme.download_url)
-        console.log(readme.download_url)
         const mdx = await res.text()
-        console.log(mdx)
         return (
           <ScrollArea className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">
-            <MDXRemote source={mdx} />
+            <MDXRemote source={mdx} options={options} />
           </ScrollArea>
         )
       } else {
