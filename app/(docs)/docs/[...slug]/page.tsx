@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeShiki from "@shikijs/rehype";
+import NoReadme from "@/components/no-readme";
 
 export async function generateStaticParams() {
   const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
@@ -106,7 +107,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
           </ScrollArea>
         )
       } else {
-        return <div>No README found</div>
+        return <NoReadme name={slug.pop()||"ERROR"} />
       }
   }
 }
