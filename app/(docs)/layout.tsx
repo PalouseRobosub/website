@@ -13,10 +13,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       }
     >
       <DocsSidebar />
-        <SidebarInset className="max-w-full max-h-full">
+        <main className="bg-background relative flex w-full flex-1 flex-col max-w-full max-h-full">
           <DocsHeader />
           {children}
-        </SidebarInset>
+        </main>
     </SidebarProvider>
   );
 };

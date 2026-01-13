@@ -28,7 +28,7 @@ const DocsClientSidebar = ({docsIndex}) => {
   const [activeSub, setActiveSub] = useState(docsSetup.subs[0]);
 
   return (
-    <Sidebar variant="inset" collapsible="icon">
+    <Sidebar>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -36,8 +36,8 @@ const DocsClientSidebar = ({docsIndex}) => {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton size="lg">
                   <div
-                    className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                    {/*<activeSub.logo className="size-4" />*/}
+                    className="flex aspect-square size-12 items-center justify-center">
+                    <img src={`/${activeSub.logo}`} className="size-12 aspect-square" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{activeSub.name}</span>
@@ -56,21 +56,16 @@ const DocsClientSidebar = ({docsIndex}) => {
                   Subs
                 </DropdownMenuLabel>
                 {docsSetup.subs.map((sub, index) => (
-                  <Link
-                    key={sub.name}
-                    href={`/docs/${sub.name.toLowerCase()}`}
+                  <DropdownMenuItem
+                    onClick={() => setActiveSub(sub)}
+                    className="gap-2 p-2"
+                    key={index}
                   >
-                    <DropdownMenuItem
-                      onClick={() => setActiveSub(sub)}
-                      className="gap-2 p-2"
-                    >
-                      <div className="flex size-6 items-center justify-center rounded-md border">
-                        {/*<sub.logo className="size-3.5 shrink-0" />*/}
-                      </div>
-                      {sub.name}
-                    </DropdownMenuItem>
-                  </Link>
-
+                    <div className="flex size-8 items-center justify-center rounded-md">
+                      <img src={`/${sub.logo}`} className="size-8 aspect-square" />
+                    </div>
+                    {sub.name}
+                  </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
