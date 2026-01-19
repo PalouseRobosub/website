@@ -2,7 +2,7 @@ import {Octokit} from "@octokit/rest";
 import { readdirSync } from "fs";
 import path from "path";
 import DocsClientSidebar from "@/components/docs-client-sidebar";
-import docsSetup from "@/docs.json";
+import docsSetup from "@/docs";
 
 export interface Page {
   name: string,

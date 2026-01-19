@@ -1,6 +1,6 @@
 "use client"
 
-import docsSetup from "@/docs.json";
+import docsSetup from "@/docs";
 import {
   Sidebar,
   SidebarContent,

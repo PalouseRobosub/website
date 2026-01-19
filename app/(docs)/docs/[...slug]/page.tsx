@@ -1,6 +1,6 @@
 import { readdirSync } from "fs"
 import path from "path"
-import docsSetup from "@/docs.json";
+import docsSetup from "@/docs";
 import { Octokit } from "@octokit/rest";
 import {MDXRemote, MDXRemoteOptions} from "next-mdx-remote-client/rsc";
 import {ScrollArea} from "@/components/ui/scroll-area";
@@ -10,49 +10,57 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeShiki from "@shikijs/rehype";
 import NoReadme from "@/components/no-readme";
+import {indexDocs} from "@/lib/docs";
 
 export async function generateStaticParams() {
-  const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
+  // const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
 
-  const params = await Promise.all(
-    docsSetup.subs.flatMap((sub) =>
-      (sub.sections ?? []).map(async (section) => {
-        if (section.type === "internal") {
-          const contents = readdirSync(
-            path.join(process.cwd(), section.path),
-            { recursive: true, withFileTypes: true }
-          )
+  // const params = await Promise.all(
+  //   docsSetup.subs.flatMap((sub) =>
+  //     (sub.sections ?? []).map(async (section) => {
+  //       if (section.type === "internal") {
+  //         const contents = readdirSync(
+  //           path.join(process.cwd(), section.path),
+  //           { recursive: true, withFileTypes: true }
+  //         )
+  //
+  //         const files = contents.filter((i) => i.isFile())
+  //
+  //         return files.map((file) => ({
+  //           slug: file.parentPath
+  //             .split("docs-root/")[1]
+  //             .split("/")
+  //             .concat(file.name.replace(".mdx", "")),
+  //         }))
+  //       }
+  //
+  //       if (section.type === "ros_ws") {
+  //         const { data } = await octokit.rest.repos.getContent({
+  //           owner: section.owner as string,
+  //           repo: section.repo as string,
+  //           path: section.path,
+  //         })
+  //
+  //         if (!Array.isArray(data)) return []
+  //
+  //         return data.map((item) => ({
+  //           slug: [sub.name.toLowerCase(), section.name.toLowerCase(), item.name.toLowerCase()],
+  //         }))
+  //       }
+  //
+  //       return []
+  //     })
+  //   )
+  // )
+  // // console.log(params.flat())
+  // return params.flat()
 
-          const files = contents.filter((i) => i.isFile())
-
-          return files.map((file) => ({
-            slug: file.parentPath
-              .split("docs-root/")[1]
-              .split("/")
-              .concat(file.name.replace(".mdx", "")),
-          }))
-        }
-
-        if (section.type === "ros_ws") {
-          const { data } = await octokit.rest.repos.getContent({
-            owner: section.owner as string,
-            repo: section.repo as string,
-            path: section.path,
-          })
-
-          if (!Array.isArray(data)) return []
-
-          return data.map((item) => ({
-            slug: [sub.name.toLowerCase(), section.name.toLowerCase(), item.name.toLowerCase()],
-          }))
-        }
-
-        return []
-      })
-    )
-  )
-  // console.log(params.flat())
-  return params.flat()
+  const docsIndex = await indexDocs()
+  return docsIndex.subs.flatMap((sub) => {
+    return sub.sections.flatMap((section) => (
+      section.params
+    ))
+  })
 }
 
 

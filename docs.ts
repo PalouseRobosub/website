@@ -1,4 +1,4 @@
-{
+const docsSetup: { subs: Sub[] } = {
   "subs": [
     {
       "name": "Guppy",
@@ -10,13 +10,13 @@
           "type": "internal",
           "path": "docs-root/guppy/mechanical"
         },
-        {
-          "name": "Electrical",
-          "type": "external",
-          "owner": "",
-          "repo": "",
-          "path": ""
-        },
+        // {
+        //   "name": "Electrical",
+        //   "type": "internal",
+        //   "owner": "",
+        //   "repo": "",
+        //   "path": ""
+        // },
         {
           "name": "ROS",
           "type": "ros_ws",
@@ -30,8 +30,9 @@
       "name": "Colbalt",
       "yearsActive": "2021",
       "logo": "wsu-logo.svg",
-      "docsPath": "docs-root/cobalt",
       "sections": []
     }
   ]
 }
+
+export default docsSetup;
