@@ -10,13 +10,11 @@ const docsSetup: { subs: Sub[] } = {
           "type": "internal",
           "path": "docs-root/guppy/mechanical"
         },
-        // {
-        //   "name": "Electrical",
-        //   "type": "internal",
-        //   "owner": "",
-        //   "repo": "",
-        //   "path": ""
-        // },
+        {
+          "name": "Electrical",
+          "type": "internal",
+          "path": "docs-root/guppy/electrical"
+        },
         {
           "name": "ROS",
           "type": "ros_ws",
