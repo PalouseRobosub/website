@@ -1,5 +1,7 @@
 interface Route {
-
+  name: string;
+  params: { slug: string[] }
+  raw_url?: string;
 }
 
 interface Section {

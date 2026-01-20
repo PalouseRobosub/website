@@ -1,6 +1,6 @@
 "use client"
 
-import docsSetup from "@/docs";
+// import docsSetup from "@/docs";
 import {
   Sidebar,
   SidebarContent,
@@ -21,12 +21,10 @@ import Link from "next/link";
 import {JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState} from "react";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-const DocsClientSidebar = ({docsIndex}) => {
+const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
 
   const {isMobile} = useSidebar()
-  const [activeSub, setActiveSub] = useState(docsSetup.subs[0]);
+  const [activeSub, setActiveSub] = useState(docsIndex.subs[0]);
 
   return (
     <Sidebar>
@@ -56,7 +54,7 @@ const DocsClientSidebar = ({docsIndex}) => {
                 <DropdownMenuLabel className="text-muted-foreground text-xs">
                   Subs
                 </DropdownMenuLabel>
-                {docsSetup.subs.map((sub, index) => (
+                {docsIndex.subs.map((sub, index) => (
                   <DropdownMenuItem
                     onClick={() => setActiveSub(sub)}
                     className="gap-2 p-2"
@@ -86,7 +84,7 @@ const DocsClientSidebar = ({docsIndex}) => {
               <CollapsibleContent>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {docsIndex[docsSetup.subs.indexOf(activeSub)][index].length && docsIndex[docsSetup.subs.indexOf(activeSub)][index].map((item: { name: string; git_url: string | undefined; type: string; sha: number; }) => {
+                    {section.params && section.params.map((item) => {
                       let url
                       switch (section.type) {
                         case "internal":

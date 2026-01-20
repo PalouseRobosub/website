@@ -25,6 +25,15 @@ export const indexDocs = async () => {
             .split("/")
             .concat(file.name.replace(".mdx", "")),
         }))
+        section.routes = files.map((file) => ({
+          params: {
+            slug: file.parentPath
+              .split("docs-root/")[1]
+              .split("/")
+              .concat(file.name.replace(".mdx", ""))
+          },
+          name: file.name.replace(".mdx", "")
+        }))
 
       } else if (section.type === "ros_ws") {
 
