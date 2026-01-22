@@ -1,6 +1,5 @@
 "use client"
 
-// import docsSetup from "@/docs";
 import {
   Sidebar,
   SidebarContent,
@@ -18,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {ChevronDown, ChevronsUpDown} from "lucide-react";
 import Link from "next/link";
-import {JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState} from "react";
+import {useState} from "react";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 
 const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
@@ -89,10 +88,10 @@ const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
                       return (
                         <SidebarMenuItem key={route.name}>
                           <SidebarMenuButton asChild>
-                            <a href={url}>
+                            <Link href={url}>
                               {section.type == "internal" &&  <span>{route.name.replace(".mdx", "").replaceAll("_", " ")}</span>}
                               {section.type == "ros_ws" && <span>{route.name}</span>}
-                            </a>
+                            </Link>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       )
