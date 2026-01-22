@@ -84,23 +84,14 @@ const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
               <CollapsibleContent>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {section.params && section.params.map((item) => {
-                      let url
-                      switch (section.type) {
-                        case "internal":
-                          url = "/docs/" + activeSub.name.toLowerCase() + "/" + section.name.toLowerCase() + "/" + item.name.replace(".mdx", "")
-                          break
-
-                        case "ros_ws":
-                          url = "/docs/" + activeSub.name.toLowerCase() + "/" + section.name.toLowerCase() + "/" + item.name
-                          break
-                      }
+                    {section.routes && section.routes.map((route) => {
+                      const url = "/docs/" + route.params.slug.join("/")
                       return (
-                        <SidebarMenuItem key={item.name}>
+                        <SidebarMenuItem key={route.name}>
                           <SidebarMenuButton asChild>
                             <a href={url}>
-                              {item.type == "page" && <span>{item.name.replace(".mdx", "").replaceAll("_", " ")}</span>}
-                              {item.sha && <span>{item.name}</span>}
+                              {section.type == "internal" &&  <span>{route.name.replace(".mdx", "").replaceAll("_", " ")}</span>}
+                              {section.type == "ros_ws" && <span>{route.name}</span>}
                             </a>
                           </SidebarMenuButton>
                         </SidebarMenuItem>

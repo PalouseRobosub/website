@@ -1,5 +1,3 @@
-import docsSetup from "@/docs";
-import { Octokit } from "@octokit/rest";
 import {MDXRemote, MDXRemoteOptions} from "next-mdx-remote-client/rsc";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {notFound} from "next/dist/client/components/not-found";
@@ -13,16 +11,19 @@ import {indexDocs} from "@/lib/docs";
 export async function generateStaticParams() {
   const docsIndex = await indexDocs()
   return docsIndex.subs.flatMap((sub) => {
-    return sub.sections.flatMap((section) => (
-      section.params
-    ))
+    return sub.sections.flatMap((section) => {
+      return section.routes?.flatMap((route) => (
+        route.params
+      ))
+    })
   })
 }
 
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params
-  const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
+
+  const docsIndex = await indexDocs()
 
   const options: MDXRemoteOptions = {
     mdxOptions: {
@@ -32,7 +33,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   }
 
   let activeSub = undefined
-  for (const sub of docsSetup.subs) {
+  for (const sub of docsIndex.subs) {
     if (sub.name.toLowerCase() == slug[0]) {
       activeSub = sub
     }
@@ -50,20 +51,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       const { default: Post } = await import(`@/docs-root/${slug.join("/")}.mdx`)
       return <Post />
     case "ros_ws":
-      const { data } = await octokit.rest.repos.getContent({
-        owner: activeSection.owner as string,
-        repo: activeSection.repo as string,
-        path: activeSection.path + "/" + slug[2],
-      });
-      let readme = undefined
-      if (!Array.isArray(data)) return notFound()
-      for (const item of data) {
-        if (item.name.toLowerCase() == "readme.md") {
-          readme = item
+      let page = undefined;
+      for (const item of activeSection.routes) {
+        if (item.name.toLowerCase() == slug[2]) {
+          page = item
         }
       }
-      if (readme && readme.download_url) {
-        const res = await fetch(readme.download_url)
+      if (page && page.raw_url) {
+        const res = await fetch(page.raw_url)
         const mdx = await res.text()
         return (
           <ScrollArea className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">

@@ -1,7 +1,7 @@
 interface Route {
   name: string;
   params: { slug: string[] }
-  raw_url?: string;
+  raw_url?: string | null;
 }
 
 interface Section {
@@ -10,7 +10,6 @@ interface Section {
   owner?: string;
   repo?: string;
   path: string;
-  params?: { slug: string[] }[];
   routes?: Route[];
 }
 
