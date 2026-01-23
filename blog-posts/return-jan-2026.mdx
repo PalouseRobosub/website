@@ -1,0 +1,51 @@
+import BlogMeta from "@/components/blog-meta";
+import BlogBack from "@/components/blog-back";
+
+export const meta = {
+  published: "01-22-2026",
+  updated: "01-22-2026",
+  title: "Our Return to RoboSub",
+  author: "Daniel Bereza",
+  tags: ["EE", "Sponsors", "OSH Park"]
+}
+
+# Our Return to RoboSub
+
+![the KiCAD layout](/blog-images/ee_board_layout.png)
+
+<BlogMeta meta={meta} />
+---
+
+	Hello everyone, this may well be the first Palouse RoboSub blog post in more than a few years! It is fitting I am the one to write this as the current longest active member. I had joined Fall 2023 as a freshman to a club on the brink of collapse as it had barely managed to retain members during Covid but had failed to recruit any driven people to keep the momentum once the main leadership would graduate in the spring. Long story short, going into Fall 2024 RoboSub was at the bare minimum three members required to have enough officers to continue to be recognized as a student organization at WSU, with me being the treasurer. I would have loved to take a more active role in the club but at that point I was already involved with 3 other clubs and knew I would not be able to give RoboSub the focus it deserved. To date I think the biggest achievement the 3 remaining officers had was us recruiting Cole Wilson and Brady Hogg as leadership, they have truly given the club the new life it badly needed for our aims to compete this year in 2026!
+
+	With the higher leadership taken care of, I have been happy to take the role of lead EE on the team. I figured a good trial by fire would be making a PCB for the RP2350 microcontroller, and if it worked, we could then base all of our embedded systems on it for motor control, sensor readings, and more. We had considered STM32 and ESP32 microcontrollers as alternatives, but decided that the RP2350 was the best balance of ease of use without the overkill that an ESP32 would be as we had no need for any wireless capabilities. In fact I had just the semester before made my own ESP32 PCB for my battlebot personally and was feeling emboldened, albeit a bit overwhelmed by the required supporting components the RP2350 required.
+
+![image of v1 schematic](/blog-images/ee_schematic_v1.png)
+
+<p style={{textAlign: "center"}}><i>A schematic of the GPIO dev board.</i></p>
+
+	In fact our first order of PCBs had to be canceled due to a decently big oversight on my part, you will not see it in the schematic above, but I had missed a crucial warning about the inductor for the 1.1V regulating rail and had picked out a completely wrong inductor which had the right inductance value but anyone after their first circuits class should know there is a lot more that goes on in picking inductors than the one value. I had only realized this after the PCB order had been put in and I was finalizing the DigiKey order, I had not verified the internal resistance had been acceptable so I went back to the RP2350 hardware design document. Even an experienced EE might not expect what I had actually read when I followed up, and one of my professors later thought I was messing with him when I told him about it.
+
+	The document explained how due to how tight the constraints on the tiny 1.1V rail were with how close the components had to be, an inductor wound the wrong way would interfere with the capacitor. Now to contextualize the absurdity in this, practically no “small” inductors are in any way marked with the direction of the winding as this is not normal. As my professor put it, the “polarized” inductor that was created for the chip sounds almost like trying to buy blinker fluid. Thankfully I had realized this within a matter of hours of our initial PCB order and OSH Park were awesome and refunded us for our early cancellation. I should also disclose that <u>[OSH Park](https://oshpark.com/)</u> is sponsoring us with free credit for PCB manufacture, and they will get more praise at the end for the beauty of the boards they delivered to us compared to their competitors.
+
+![blank PCB board](/blog-images/ee_blank_board_v1.jpg)
+
+		<p style={{textAlign: "center"}}><i>The blank PCB straight from OSH Park.</i></p>
+
+	Once the issue was fixed we had to anxiously wait two weeks for manufacturing and shipping. We do our assembly in house, and the first board we put together did not seem to initially work. With some panicked troubleshooting we found the issue, I had swapped the labels of a resistor and capacitor. With that fixed we had our first working dev board! That was in November but I have been holding off on congratulating myself until the full CAN functionality was verified for a fully working board, which it now has! We will be writing more on the design decisions we made and why, but the most important thing is at least in my mind, we are alive again!
+
+![finished PCB board](/blog-images/ee_board_finished_v1.jpg)
+
+<p style={{textAlign: "center"}}><i>The finished GPIO board.</i></p>
+
+-Daniel Bereza, EE Lead
+
+<div style={{textAlign: "center"}}>
+
+	![OSH Park Logo](/sponsor-logos/osh-park.png)
+
+</div>
+
+---
+
+<BlogBack/>

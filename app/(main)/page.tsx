@@ -71,10 +71,10 @@ const Page = async () => {
               <Link href={`/blog/${posts[1].slug}`}>{posts[1].title}</Link>
               <div>{posts[1].published}</div>
             </div>
-			{/*<div className={styles.post}>
+			      <div className={styles.post}>
               <Link href={`/blog/${posts[2].slug}`}>{posts[2].title}</Link>
               <div>{posts[0].published}</div>
-            </div>*/}
+            </div>
           </div>
         </div>
       </div>
