@@ -70,10 +70,10 @@ const Page = async () => {
                 <Link href={`/blog/${posts[1].slug}`}>{posts[1].title}</Link>
                 <div>{posts[1].published}</div>
               </div>
-              {/*<div className="flex justify-between items-center p-2.5 even:bg-[#ebebeb]">
+              <div className="flex justify-between items-center p-2.5 even:bg-[#ebebeb]">
               <Link href={`/blog/${posts[2].slug}`}>{posts[2].title}</Link>
-              <div>{posts[0].published}</div>
-            </div>*/}
+              <div>{posts[2].published}</div>
+            </div>
           </div>
         </div>
       </div>
