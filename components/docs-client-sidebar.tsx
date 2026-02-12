@@ -35,7 +35,7 @@ const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
                 <SidebarMenuButton size="lg" className="border-2 border-neutral-400">
                   <div
                     className="flex aspect-square size-12 items-center justify-center">
-                    <img src={`/${activeSub.logo}`} className="size-12 aspect-square select-none" />
+                    <img src={`/${activeSub.logo}`} alt="" className="size-12 aspect-square select-none" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{activeSub.name}</span>
@@ -60,7 +60,7 @@ const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
                     key={index}
                   >
                     <div className="flex size-8 items-center justify-center rounded-md">
-                      <img src={`/${sub.logo}`} className="size-8 aspect-square" />
+                      <img src={`/${sub.logo}`} alt="" className="size-8 aspect-square" />
                     </div>
                     {sub.name}
                   </DropdownMenuItem>
@@ -88,7 +88,7 @@ const DocsClientSidebar = ({ docsIndex }: { docsIndex: { subs: Sub[] } }) => {
                       return (
                         <SidebarMenuItem key={route.name}>
                           <SidebarMenuButton asChild>
-                            <Link href={url}>
+                            <Link href={url} className="no-underline">
                               {section.type == "internal" &&  <span>{route.name.replace(".mdx", "").replaceAll("_", " ")}</span>}
                               {section.type == "ros_ws" && <span>{route.name}</span>}
                             </Link>

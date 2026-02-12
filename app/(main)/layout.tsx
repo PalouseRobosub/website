@@ -16,7 +16,6 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains"
 })
 
-
 // html head data
 export const metadata: Metadata = {
   title: "Palouse RoboSub",
@@ -30,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.className} ${jetBrainsMono.variable}`}>
-      <body>
+      <body className="min-h-screen flex flex-col main-routes">
         <Header />
         {children}
         <Footer />

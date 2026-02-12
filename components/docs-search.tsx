@@ -1,5 +1,5 @@
 import {Button} from "@/components/ui/button";
-import {Kbd, KbdGroup} from "./ui/kbd";
+import {Kbd} from "./ui/kbd";
 
 const DocsSearch = () => {
 

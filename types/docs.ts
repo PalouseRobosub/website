@@ -13,6 +13,7 @@ interface Section {
   routes?: Route[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Sub {
   name: string;
   yearsActive: string;

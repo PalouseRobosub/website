@@ -49,9 +49,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   switch (activeSection.type) {
     case "internal":
       const { default: Post } = await import(`@/docs-root/${slug.join("/")}.mdx`)
-      return <Post />
+      return (
+        <ScrollArea className="prose prose-neutral h-full max-w-none overflow-y-auto p-8">
+          <Post />
+        </ScrollArea>
+      )
     case "ros_ws":
       let page = undefined;
+      if (!activeSection.routes) return
       for (const item of activeSection.routes) {
         if (item.name.toLowerCase() == slug[2]) {
           page = item
@@ -61,7 +66,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         const res = await fetch(page.raw_url)
         const mdx = await res.text()
         return (
-          <ScrollArea className="prose prose-neutral dark:prose-invert h-full max-w-none overflow-y-auto p-8">
+          <ScrollArea className="prose prose-neutral h-full max-w-none overflow-y-auto p-8">
             <MDXRemote source={mdx} options={options} />
           </ScrollArea>
         )
