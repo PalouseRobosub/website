@@ -8,8 +8,8 @@ const Page = async () => {
   const posts = await indexBlogPosts()
   
   return (
-    <main>
-      <h1>Palouse RoboSub Blog</h1>
+    <main className="px-[15%] flex-1">
+      <h1 className="text-[36px] font-bold text-center my-4">Palouse RoboSub Blog</h1>
       {/* pass post data to client component */}
       <ClientPage posts={posts} />
     </main>

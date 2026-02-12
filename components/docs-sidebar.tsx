@@ -1,6 +1,5 @@
-import { readdirSync } from "fs";
-import path from "path";
-import DocsClientSidebar from "./docs-client-sidebar";
+import DocsClientSidebar from "@/components/docs-client-sidebar";
+import {indexDocs} from "@/lib/docs";
 
 export interface Page {
   name: string,
@@ -15,34 +14,11 @@ export interface Dir {
   children: (Dir|Page)[]
 }
 
-const DocsSidebar = () => {
-  const indexDir = (dir: string): Dir => {
-    const entries = readdirSync(dir, { encoding: "utf-8", withFileTypes: true })
-    
-    return {
-      name: path.basename(dir),
-      path: dir,
-      type: "dir",
-      children: entries.map(entry => {
-            const fullPath = path.join(dir, entry.name);
-            if (entry.isDirectory()) {
-              return indexDir(fullPath);
-            } else {
-              return {
-                name: entry.name,
-                path: fullPath,
-                type: "page"
-              };
-            }
-          })
-    }
-  }
-  
-  const docsContents = indexDir(path.join(process.cwd(), "docs-root"))
-  
+export default async function DocsSidebar() {
+
+  const docsIndex = await indexDocs();
+
   return (
-    <DocsClientSidebar docsContents={docsContents} />
+    <DocsClientSidebar docsIndex={docsIndex} />
   )
 }
-
-export default DocsSidebar;

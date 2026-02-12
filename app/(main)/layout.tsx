@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat, JetBrains_Mono } from 'next/font/google'
-import "./main.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import "@/app/globals.css"
 
 // preload fonts
 const montserrat = Montserrat({
@@ -16,7 +16,6 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains"
 })
 
-
 // html head data
 export const metadata: Metadata = {
   title: "Palouse RoboSub",
@@ -29,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.className} ${jetBrainsMono.variable}`}>
+    <html lang="en" className={`${montserrat.className} ${jetBrainsMono.variable}`}>
+      <body className="min-h-screen flex flex-col main-routes">
         <Header />
         {children}
         <Footer />
