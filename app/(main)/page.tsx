@@ -39,16 +39,18 @@ const Page = async () => {
           <img className="sponsorLogo" src="/sponsor-logos/waterlinked.png" alt="WaterLinked" />
           <img className="sponsorLogo" src="/sponsor-logos/lattepanda.jpg" alt="LattePanda" />
           <img className="sponsorLogo" src="/sponsor-logos/tektronix.png" alt="Tektronix" />
+          <img className="sponsorLogo" src="/sponsor-logos/alaska.png" alt="Alaska Airlines" />
           {/* duplicate for seamless loop */}
-          <img className="sponsorLogo" src="/sponsor-logos/osh-park.png" alt="OSH Park" />
-          <img className="sponsorLogo" src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
-          <img className="sponsorLogo" src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
-          <img className="sponsorLogo" src="/sponsor-logos/solidworks.png" alt="SOLIDWORKS" />
-          <img className="sponsorLogo" src="/sponsor-logos/vectornav.png" alt="VECTORNAV" />
-          <img className="sponsorLogo" src="/sponsor-logos/joescan.jpg" alt="JoeScan" />
-          <img className="sponsorLogo" src="/sponsor-logos/waterlinked.png" alt="WaterLinked" />
-          <img className="sponsorLogo" src="/sponsor-logos/lattepanda.jpg" alt="LattePanda" />
-          <img className="sponsorLogo" src="/sponsor-logos/tektronix.png" alt="Tektronix" />
+          <img className="sponsorLogo" src="/sponsor-logos/osh-park.png" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/blue-robotics.png" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/real-digital.svg" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/solidworks.png" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/vectornav.png" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/joescan.jpg" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/waterlinked.png" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/lattepanda.jpg" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/tektronix.png" alt="" />
+          <img className="sponsorLogo" src="/sponsor-logos/alaska.png" alt="" />
         </div>
       </div>
 
