@@ -10,11 +10,17 @@ const Page = async () => {
 
   return (
     <main className="flex flex-col p-0 items-center home">
-      <Image src="/group.webp" priority height={634} width={1024} alt="" className="w-full md:h-[80vh] h-auto md:max-h-none max-h-[80vh] md:object-cover object-contain object-[center_75%]" />
-      <div className="w-full flex justify-center bg-[#CCCCCC]">
-        <h1 className="bg-[#A60F2D] text-white px-5 py-2.5 md:text-5xl text-2xl font-bold -mt-8 w-min whitespace-nowrap">Palouse RoboSub</h1>
+      <video autoPlay muted playsInline className="w-full md:h-[80vh] h-auto md:max-h-none max-h-[80vh] md:object-cover object-contain object-[center_75%]">
+        <source src="vid.mp4" type="video/mp4"/>
+      </video>
+      <div className="w-full flex justify-center bg-[#fff]">
       </div>
-	    <div className="bg-[#CCCCCC] w-full py-0 md:px-[20%] px-[5%] pb-7.5">
+      <div className="bg-linear-to-t from-[#fff] to-transparent w-full px-[5%] p-70 pb-7.5 -mt-120">
+        <h1 className="font-bold text-black text-7xl">
+          WSU&apos;S <span className="text-[#A60F2D]">PREMIER</span> UNDERWATER ROBOTICS
+        </h1>
+      </div>
+      <div className="bg-[#fff] w-full py-0 md:px-[20%] px-[5%] pb-7.5 pt-100">
 		    <p className="text-center text-lg mt-4">
           WSU&apos;s Palouse RoboSub club develops underwater submarines designed to participate in the intercollegiate
           RoboSub national competitions. Located in the basement of Dana Hall, Palouse RoboSub combines Electrical,

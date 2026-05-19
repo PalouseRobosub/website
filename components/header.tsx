@@ -9,18 +9,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-[#A60F2D] w-full flex flex-col p-2.5 items-center relative text-white">
-      <div className="w-full flex justify-between items-center relative">
-        <div className="flex gap-3 md:text-4xl text-xl items-center">
-          <Link href="/" className="contents">
-            <div className="h-[1em] aspect-11/4 relative">
-              <Image src="/robosub_logo.svg" alt="" fill priority />
-            </div>
-            <div className="font-semibold">Palouse RoboSub</div>
-          </Link>
-        </div>
+    <header className="w-full flex flex-col p-2.5 items-center justify-center absolute text-white bg-transparent">
+      <div className="justify-between items-center relative">
         <div className="border border-white rounded-md items-center justify-center p-1 cursor-pointer md:hidden" onClick={() => setMenuOpen(!menuOpen)}><Menu/></div>
-        <div className="md:flex hidden h-full items-center gap-4.5 text-[20px] font-medium">
+        <div className="md:flex hidden h-full items-center gap-12 text-[20px] font-medium">
           <Link href="/about">About</Link>
           <Link href="/officers">Officers</Link>
           <Link href="/sponsors">Sponsors</Link>
