@@ -3,6 +3,8 @@ import {ScrollArea} from "@/components/ui/scroll-area";
 import {notFound} from "next/dist/client/components/not-found";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeShiki from "@shikijs/rehype";
 import NoReadme from "@/components/no-readme";
@@ -27,8 +29,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
   const options: MDXRemoteOptions = {
     mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, [rehypeShiki, {theme: "github-dark"}]]
+      remarkPlugins: [remarkGfm, remarkMath],
+      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeKatex, [rehypeShiki, {theme: "github-dark"}]]
     },
   }
 
