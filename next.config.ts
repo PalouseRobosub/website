@@ -22,7 +22,7 @@ const withMDX = createMDX({
     *
     * remark-prism enables language-aware syntax highlighting in code blocks using prismjs
     */
-    remarkPlugins: ["remark-gfm"],
+    remarkPlugins: ["remark-gfm", "remark-math"],
     /*
     * rehype-slug automatically adds id attributes to headings
     *
@@ -33,6 +33,7 @@ const withMDX = createMDX({
     rehypePlugins: [
       "rehype-slug",
       "rehype-autolink-headings",
+      "rehype-katex",
       [
         "@shikijs/rehype",
         {

@@ -10,51 +10,82 @@ const Page = async () => {
 
   return (
     <main className="flex flex-col p-0 items-center home">
-      <Image src="/group.webp" priority height={634} width={1024} alt="" className="w-full md:h-[80vh] h-auto md:max-h-none max-h-[80vh] md:object-cover object-contain object-[center_75%]" />
-      <div className="w-full flex justify-center bg-[#CCCCCC]">
-        <h1 className="bg-[#A60F2D] text-white px-5 py-2.5 md:text-5xl text-2xl font-bold -mt-8 w-min whitespace-nowrap">Palouse RoboSub</h1>
-      </div>
-	    <div className="bg-[#CCCCCC] w-full py-0 md:px-[20%] px-[5%] pb-7.5">
-		    <p className="text-center text-lg mt-4">
-          WSU&apos;s Palouse RoboSub club develops underwater submarines designed to participate in the intercollegiate
-          RoboSub national competitions. Located in the basement of Dana Hall, Palouse RoboSub combines Electrical,
-          Mechanical, and Computer Engineering to create complex AUVs and ROVs.
-        </p>
-        <h2 className="md:text-4xl text-lg text-center md:text-left md:my-4">Support Palouse RoboSub!</h2>
-        <div className="flex justify-center md:flex-row flex-col items-start gap-5 text-lg">
-          <div>If you are a student please consider <Link href="/join">joining</Link>!</div>
-          <div>If you have the means please consider <Link target="_blank" href="https://foundation.wsu.edu/give/?fund=ffdf2195-2497-4361-b697-44e5024bf0b0">donating to us</Link>!</div>
-          <div>If you are a company or organization please consider <Link href="/sponsors">sponsoring us</Link>!</div>
-        </div>
-      </div>
-      <p className="md:text-4xl text-xl text-center md:m-5 m-3">Sponsored By</p>
-      <div className="sponsorBanner">
-        <div className="sponsorTrack">
-          <img className="sponsorLogo" src="/sponsor-logos/osh-park.png" alt="OSH Park" />
-          <img className="sponsorLogo" src="/sponsor-logos/blue-robotics.png" alt="Blue Robotics" />
-          <img className="sponsorLogo" src="/sponsor-logos/real-digital.svg" alt="Real Digital" />
-          <img className="sponsorLogo" src="/sponsor-logos/solidworks.png" alt="SOLIDWORKS" />
-          <img className="sponsorLogo" src="/sponsor-logos/vectornav.png" alt="VECTORNAV" />
-          <img className="sponsorLogo" src="/sponsor-logos/joescan.jpg" alt="JoeScan" />
-          <img className="sponsorLogo" src="/sponsor-logos/waterlinked.png" alt="WaterLinked" />
-          <img className="sponsorLogo" src="/sponsor-logos/lattepanda.jpg" alt="LattePanda" />
-          <img className="sponsorLogo" src="/sponsor-logos/tektronix.png" alt="Tektronix" />
-          <img className="sponsorLogo" src="/sponsor-logos/alaska.png" alt="Alaska Airlines" />
-          {/* duplicate for seamless loop */}
-          <img className="sponsorLogo" src="/sponsor-logos/osh-park.png" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/blue-robotics.png" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/real-digital.svg" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/solidworks.png" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/vectornav.png" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/joescan.jpg" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/waterlinked.png" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/lattepanda.jpg" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/tektronix.png" alt="" />
-          <img className="sponsorLogo" src="/sponsor-logos/alaska.png" alt="" />
-        </div>
+      <video autoPlay muted playsInline loop className="w-full md:h-[80vh] h-auto md:max-h-none max-h-[80vh] md:object-cover object-contain object-[center_75%]">
+        <source src="/vid.mp4" type="video/mp4"/>
+      </video>
+      <div className="bg-linear-to-t from-white to-transparent w-full px-[5%] p-70 pb-7.5 -mt-119">
+        <h1 className="font-bold text-black text-7xl">
+          <span className="text-8xl">PALOUSE ROBOSUB</span>
+          <br/>
+          WSU&apos;S <span className="text-[#A60F2D]">PREMIER</span> UNDERWATER ROBOTICS
+        </h1>
       </div>
 
-      <div className="w-full md:px-[20%] px-[5%] mb-5">
+      <section className="flex flex-col w-full items-center justify-center gap-4">
+        <h2 className="md:text-4xl text-lg text-center md:text-left md:my-4">Meet Guppy!</h2>
+        <div className="flex flex-row gap-8 items-center justify-center w-2/3">
+          <div className="aspect-4/3 relative w-1/2">
+            <Image src="/guppy-under.jpeg" alt="Guppy" fill />
+          </div>
+          <p className="w-1/2 text-center text-xl">
+            Guppy is our brand-new flagship submarine, and is headed to
+            RoboNation's RoboSub 2026 competition in Irvine, CA, this
+            July!
+            <br/>
+            <br/>
+            Guppy's mechanical, electrical, and computer science architectures are entirely designed and created in-house by our team.
+            <br/>
+            <br/>
+            Able to move in all six degrees of freedom, and with advanced onboard autonomy, Guppy is truly a massive team effort.
+            <br/>
+            <br/>
+            <Link href="/guppy">Learn More About Guppy</Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="flex flex-col w-full items-center justify-center gap-4">
+        <h2 className="md:text-4xl text-lg text-center md:text-left md:my-4">Meet the Team!</h2>
+        <div className="flex flex-row gap-8 items-center justify-center w-2/3">
+          <p className="w-1/2 text-center text-xl">
+            Palouse RoboSub is made up of roughly 35 dedicated undergraduates from nearly every discipline of engineering.
+            <br/>
+            <br/>
+            Working together, we design, manufacture, build, program, and test Autonomous Underwater Vehicles (AUVs) for
+            competition in the <Link href="https://robosub.org/" target="_blank">RoboNation RoboSub competition</Link>.
+            <br/>
+            <br/>
+            We are very excited to be back after a several-year hiatus, with our submarine Guppy!
+            <br/>
+            <br/>
+            If you are a student and interested in joining us, feel free to reach out to
+            any <Link href="/officers">officer</Link> or show up to one of our regularly scheduled meetings!
+          </p>
+          <div className="aspect-4/3 relative w-1/2">
+            <Image src="/group.webp" alt="Palouse RoboSub Team Photo" fill />
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col w-full items-center justify-center gap-4 text-xl">
+        <h2 className="md:text-4xl text-lg text-center md:text-left md:my-4">Thank You to our <Link href="/sponsors">Generous Sponsors</Link>!</h2>
+        <p>We could not do this without your help!</p>
+        <div className="flex flex-row flex-wrap max-w-5/6 gap-4">
+          <Link target="_blank" href="https://www.alaskaair.com/">Alaska Airlines</Link>
+          <Link target="_blank" href="https://bluerobotics.com/">Blue Robotics</Link>
+          <Link target="_blank" href="https://joescan.com/">JoeScan</Link>
+          <Link target="_blank" href="https://www.lattepanda.com/">LattePanda</Link>
+          <Link target="_blank" href="https://www.moscowapparel.com/">Moscow Apparel</Link>
+          <Link target="_blank" href="https://oshpark.com/">OSH Park</Link>
+          <Link target="_blank" href="https://www.realdigital.org/">Real Digital</Link>
+          <Link target="_blank" href="https://www.solidworks.com/">Solidworks</Link>
+          <Link target="_blank" href="https://www.tek.com/en">Tektronix</Link>
+          <Link target="_blank" href="https://www.vectornav.com/">VectorNav</Link>
+          <Link target="_blank" href="https://www.waterlinked.com/">WaterLinked</Link>
+        </div>
+      </section>
+
+      <section className="w-full md:px-[20%] px-[5%] mb-5">
         <h2 className="md:text-4xl text-xl text-center md:text-left md:my-4">Check out our blog!</h2>
         <div className="flex md:flex-row flex-col items-start justify-center md:gap-5 text-lg">
           <div className="flex-1">
@@ -78,7 +109,7 @@ const Page = async () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   )
 }

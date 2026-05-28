@@ -4,6 +4,7 @@ import DocsSidebar from "@/components/docs-sidebar";
 import {SidebarProvider} from "@/components/ui/sidebar";
 import DocsHeader from "@/components/docs-header";
 import "@/app/globals.css"
+import "katex/dist/katex.min.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

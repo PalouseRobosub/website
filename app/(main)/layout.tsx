@@ -3,6 +3,7 @@ import { Montserrat, JetBrains_Mono } from 'next/font/google'
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import "@/app/globals.css"
+import "katex/dist/katex.min.css";
 
 // preload fonts
 const montserrat = Montserrat({
