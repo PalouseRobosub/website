@@ -9,7 +9,7 @@ const Page = async () => {
   const posts = await indexBlogPosts()
 
   return (
-    <main className="flex flex-col p-0 items-center home">
+    <main className="flex flex-col p-0 items-center home" style={{zIndex: "-1"}}>
       <video autoPlay muted playsInline loop className="w-full md:h-[80vh] h-auto md:max-h-none max-h-[80vh] md:object-cover object-contain object-[center_75%]">
         <source src="/vid.mp4" type="video/mp4"/>
       </video>
