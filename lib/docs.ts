@@ -32,7 +32,7 @@ export const indexDocs = async () => {
 
       } else if (section.type === "ros_ws") {
 
-        const { data } = await octokit.rest.repos.getContent({
+		  const { data } = await octokit.rest.repos.getContent({
           owner: section.owner as string,
           repo: section.repo as string,
           path: section.path,

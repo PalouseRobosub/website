@@ -1,5 +1,19 @@
-import Warning from "@/components/warning"
+import {ScrollArea} from "@/components/ui/scroll-area";
 
-<Warning title="Incomplete Page">
-  This page is incomplete and requires edits to be made before publishing.
-</Warning>
+<ScrollArea className="prose prose-neutral h-[calc(100%-61px)] max-w-none overflow-y-auto p-8 text-center">
+
+## Welcome to the RoboSub Documentation Site!
+
+See the tabs on the side to learn about our electrical, mechanical, and
+computer science architecture!
+
+[2026 Technical Design Report](/TDR_PalouseRoboSub_RS2026.pdf)
+
+<iframe
+	src="/TDR_PalouseRoboSub_RS2026.pdf"
+	width="90%"
+	height="1000"
+	style={{ display: "block", height: "900px", margin: "0 auto" }}
+/>
+
+</ScrollArea>
